@@ -1,0 +1,11 @@
+﻿{
+  "solution": {
+    "path": "CrankItUp.sln",
+    "projects": [
+      "CrankItUp.Desktop\\CrankItUp.Desktop.csproj",
+      "CrankItUp.Game\\CrankItUp.Game.csproj",
+      "CrankItUp.Game.Tests\\CrankItUp.Game.Tests.csproj",
+      "CrankItUp.Resources\\CrankItUp.Resources.csproj"
+    ]
+  }
+}
