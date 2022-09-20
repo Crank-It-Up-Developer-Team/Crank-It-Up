@@ -1,8 +1,5 @@
-public static class MainMenu: CrankItUpGameBase{
+public class MainMenu {
 
-    protected override void load(){
-        base.LoadComplete();
-        
-    }
+   
 
 }

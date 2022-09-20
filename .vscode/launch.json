@@ -12,10 +12,11 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
+            "requireExactSource": false,
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/CrankItUp.Game.Tests/bin/Debug/net6.0/CrankItUp.Game.Tests.dll",
+            "program": "${workspaceFolder}/CrankItUp.Game/bin/Debug/netstandard2.1/CrankItUp.Game.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/CrankItUp.Game.Tests",
+            "cwd": "${workspaceFolder}/CrankItUp.Game",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
