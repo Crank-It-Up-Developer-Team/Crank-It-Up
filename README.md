@@ -1,6 +1,6 @@
 # Crank It Up!
 
-Crank It Up! is aA 1k1c (1 key 1 crank) rhythm game, involving, you guessed it, one key and one crank.
+Crank It Up! is a 1k1c (1 key 1 crank) rhythm game, involving, you guessed it, one key and one crank.
 
 The game is currently in very, very early stages of development, barely past the basic concept phase.
 So don't expect much yet!
