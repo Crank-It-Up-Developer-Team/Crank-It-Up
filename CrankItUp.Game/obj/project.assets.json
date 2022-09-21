@@ -5,53 +5,37 @@
       "FFmpeg.AutoGen/4.3.0.1": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.1/FFmpeg.AutoGen.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.1/FFmpeg.AutoGen.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.1/FFmpeg.AutoGen.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.1/FFmpeg.AutoGen.dll": {}
         }
       },
       "JetBrains.Annotations/2021.3.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/JetBrains.Annotations.dll": {
-            "related": ".deps.json;.xml"
-          }
+          "lib/netstandard2.0/JetBrains.Annotations.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/JetBrains.Annotations.dll": {
-            "related": ".deps.json;.xml"
-          }
+          "lib/netstandard2.0/JetBrains.Annotations.dll": {}
         }
       },
       "managed-midi/1.9.14": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Commons.Music.Midi.dll": {
-            "related": ".deps.json;.pdb"
-          }
+          "lib/netstandard2.0/Commons.Music.Midi.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Commons.Music.Midi.dll": {
-            "related": ".deps.json;.pdb"
-          }
+          "lib/netstandard2.0/Commons.Music.Midi.dll": {}
         }
       },
       "ManagedBass/3.1.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.4/ManagedBass.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard1.4/ManagedBass.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.4/ManagedBass.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard1.4/ManagedBass.dll": {}
         }
       },
       "ManagedBass.Fx/3.1.0": {
@@ -61,14 +45,10 @@
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.4/ManagedBass.Fx.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard1.4/ManagedBass.Fx.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.4/ManagedBass.Fx.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard1.4/ManagedBass.Fx.dll": {}
         }
       },
       "ManagedBass.Mix/3.1.0": {
@@ -78,40 +58,28 @@
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.4/ManagedBass.Mix.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard1.4/ManagedBass.Mix.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.4/ManagedBass.Mix.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard1.4/ManagedBass.Mix.dll": {}
         }
       },
       "Markdig/0.23.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.1/Markdig.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.1/Markdig.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.1/Markdig.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.1/Markdig.dll": {}
         }
       },
       "Microsoft.Diagnostics.NETCore.Client/0.2.61701": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Microsoft.Diagnostics.NETCore.Client.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Microsoft.Diagnostics.NETCore.Client.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Diagnostics.NETCore.Client.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Microsoft.Diagnostics.NETCore.Client.dll": {}
         }
       },
       "Microsoft.Diagnostics.Runtime/2.0.161401": {
@@ -125,27 +93,19 @@
           "System.Runtime.CompilerServices.Unsafe": "4.7.1"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Diagnostics.Runtime.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/netstandard2.0/Microsoft.Diagnostics.Runtime.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Diagnostics.Runtime.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/netstandard2.0/Microsoft.Diagnostics.Runtime.dll": {}
         }
       },
       "Microsoft.Extensions.ObjectPool/5.0.11": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {}
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {
@@ -175,14 +135,10 @@
       "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
       "NuGet.Common/5.11.0": {
@@ -191,14 +147,10 @@
           "NuGet.Frameworks": "5.11.0"
         },
         "compile": {
-          "lib/netstandard2.0/NuGet.Common.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.Common.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/NuGet.Common.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.Common.dll": {}
         }
       },
       "NuGet.Configuration/5.11.0": {
@@ -208,14 +160,10 @@
           "System.Security.Cryptography.ProtectedData": "4.4.0"
         },
         "compile": {
-          "lib/netstandard2.0/NuGet.Configuration.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.Configuration.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/NuGet.Configuration.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.Configuration.dll": {}
         }
       },
       "NuGet.DependencyResolver.Core/5.11.0": {
@@ -225,27 +173,19 @@
           "NuGet.Protocol": "5.11.0"
         },
         "compile": {
-          "lib/netstandard2.0/NuGet.DependencyResolver.Core.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.DependencyResolver.Core.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/NuGet.DependencyResolver.Core.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.DependencyResolver.Core.dll": {}
         }
       },
       "NuGet.Frameworks/5.11.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/NuGet.Frameworks.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.Frameworks.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/NuGet.Frameworks.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.Frameworks.dll": {}
         }
       },
       "NuGet.LibraryModel/5.11.0": {
@@ -255,14 +195,10 @@
           "NuGet.Versioning": "5.11.0"
         },
         "compile": {
-          "lib/netstandard2.0/NuGet.LibraryModel.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.LibraryModel.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/NuGet.LibraryModel.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.LibraryModel.dll": {}
         }
       },
       "NuGet.Packaging/5.11.0": {
@@ -275,14 +211,10 @@
           "System.Security.Cryptography.Pkcs": "5.0.0"
         },
         "compile": {
-          "lib/netstandard2.0/NuGet.Packaging.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.Packaging.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/NuGet.Packaging.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.Packaging.dll": {}
         }
       },
       "NuGet.ProjectModel/5.11.0": {
@@ -291,14 +223,10 @@
           "NuGet.DependencyResolver.Core": "5.11.0"
         },
         "compile": {
-          "lib/netstandard2.0/NuGet.ProjectModel.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.ProjectModel.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/NuGet.ProjectModel.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.ProjectModel.dll": {}
         }
       },
       "NuGet.Protocol/5.11.0": {
@@ -307,27 +235,19 @@
           "NuGet.Packaging": "5.11.0"
         },
         "compile": {
-          "lib/netstandard2.0/NuGet.Protocol.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.Protocol.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/NuGet.Protocol.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.Protocol.dll": {}
         }
       },
       "NuGet.Versioning/5.11.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/NuGet.Versioning.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.Versioning.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/NuGet.Versioning.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/NuGet.Versioning.dll": {}
         }
       },
       "NUnit/3.13.2": {
@@ -336,14 +256,10 @@
           "NETStandard.Library": "2.0.0"
         },
         "compile": {
-          "lib/netstandard2.0/nunit.framework.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/nunit.framework.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/nunit.framework.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/nunit.framework.dll": {}
         },
         "build": {
           "build/_._": {}
@@ -371,14 +287,10 @@
           "ppy.osuTK.NS20": "1.0.192"
         },
         "compile": {
-          "lib/netstandard2.1/osu.Framework.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.1/osu.Framework.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.1/osu.Framework.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.1/osu.Framework.dll": {}
         }
       },
       "ppy.osuTK.NS20/1.0.192": {
@@ -458,14 +370,10 @@
           "System.Text.Encoding.CodePages": "5.0.0"
         },
         "compile": {
-          "lib/netstandard2.1/SixLabors.ImageSharp.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.1/SixLabors.ImageSharp.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.1/SixLabors.ImageSharp.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.1/SixLabors.ImageSharp.dll": {}
         }
       },
       "StbiSharp/1.1.0": {
@@ -501,14 +409,10 @@
       "System.Buffers/4.5.1": {
         "type": "package",
         "compile": {
-          "ref/netstandard2.0/System.Buffers.dll": {
-            "related": ".xml"
-          }
+          "ref/netstandard2.0/System.Buffers.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/System.Buffers.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/System.Buffers.dll": {}
         }
       },
       "System.Collections.Immutable/1.7.1": {
@@ -517,14 +421,10 @@
           "System.Memory": "4.5.4"
         },
         "compile": {
-          "lib/netstandard2.0/System.Collections.Immutable.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/System.Collections.Immutable.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {}
         }
       },
       "System.Formats.Asn1/5.0.0": {
@@ -534,14 +434,10 @@
           "System.Memory": "4.5.4"
         },
         "compile": {
-          "lib/netstandard2.0/_._": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/_._": {}
         },
         "runtime": {
-          "lib/netstandard2.0/System.Formats.Asn1.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/System.Formats.Asn1.dll": {}
         }
       },
       "System.Memory/4.5.4": {
@@ -552,27 +448,19 @@
           "System.Runtime.CompilerServices.Unsafe": "4.5.3"
         },
         "compile": {
-          "lib/netstandard2.0/System.Memory.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/System.Memory.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/System.Memory.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/System.Memory.dll": {}
         }
       },
       "System.Numerics.Vectors/4.5.0": {
         "type": "package",
         "compile": {
-          "ref/netstandard2.0/System.Numerics.Vectors.dll": {
-            "related": ".xml"
-          }
+          "ref/netstandard2.0/System.Numerics.Vectors.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/System.Numerics.Vectors.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Reflection.Metadata/1.8.1": {
@@ -581,40 +469,28 @@
           "System.Collections.Immutable": "1.7.1"
         },
         "compile": {
-          "lib/netstandard2.0/System.Reflection.Metadata.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/System.Reflection.Metadata.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/System.Reflection.Metadata.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/System.Reflection.Metadata.dll": {}
         }
       },
       "System.Runtime.CompilerServices.Unsafe/5.0.0": {
         "type": "package",
         "compile": {
-          "ref/netstandard2.1/System.Runtime.CompilerServices.Unsafe.dll": {
-            "related": ".xml"
-          }
+          "ref/netstandard2.1/System.Runtime.CompilerServices.Unsafe.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
         }
       },
       "System.Security.Cryptography.Cng/5.0.0": {
         "type": "package",
         "compile": {
-          "ref/netstandard2.1/System.Security.Cryptography.Cng.dll": {
-            "related": ".xml"
-          }
+          "ref/netstandard2.1/System.Security.Cryptography.Cng.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.1/System.Security.Cryptography.Cng.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.1/System.Security.Cryptography.Cng.dll": {}
         },
         "runtimeTargets": {
           "runtimes/win/lib/netstandard1.6/System.Security.Cryptography.Cng.dll": {
@@ -630,14 +506,10 @@
           "System.Security.Cryptography.Cng": "5.0.0"
         },
         "compile": {
-          "ref/netstandard2.1/System.Security.Cryptography.Pkcs.dll": {
-            "related": ".xml"
-          }
+          "ref/netstandard2.1/System.Security.Cryptography.Pkcs.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.1/System.Security.Cryptography.Pkcs.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.1/System.Security.Cryptography.Pkcs.dll": {}
         },
         "runtimeTargets": {
           "runtimes/win/lib/netstandard2.1/System.Security.Cryptography.Pkcs.dll": {
@@ -649,9 +521,7 @@
       "System.Security.Cryptography.ProtectedData/4.4.0": {
         "type": "package",
         "compile": {
-          "ref/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
-            "related": ".xml"
-          }
+          "ref/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {}
@@ -669,14 +539,10 @@
           "System.Runtime.CompilerServices.Unsafe": "5.0.0"
         },
         "compile": {
-          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
         },
         "runtimeTargets": {
           "runtimes/win/lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {
@@ -1793,41 +1659,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\fizzi\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/home/annoyingrains/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fizzi\\Documents\\GitHub\\Crank-It-Up\\CrankItUp\\CrankItUp.Game\\CrankItUp.Game.csproj",
+      "projectUniqueName": "/home/annoyingrains/Crank-It-Up/CrankItUp.Game/CrankItUp.Game.csproj",
       "projectName": "CrankItUp.Game",
-      "projectPath": "C:\\Users\\fizzi\\Documents\\GitHub\\Crank-It-Up\\CrankItUp\\CrankItUp.Game\\CrankItUp.Game.csproj",
-      "packagesPath": "C:\\Users\\fizzi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fizzi\\Documents\\GitHub\\Crank-It-Up\\CrankItUp\\CrankItUp.Game\\obj\\",
+      "projectPath": "/home/annoyingrains/Crank-It-Up/CrankItUp.Game/CrankItUp.Game.csproj",
+      "packagesPath": "/home/annoyingrains/.nuget/packages/",
+      "outputPath": "/home/annoyingrains/Crank-It-Up/CrankItUp.Game/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\fizzi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/annoyingrains/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "projectReferences": {
-            "C:\\Users\\fizzi\\Documents\\GitHub\\Crank-It-Up\\CrankItUp\\CrankItUp.Resources\\CrankItUp.Resources.csproj": {
-              "projectPath": "C:\\Users\\fizzi\\Documents\\GitHub\\Crank-It-Up\\CrankItUp\\CrankItUp.Resources\\CrankItUp.Resources.csproj"
+            "/home/annoyingrains/Crank-It-Up/CrankItUp.Resources/CrankItUp.Resources.csproj": {
+              "projectPath": "/home/annoyingrains/Crank-It-Up/CrankItUp.Resources/CrankItUp.Resources.csproj"
             }
           }
         }
@@ -1853,8 +1710,7 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -1863,7 +1719,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.108/RuntimeIdentifierGraph.json"
       }
     }
   }
