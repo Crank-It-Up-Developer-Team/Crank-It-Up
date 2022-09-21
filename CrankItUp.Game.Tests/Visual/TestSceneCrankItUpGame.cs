@@ -1,6 +1,8 @@
 using osu.Framework.Allocation;
 using osu.Framework.Platform;
 using NUnit.Framework;
+using osu.Framework.Screens;
+using osu.Framework.Graphics;
 
 namespace CrankItUp.Game.Tests.Visual
 {
@@ -19,6 +21,7 @@ namespace CrankItUp.Game.Tests.Visual
             game.SetHost(host);
 
             AddGame(game);
+            Add(new ScreenStack(new TitleScreen()) { RelativeSizeAxes = Axes.Both });
         }
     }
 }

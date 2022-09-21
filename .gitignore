@@ -1,2 +1,4 @@
-CrankItUp.[Desktop/Game/Game.Tests/iOS/Resources]/[bin/obj]
+**/bin
+**/obj
 *.exe
+.vscode/*
