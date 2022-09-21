@@ -7,6 +7,7 @@ using osu.Framework.Graphics.Textures;
 using osu.Framework.Graphics.Cursor;
 using osuTK;
 using System;
+using osu.Framework.Input.Events;
 
 
 namespace CrankItUp.Game
@@ -21,6 +22,7 @@ namespace CrankItUp.Game
 
         private Container box;
         private CursorContainer mouse;
+        public float Sensitivity;
 
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
@@ -56,12 +58,10 @@ namespace CrankItUp.Game
         {
             base.LoadComplete();
         }
-
-        protected override void Update()
-        {
-            Vector2 pos = mouse.Position;
-            float direction = (float)Math.Atan2(pos.Y, pos.X);
-            box.RotateTo(direction, 1000);
+        protected override bool OnMouseMove(MouseMoveEvent e){
+            float Difference = e.MousePosition[0] - e.LastMousePosition[0]; // get difference on the X axis
+            box.Rotation += Difference*Sensitivity;
+            return true;
         }
     }
 }

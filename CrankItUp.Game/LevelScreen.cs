@@ -15,7 +15,7 @@ namespace CrankItUp.Game{
             InternalChildren = new Drawable[]
             {
                 new Crank{
-                    
+                    Sensitivity = 0.6f // 6 pixels per degree, for 600ppr
                 }
             };
         }
