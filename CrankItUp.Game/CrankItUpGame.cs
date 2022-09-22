@@ -21,7 +21,7 @@ namespace CrankItUp.Game
 
         protected override void LoadComplete()
         {
-            screenStack.Push(new TitleScreen());
+            screenStack.Push(new LevelScreen());
             base.LoadComplete(); 
         }
 

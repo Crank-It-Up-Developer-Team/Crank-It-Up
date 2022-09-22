@@ -14,18 +14,17 @@ using osuTK;
 namespace CrankItUp.Game{
     public class TitleScreen : Screen{
 
+        BasicButton button;
+
     [BackgroundDependencyLoader]
     private void load(){
-            BasicButton button =new BasicButton{
+            button =new BasicButton{
                 Anchor = Anchor.Centre,
                 Text = "Begin Test Levels",
                 BackgroundColour = Color4.AntiqueWhite,
-                Alpha = 1.0f,
-                Height = 30,
-                CornerRadius = 3,
-                 Size = new Vector2(200, 40),
+                Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Action = () => pushScreenToStack(new LevelScreen())                
+                Action = () => pushScreenToStack(new LevelScreen()),          
             };
             
 
@@ -33,11 +32,7 @@ namespace CrankItUp.Game{
             
 
             InternalChildren = new Drawable[] {
-            new Box
-                {
-                    Colour = Color4.Violet,
-                    RelativeSizeAxes = Axes.Both,
-                },
+            
             button,
             
             new SpriteText{
@@ -50,6 +45,12 @@ namespace CrankItUp.Game{
             
         };
     }
+    public void test(){
+        button.Text = "button has been pushed";
+    }
+
+
+    
     public void pushScreenToStack(Screen screen){
         Program.getGame().pushScreenToStack(screen);
         
