@@ -24,3 +24,16 @@ C:/Users/fizzi/Documents/GitHub/Crank-It-Up/CrankItUp/CrankItUp.Game/obj/Debug/n
 /home/annoyingrains/Crank-It-Up/CrankItUp.Game/bin/Debug/netstandard2.1/CrankItUp.Resources.dll
 /home/annoyingrains/Crank-It-Up/CrankItUp.Game/bin/Debug/netstandard2.1/CrankItUp.Resources.pdb
 /home/annoyingrains/Crank-It-Up/CrankItUp.Game/obj/Debug/netstandard2.1/CrankItUp.Game.csproj.CopyComplete
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\bin\Debug\netstandard2.1\CrankItUp.Game.deps.json
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\bin\Debug\netstandard2.1\CrankItUp.Game.dll
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\bin\Debug\netstandard2.1\CrankItUp.Game.pdb
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\bin\Debug\netstandard2.1\CrankItUp.Resources.dll
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\bin\Debug\netstandard2.1\CrankItUp.Resources.pdb
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\obj\Debug\netstandard2.1\CrankItUp.Game.csproj.AssemblyReference.cache
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\obj\Debug\netstandard2.1\CrankItUp.Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\obj\Debug\netstandard2.1\CrankItUp.Game.AssemblyInfoInputs.cache
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\obj\Debug\netstandard2.1\CrankItUp.Game.AssemblyInfo.cs
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\obj\Debug\netstandard2.1\CrankItUp.Game.csproj.CoreCompileInputs.cache
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\obj\Debug\netstandard2.1\CrankItUp.Game.csproj.CopyComplete
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\obj\Debug\netstandard2.1\CrankItUp.Game.dll
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Game\obj\Debug\netstandard2.1\CrankItUp.Game.pdb

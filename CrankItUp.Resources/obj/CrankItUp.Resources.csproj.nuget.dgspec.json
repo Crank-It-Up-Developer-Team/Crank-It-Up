@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/home/annoyingrains/Crank-It-Up/CrankItUp.Resources/CrankItUp.Resources.csproj": {}
+    "C:\\Users\\fizzi\\Documents\\GitHub\\Crank-It-Up\\CrankItUp.Resources\\CrankItUp.Resources.csproj": {}
   },
   "projects": {
-    "/home/annoyingrains/Crank-It-Up/CrankItUp.Resources/CrankItUp.Resources.csproj": {
+    "C:\\Users\\fizzi\\Documents\\GitHub\\Crank-It-Up\\CrankItUp.Resources\\CrankItUp.Resources.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/annoyingrains/Crank-It-Up/CrankItUp.Resources/CrankItUp.Resources.csproj",
+        "projectUniqueName": "C:\\Users\\fizzi\\Documents\\GitHub\\Crank-It-Up\\CrankItUp.Resources\\CrankItUp.Resources.csproj",
         "projectName": "CrankItUp.Resources",
-        "projectPath": "/home/annoyingrains/Crank-It-Up/CrankItUp.Resources/CrankItUp.Resources.csproj",
-        "packagesPath": "/home/annoyingrains/.nuget/packages/",
-        "outputPath": "/home/annoyingrains/Crank-It-Up/CrankItUp.Resources/obj/",
+        "projectPath": "C:\\Users\\fizzi\\Documents\\GitHub\\Crank-It-Up\\CrankItUp.Resources\\CrankItUp.Resources.csproj",
+        "packagesPath": "C:\\Users\\fizzi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\fizzi\\Documents\\GitHub\\Crank-It-Up\\CrankItUp.Resources\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/home/annoyingrains/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\fizzi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,7 +50,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -52,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.108/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

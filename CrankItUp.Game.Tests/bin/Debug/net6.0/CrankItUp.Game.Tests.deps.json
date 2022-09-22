@@ -704,122 +704,122 @@
           "runtimes/win-arm64/native/avcodec-58.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "58.91.100.0"
           },
           "runtimes/win-arm64/native/avfilter-7.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "7.85.100.0"
           },
           "runtimes/win-arm64/native/avformat-58.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "58.45.100.0"
           },
           "runtimes/win-arm64/native/avutil-56.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "56.51.100.0"
           },
           "runtimes/win-arm64/native/bass.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.4.16.4"
           },
           "runtimes/win-arm64/native/bass_fx.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.4.12.6"
           },
           "runtimes/win-arm64/native/bassmix.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.4.10.8"
           },
           "runtimes/win-arm64/native/swscale-5.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "5.7.100.0"
           },
           "runtimes/win-x64/native/avcodec-58.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "58.91.100.0"
           },
           "runtimes/win-x64/native/avfilter-7.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "7.85.100.0"
           },
           "runtimes/win-x64/native/avformat-58.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "58.45.100.0"
           },
           "runtimes/win-x64/native/avutil-56.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "56.51.100.0"
           },
           "runtimes/win-x64/native/bass.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.4.16.7"
           },
           "runtimes/win-x64/native/bass_fx.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.4.12.6"
           },
           "runtimes/win-x64/native/bassmix.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.4.11.1"
           },
           "runtimes/win-x64/native/swscale-5.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "5.7.100.0"
           },
           "runtimes/win-x86/native/avcodec-58.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "58.91.100.0"
           },
           "runtimes/win-x86/native/avfilter-7.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "7.85.100.0"
           },
           "runtimes/win-x86/native/avformat-58.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "58.45.100.0"
           },
           "runtimes/win-x86/native/avutil-56.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "56.51.100.0"
           },
           "runtimes/win-x86/native/bass.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.4.16.7"
           },
           "runtimes/win-x86/native/bass_fx.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.4.12.6"
           },
           "runtimes/win-x86/native/bassmix.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.4.11.1"
           },
           "runtimes/win-x86/native/swscale-5.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "5.7.100.0"
           }
         }
       },
@@ -862,17 +862,17 @@
           "runtimes/win-arm64/native/SDL2.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.23.2.0"
           },
           "runtimes/win-x64/native/SDL2.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.23.2.0"
           },
           "runtimes/win-x86/native/SDL2.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.23.2.0"
           }
         }
       },

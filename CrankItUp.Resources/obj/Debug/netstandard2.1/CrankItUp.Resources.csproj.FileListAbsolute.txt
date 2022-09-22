@@ -18,3 +18,13 @@ C:/Users/fizzi/Documents/GitHub/Crank-It-Up/CrankItUp/CrankItUp.Resources/obj/De
 /home/annoyingrains/Crank-It-Up/CrankItUp.Resources/obj/Debug/netstandard2.1/CrankItUp.Resources.csproj.CoreCompileInputs.cache
 /home/annoyingrains/Crank-It-Up/CrankItUp.Resources/obj/Debug/netstandard2.1/CrankItUp.Resources.dll
 /home/annoyingrains/Crank-It-Up/CrankItUp.Resources/obj/Debug/netstandard2.1/CrankItUp.Resources.pdb
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Resources\bin\Debug\netstandard2.1\CrankItUp.Resources.deps.json
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Resources\bin\Debug\netstandard2.1\CrankItUp.Resources.dll
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Resources\bin\Debug\netstandard2.1\CrankItUp.Resources.pdb
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Resources\obj\Debug\netstandard2.1\CrankItUp.Resources.csproj.AssemblyReference.cache
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Resources\obj\Debug\netstandard2.1\CrankItUp.Resources.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Resources\obj\Debug\netstandard2.1\CrankItUp.Resources.AssemblyInfoInputs.cache
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Resources\obj\Debug\netstandard2.1\CrankItUp.Resources.AssemblyInfo.cs
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Resources\obj\Debug\netstandard2.1\CrankItUp.Resources.csproj.CoreCompileInputs.cache
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Resources\obj\Debug\netstandard2.1\CrankItUp.Resources.dll
+C:\Users\fizzi\Documents\GitHub\Crank-It-Up\CrankItUp.Resources\obj\Debug\netstandard2.1\CrankItUp.Resources.pdb
