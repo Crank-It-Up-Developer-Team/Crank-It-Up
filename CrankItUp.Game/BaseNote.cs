@@ -1,3 +1,5 @@
+using osuTK;
+
 namespace CrankItUp.Game{
     public class BaseNote{
         
