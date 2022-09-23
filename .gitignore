@@ -1,4 +1,5 @@
-**/bin
-**/obj
+**/bin/**
+**/obj/**
+CrankItUp.Resources/bin
 *.exe
 .vscode/*
