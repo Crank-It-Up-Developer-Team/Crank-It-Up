@@ -58,10 +58,8 @@ namespace CrankItUp.Game
         {
             base.LoadComplete();
         }
-        protected override bool OnMouseMove(MouseMoveEvent e){
-            float Difference = e.MousePosition[0] - e.LastMousePosition[0]; // get difference on the X axis
-            box.Rotation += Difference*Sensitivity;
-            return true;
+        public void updateRotation(Vector2 MousePos){
+            box.Rotation = (float)((180 / Math.PI) * Math.Atan2(MousePos.Y, MousePos.X));
         }
     }
 }
