@@ -59,7 +59,7 @@ namespace CrankItUp.Game
             base.LoadComplete();
         }
         public void updateRotation(Vector2 MousePos){
-            box.Rotation = (float)((180 / Math.PI) * Math.Atan2(MousePos.Y, MousePos.X));
+            box.Rotation = (float)((180 / Math.PI) * Math.Atan2(MousePos.Y, MousePos.X)) + 90;
         }
     }
 }
