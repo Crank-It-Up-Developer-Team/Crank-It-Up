@@ -26,7 +26,7 @@ namespace CrankItUp.Game
         }
 
         public void pushScreenToStack(Screen screen){
-            Child = screenStack = new ScreenStack { RelativeSizeAxes = Axes.Both };
+           
             screenStack.Push(screen);
         }
     }

@@ -24,7 +24,7 @@ namespace CrankItUp.Game{
                 BackgroundColour = Color4.AntiqueWhite,
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Action = () => pushScreenToStack(new LevelScreen()),          
+                Action = () => pushLevel(),          
             };
             
 
@@ -49,12 +49,11 @@ namespace CrankItUp.Game{
         button.Text = "button has been pushed";
     }
 
-
-    
-    public void pushScreenToStack(Screen screen){
-        Program.getGame().pushScreenToStack(screen);
-        
+    public void pushLevel(){
+        this.Push(new LevelScreen());
     }
+    
+    
     }
     
 }
