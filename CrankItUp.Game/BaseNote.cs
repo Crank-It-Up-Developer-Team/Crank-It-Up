@@ -1,7 +1,18 @@
+using osu.Framework.Allocation;
+using osu.Framework.Graphics;
+using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Shapes;
+using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Textures;
+using osu.Framework.Graphics.Cursor;
 using osuTK;
+using System;
+using osu.Framework.Input.Events;
+using osu.Framework.Physics;
+
 
 namespace CrankItUp.Game{
-    public class BaseNote{
+    public class BaseNote: RigidBodySimulation{
         
         /**
         so my thoughts on how mapping should be implemented
@@ -13,9 +24,54 @@ namespace CrankItUp.Game{
         **/
 
         private double radians;
-        private static Vector2 PROJECTION_VECTOR2;
-        public BaseNote(double radians){
-            
+        private long spawnTime;
+        Sprite note;
+        
+        private static float PROJECTION_VECTOR_MAGNITUDE = 375; //pixels
+        public BaseNote(double radians, long spawnTime){
+            AutoSizeAxes = Axes.Both;
+            this.radians = radians;
+            this.spawnTime = spawnTime;
+
         }
+        private void load(TextureStore textures){
+               InternalChild = new Container
+            {
+                AutoSizeAxes = Axes.Both,
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Children = new Drawable[]
+               {
+                    new Circle
+                    {
+                        RelativeSizeAxes = Axes.Both,
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                    },
+                    note = new Sprite
+                    {
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                        Texture = textures.Get("BaseNote"),
+                        Alpha = 0f,
+                    },
+               }
+
+            };
+        }
+        
+
+        public void spawn(){
+            double finalMagnitude = PROJECTION_VECTOR_MAGNITUDE - NoteManager.radius;
+            Vector2 spawnPointCenteredCoordinates = new Vector2((float)(finalMagnitude * Math.Cos(radians)),(float)(finalMagnitude * Math.Sin(radians)));
+            Position = spawnPointCenteredCoordinates + Constants.CORNER_TO_CENTER_TRANSFORMATION;
+            Velocity = new Vector2((float)(NoteManager.approachRate * Math.Cos(radians)),(float)(NoteManager.approachRate * Math.Sin(radians)));
+            note.Alpha = 1f;
+        }
+
+        public long getSpawnTime(){
+            return spawnTime;
+        }
+        
     }
 }

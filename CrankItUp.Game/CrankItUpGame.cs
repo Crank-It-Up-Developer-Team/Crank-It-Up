@@ -24,10 +24,5 @@ namespace CrankItUp.Game
             screenStack.Push(new TitleScreen());
             base.LoadComplete(); 
         }
-
-        public void pushScreenToStack(Screen screen){
-           
-            screenStack.Push(screen);
-        }
     }
 }

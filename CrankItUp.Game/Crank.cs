@@ -22,7 +22,6 @@ namespace CrankItUp.Game
 
         private Container box;
         private CursorContainer mouse;
-        public float Sensitivity;
 
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
@@ -59,7 +58,7 @@ namespace CrankItUp.Game
             base.LoadComplete();
         }
         public void updateRotation(Vector2 MousePos){
-            box.Rotation = (float)((180 / Math.PI) * Math.Atan2(MousePos.Y, MousePos.X)) + 90;
+            box.Rotation = (float)((180 / Math.PI) * Math.Atan2(MousePos.Y, MousePos.X));
         }
     }
 }
