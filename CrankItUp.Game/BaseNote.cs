@@ -12,7 +12,7 @@ using osu.Framework.Physics;
 
 
 namespace CrankItUp.Game{
-    public class BaseNote: RigidBodySimulation{
+    public class BaseNote: CompositeDrawable{
         
         /**
         so my thoughts on how mapping should be implemented
@@ -25,21 +25,28 @@ namespace CrankItUp.Game{
 
         private double radians;
         private long spawnTime;
+        private long travelTime;
         Sprite note;
+
+        Vector2 velocity;
+
+
+      
         
         private static float PROJECTION_VECTOR_MAGNITUDE = 375; //pixels
         public BaseNote(double radians, long spawnTime){
-            AutoSizeAxes = Axes.Both;
+
             this.radians = radians;
             this.spawnTime = spawnTime;
-
+            
         }
+        [BackgroundDependencyLoader]        
         private void load(TextureStore textures){
-               InternalChild = new Container
+            
+            InternalChild = new Container
             {
                 AutoSizeAxes = Axes.Both,
-                Anchor = Anchor.Centre,
-                Origin = Anchor.Centre,
+                
                 Children = new Drawable[]
                {
                     new Circle
@@ -53,21 +60,47 @@ namespace CrankItUp.Game{
                         Anchor = Anchor.Centre,
                         Origin = Anchor.Centre,
                         Texture = textures.Get("BaseNote"),
-                        Alpha = 0f,
+                        Alpha = 1f,
                     },
                }
 
             };
+            
         }
-        
+
+        protected override void Update(){
+           Vector2 centerPosition = new Vector2((float)(X + NoteManager.radius), (float)(Y + NoteManager.radius));
+           double leftStartAngle = radians -  Math.PI/2.0;
+           Vector2 leftTangent = new Vector2(centerPosition.X - (float)(NoteManager.radius * Math.Cos(leftStartAngle)),centerPosition.Y - (float)(NoteManager.radius * Math.Sin(leftStartAngle)));
+           Vector2 leftWaypoint = new Vector2(leftTangent.X - (float)(NoteManager.radius * Math.Cos(radians)), leftTangent.Y - (float)(NoteManager.radius * Math.Sin(radians)));
+           double rightStartAngle = radians + Math.PI/2.0;
+           Vector2 rightTangent = new Vector2(centerPosition.X - (float)(NoteManager.radius * Math.Cos(rightStartAngle)),centerPosition.Y - (float)(NoteManager.radius * Math.Sin(rightStartAngle)));
+           Vector2 rightWaypoint = new Vector2(rightTangent.X - (float)(NoteManager.radius * Math.Cos(radians)), rightTangent.Y - (float)(NoteManager.radius * Math.Sin(radians)));
+           Line collision = new Line(new Point(rightWaypoint), new Point(leftWaypoint));
+           if(collision.intersection(Crank.collisionLine) != null){
+            //collision has happened, we do some math to determine the accuracy
+            Console.WriteLine(Crank.collisionLine.toString());
+            Console.WriteLine(collision.toString());
+            Console.WriteLine(collision.intersection(Crank.collisionLine).toString());
+           }
+        }
 
         public void spawn(){
+    
             double finalMagnitude = PROJECTION_VECTOR_MAGNITUDE - NoteManager.radius;
-            Vector2 spawnPointCenteredCoordinates = new Vector2((float)(finalMagnitude * Math.Cos(radians)),(float)(finalMagnitude * Math.Sin(radians)));
-            Position = spawnPointCenteredCoordinates + Constants.CORNER_TO_CENTER_TRANSFORMATION;
-            Velocity = new Vector2((float)(NoteManager.approachRate * Math.Cos(radians)),(float)(NoteManager.approachRate * Math.Sin(radians)));
-            note.Alpha = 1f;
+            Vector2 spawnPointCenteredCoordinates = new Vector2((float)(finalMagnitude * Math.Cos(-radians)),(float)(finalMagnitude * Math.Sin(-radians)));
+            Position = spawnPointCenteredCoordinates + Constants.NOTE_DESTINATION;
+            velocity = new Vector2((float)(NoteManager.approachRate * Math.Cos(radians)),(float)(NoteManager.approachRate * Math.Sin(radians)));
+            double timeSeconds = finalMagnitude / NoteManager.approachRate;
+            travelTime = (long)(timeSeconds * 1000);
+            
         }
+
+        public long getTravelTime(){
+            return travelTime;
+        }
+
+        
 
         public long getSpawnTime(){
             return spawnTime;

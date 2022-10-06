@@ -7,6 +7,7 @@ using osu.Framework.Graphics.Textures;
 using osu.Framework.Graphics.Cursor;
 using osuTK;
 using System;
+using System.Runtime.CompilerServices;
 using osu.Framework.Input.Events;
 
 
@@ -22,6 +23,7 @@ namespace CrankItUp.Game
 
         private Container box;
         private CursorContainer mouse;
+        public static Line collisionLine;
 
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
@@ -57,6 +59,19 @@ namespace CrankItUp.Game
         {
             base.LoadComplete();
         }
+        
+        [MethodImpl (MethodImplOptions.Synchronized)]
+        protected override void Update()
+        {
+            double direction = box.Rotation;
+            Vector2 farEnd = Constants.CORNER_TO_CENTER_TRANSFORMATION + new Vector2((float)(Constants.CRANK_DEFAULT_HEIGHT / 2.0 * Math.Cos(direction)), (float)(Constants.CRANK_DEFAULT_LENGTH / 2.0 * Math.Sin(direction)));
+            Vector2 nearEnd = Constants.CORNER_TO_CENTER_TRANSFORMATION - new Vector2((float)(Constants.CRANK_DEFAULT_HEIGHT / 2.0 * Math.Cos(direction)), (float)(Constants.CRANK_DEFAULT_LENGTH / 2.0 * Math.Sin(direction)));
+            collisionLine = new Line(new Point(nearEnd), new Point(farEnd));
+            base.Update();
+        }
+
+        
+
         public void updateRotation(Vector2 MousePos){
             box.Rotation = (float)((180 / Math.PI) * Math.Atan2(MousePos.Y, MousePos.X));
         }

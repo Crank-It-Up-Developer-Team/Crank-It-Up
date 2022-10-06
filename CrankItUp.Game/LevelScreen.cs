@@ -22,14 +22,22 @@ namespace CrankItUp.Game{
                     Origin = Anchor.Centre,
                     Position = new osuTK.Vector2(0,0),
                 };
-            manager = new NoteManager();
+            manager = new NoteManager(this);
             InternalChildren = new Drawable[]
             {
             crank,
             manager
-
             };
+
+            
+            
         }
+
+        public void addNote(BaseNote note){
+            crank.ScaleTo(manager.dilation);
+            AddInternal(note);
+        }
+
 
        
         protected override bool OnMouseMove(MouseMoveEvent e)
