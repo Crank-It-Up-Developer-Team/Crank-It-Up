@@ -108,5 +108,10 @@ namespace CrankItUp.Game{
         public String toString(){
             return "y = " + slope + "x" + " + " + intercept;
         }
+
+        //for outputting line segments to desmos
+        public string toStringFull(){
+            return toString() + "\\left\\{"+ Math.Min(point1.getX(), point2.getX()) + "< x < " + Math.Max(point1.getX(), point2.getX()) + "\\right\\}";
+        }
     }
 }

@@ -22,15 +22,17 @@ namespace CrankItUp.Game{
         
         LevelScreen screen;
 
-        public NoteManager(LevelScreen screen){
+        public NoteManager(LevelScreen screen, double setRadius, double setApproachRate){
+            radius = setRadius;
+            approachRate = setApproachRate;
             this.screen = screen;
         }
+
+        
         
         Boolean stopSpawning;
         protected override void LoadComplete(){
             notes = new Queue<BaseNote>();
-            radius = 50;
-            approachRate = 100;
             dilation = (float)(radius / Constants.NOTE_DEFAULT_RADIUS);
             notes.Enqueue(new BaseNote(Math.PI / 4.0, 500));
             elapsedTime = 0;

@@ -22,7 +22,7 @@ namespace CrankItUp.Game{
                     Origin = Anchor.Centre,
                     Position = new osuTK.Vector2(0,0),
                 };
-            manager = new NoteManager(this);
+            manager = new NoteManager(this, 50, 100);
             InternalChildren = new Drawable[]
             {
             crank,

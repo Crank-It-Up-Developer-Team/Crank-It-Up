@@ -29,6 +29,7 @@ namespace CrankItUp.Game{
         Sprite note;
 
         Vector2 velocity;
+        Boolean firstCollision;
 
 
       
@@ -38,7 +39,7 @@ namespace CrankItUp.Game{
 
             this.radians = radians;
             this.spawnTime = spawnTime;
-            
+            firstCollision = true;
         }
         [BackgroundDependencyLoader]        
         private void load(TextureStore textures){
@@ -77,11 +78,22 @@ namespace CrankItUp.Game{
            Vector2 rightTangent = new Vector2(centerPosition.X - (float)(NoteManager.radius * Math.Cos(rightStartAngle)),centerPosition.Y - (float)(NoteManager.radius * Math.Sin(rightStartAngle)));
            Vector2 rightWaypoint = new Vector2(rightTangent.X - (float)(NoteManager.radius * Math.Cos(radians)), rightTangent.Y - (float)(NoteManager.radius * Math.Sin(radians)));
            Line collision = new Line(new Point(rightWaypoint), new Point(leftWaypoint));
+            
            if(collision.intersection(Crank.collisionLine) != null){
             //collision has happened, we do some math to determine the accuracy
-            Console.WriteLine(Crank.collisionLine.toString());
-            Console.WriteLine(collision.toString());
-            Console.WriteLine(collision.intersection(Crank.collisionLine).toString());
+            ClearTransforms();
+            if(firstCollision){
+                Console.WriteLine(Crank.collisionLine.toString());
+                Console.WriteLine(Crank.collisionLine.getPoint2().toString());
+                Console.WriteLine(Crank.collisionLine.getPoint1().toString());
+                Console.WriteLine("");
+                Console.WriteLine(collision.toString());
+                Console.WriteLine(collision.getPoint2().toString());
+                Console.WriteLine(collision.getPoint1().toString());
+                Console.WriteLine(collision.intersection(Crank.collisionLine).toString());
+                firstCollision = false;
+            }
+            
            }
         }
 

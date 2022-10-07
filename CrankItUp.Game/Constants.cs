@@ -8,7 +8,7 @@ namespace CrankItUp.Game{
          public static readonly double NOTE_DEFAULT_RADIUS = 74; //pixels
          
          public static readonly double CRANK_DEFAULT_LENGTH = 337;
-         public static readonly double CRANK_DEFAULT_HEIGHT = 295;
+         public static readonly double CRANK_DEFAULT_HEIGHT = 70;
           
     }
 }
