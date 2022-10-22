@@ -5,7 +5,6 @@ using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 
-
 namespace CrankItUp.Game
 {
     public class SpinningBox : CompositeDrawable
@@ -28,9 +27,7 @@ namespace CrankItUp.Game
                 Origin = Anchor.Centre,
                 Children = new Drawable[]
                 {
-                    new Box{
-
-                    },
+                    new Box { },
                     new Box
                     {
                         RelativeSizeAxes = Axes.Both,

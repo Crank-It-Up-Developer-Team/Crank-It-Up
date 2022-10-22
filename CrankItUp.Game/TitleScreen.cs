@@ -9,13 +9,10 @@ using System;
 using osu.Framework.Input;
 using osuTK;
 
-
-
 namespace CrankItUp.Game
 {
     public class TitleScreen : Screen
     {
-
         BasicButton testLevelsButton;
         BasicButton settingsButton;
 
@@ -46,21 +43,21 @@ namespace CrankItUp.Game
                 Action = () => pushSettings(),
             };
 
-            InternalChildren = new Drawable[] {
-
-            testLevelsButton,
-            settingsButton,
-
-            new SpriteText{
-                Y = 20,
-                Text = "Welcome to Crank it Up",
-                Anchor = Anchor.TopCentre,
-                Origin = Anchor.TopCentre,
-                Font = FontUsage.Default.With(size: 40)
-            },
-
-        };
+            InternalChildren = new Drawable[]
+            {
+                testLevelsButton,
+                settingsButton,
+                new SpriteText
+                {
+                    Y = 20,
+                    Text = "Welcome to Crank it Up",
+                    Anchor = Anchor.TopCentre,
+                    Origin = Anchor.TopCentre,
+                    Font = FontUsage.Default.With(size: 40)
+                },
+            };
         }
+
         public void test()
         {
             testLevelsButton.Text = "button has been pushed";
@@ -70,12 +67,10 @@ namespace CrankItUp.Game
         {
             this.Push(new SettingsScreen());
         }
+
         public void pushLevel()
         {
             this.Push(new LevelScreen());
         }
-
-
     }
-
 }

@@ -9,44 +9,37 @@ using osu.Framework.Input.Events;
 using osuTK;
 using System.Collections.Generic;
 
-namespace CrankItUp.Game{
-    public class LevelScreen : Screen {
+namespace CrankItUp.Game
+{
+    public class LevelScreen : Screen
+    {
         Crank crank;
         NoteManager manager;
 
-       [BackgroundDependencyLoader]
+        [BackgroundDependencyLoader]
         private void load()
         {
-            crank = new Crank{
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    Position = new osuTK.Vector2(0,0),
-                };
-            manager = new NoteManager(this, 50, 100);
-            InternalChildren = new Drawable[]
+            crank = new Crank
             {
-            crank,
-            manager
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Position = new osuTK.Vector2(0, 0),
             };
-
-            
-            
+            manager = new NoteManager(this, 50, 100);
+            InternalChildren = new Drawable[] { crank, manager };
         }
 
-        public void addNote(BaseNote note){
+        public void addNote(BaseNote note)
+        {
             crank.ScaleTo(manager.dilation);
             AddInternal(note);
         }
 
-
-       
         protected override bool OnMouseMove(MouseMoveEvent e)
         {
             Vector2 dPos = e.MousePosition - Constants.CORNER_TO_CENTER_TRANSFORMATION;
             crank.updateRotation(dPos);
             return base.OnMouseMove(e);
         }
-        
-      
     }
 }
