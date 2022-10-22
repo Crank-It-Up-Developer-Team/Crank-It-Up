@@ -11,30 +11,46 @@ using osuTK;
 
 
 
-namespace CrankItUp.Game{
-    public class TitleScreen : Screen{
+namespace CrankItUp.Game
+{
+    public class TitleScreen : Screen
+    {
 
-        BasicButton button;
+        BasicButton testLevelsButton;
+        BasicButton settingsButton;
 
-    [BackgroundDependencyLoader]
-    private void load(){
-            button =new BasicButton{
+        [BackgroundDependencyLoader]
+        private void load()
+        {
+            testLevelsButton = new BasicButton
+            {
                 Anchor = Anchor.Centre,
                 Text = "Begin Test Levels",
                 BackgroundColour = Color4.AntiqueWhite,
+                Colour = Color4.Black,
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Action = () => pushLevel(),          
+                Position = new Vector2(0, 0),
+                Action = () => pushLevel(),
             };
-            
 
-
-            
+            settingsButton = new BasicButton
+            {
+                Anchor = Anchor.Centre,
+                Text = "Settings",
+                BackgroundColour = Color4.AntiqueWhite,
+                Colour = Color4.Black,
+                Size = new Vector2(200, 40),
+                Margin = new MarginPadding(10),
+                Position = new Vector2(0, 50),
+                Action = () => pushSettings(),
+            };
 
             InternalChildren = new Drawable[] {
-            
-            button,
-            
+
+            testLevelsButton,
+            settingsButton,
+
             new SpriteText{
                 Y = 20,
                 Text = "Welcome to Crank it Up",
@@ -42,18 +58,24 @@ namespace CrankItUp.Game{
                 Origin = Anchor.TopCentre,
                 Font = FontUsage.Default.With(size: 40)
             },
-            
+
         };
-    }
-    public void test(){
-        button.Text = "button has been pushed";
+        }
+        public void test()
+        {
+            testLevelsButton.Text = "button has been pushed";
+        }
+
+        public void pushSettings()
+        {
+            this.Push(new SettingsScreen());
+        }
+        public void pushLevel()
+        {
+            this.Push(new LevelScreen());
+        }
+
+
     }
 
-    public void pushLevel(){
-        this.Push(new LevelScreen());
-    }
-    
-    
-    }
-    
 }
