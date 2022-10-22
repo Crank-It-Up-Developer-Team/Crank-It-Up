@@ -6,7 +6,6 @@ using osu.Framework.Screens;
 using osuTK.Graphics;
 using osu.Framework.Graphics.UserInterface;
 
-
 namespace CrankItUp.Game
 {
     public class MainScreen : Screen
@@ -14,19 +13,9 @@ namespace CrankItUp.Game
         [BackgroundDependencyLoader]
         private void load()
         {
-            
-
-
-            
-            
             InternalChildren = new Drawable[]
             {
-               
-                new Box
-                {
-                    Colour = Color4.Violet,
-                    RelativeSizeAxes = Axes.Both,
-                },
+                new Box { Colour = Color4.Violet, RelativeSizeAxes = Axes.Both, },
                 new SpriteText
                 {
                     Y = 20,
@@ -35,10 +24,7 @@ namespace CrankItUp.Game
                     Origin = Anchor.TopCentre,
                     Font = FontUsage.Default.With(size: 40)
                 },
-                new SpinningBox
-                {
-                    Anchor = Anchor.Centre,
-                }
+                new SpinningBox { Anchor = Anchor.Centre, }
             };
         }
     }

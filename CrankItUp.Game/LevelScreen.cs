@@ -11,48 +11,41 @@ using System.Collections.Generic;
 using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
 
-namespace CrankItUp.Game{
-    public class LevelScreen : Screen {
+namespace CrankItUp.Game
+{
+    public class LevelScreen : Screen
+    {
         Crank crank;
         NoteManager manager;
         private Track song;
 
-       [BackgroundDependencyLoader]
+        [BackgroundDependencyLoader]
         private void load(AudioManager audio)
         {
-            crank = new Crank{
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    Position = new osuTK.Vector2(0,0),
-                };
-            
+            crank = new Crank
+            {
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Position = new osuTK.Vector2(0, 0),
+            };
+
             song = audio.Tracks.Get("Flamewall.mp3");
             manager = new NoteManager(this, 50, 100);
-            InternalChildren = new Drawable[]
-            {
-            crank,
-            manager,
-            };
+            InternalChildren = new Drawable[] { crank, manager, };
             song.Start();
-
-            
-            
         }
 
-        public void addNote(BaseNote note){
+        public void addNote(BaseNote note)
+        {
             crank.ScaleTo(manager.dilation);
             AddInternal(note);
         }
 
-
-       
         protected override bool OnMouseMove(MouseMoveEvent e)
         {
             Vector2 dPos = e.MousePosition - Constants.CORNER_TO_CENTER_TRANSFORMATION;
             crank.updateRotation(dPos);
             return base.OnMouseMove(e);
         }
-        
-      
     }
 }

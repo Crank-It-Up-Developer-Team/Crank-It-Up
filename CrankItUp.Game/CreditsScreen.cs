@@ -9,13 +9,10 @@ using System;
 using osu.Framework.Input;
 using osuTK;
 
-
-
 namespace CrankItUp.Game
 {
     public class CreditsScreen : Screen
     {
-
         BasicButton backButton;
         SpriteText creditsText;
 
@@ -34,19 +31,19 @@ namespace CrankItUp.Game
                 Action = () => PushMenu(),
             };
 
-
-            string[] credits = {
+            string[] credits =
+            {
                 "AnnoyingRains - Original concept and Programming",
                 "MrJamesGaming - Programming",
                 "Camellia - Allowing free use of the album 'Tera I/O'"
-                };
+            };
             SpriteText[] creditsTextList;
             creditsTextList = new SpriteText[credits.Length];
             SpriteText TempText;
             for (int i = 0; i < credits.Length; i++)
             {
-                
-                TempText = new SpriteText{
+                TempText = new SpriteText
+                {
                     Y = 100 + (i * 30),
                     Text = credits[i],
                     Anchor = Anchor.TopCentre,
@@ -54,31 +51,29 @@ namespace CrankItUp.Game
                     Font = FontUsage.Default.With(size: 20)
                 };
                 creditsTextList[i] = TempText;
+            }
+            ;
+
+            InternalChildren = new Drawable[]
+            {
+                backButton,
+                new SpriteText
+                {
+                    Y = 20,
+                    Text = "Crank It up - Credits",
+                    Anchor = Anchor.TopCentre,
+                    Origin = Anchor.TopCentre,
+                    Font = FontUsage.Default.With(size: 40)
+                },
+                creditsTextList[0],
+                creditsTextList[1],
+                creditsTextList[2]
             };
-
-            
-            InternalChildren = new Drawable[] {
-
-            backButton,
-
-            new SpriteText{
-                Y = 20,
-                Text = "Crank It up - Credits",
-                Anchor = Anchor.TopCentre,
-                Origin = Anchor.TopCentre,
-                Font = FontUsage.Default.With(size: 40)
-            },
-            creditsTextList[0],
-            creditsTextList[1],
-            creditsTextList[2]
-            };
-            
         }
 
         void PushMenu()
         {
             this.Push(new TitleScreen());
         }
-        }
     }
-
+}

@@ -3,8 +3,6 @@ using osu.Framework.Graphics;
 using osu.Framework.Screens;
 using System;
 
-
-
 namespace CrankItUp.Game
 {
     public class CrankItUpGame : CrankItUpGameBase
@@ -22,7 +20,7 @@ namespace CrankItUp.Game
         protected override void LoadComplete()
         {
             screenStack.Push(new TitleScreen());
-            base.LoadComplete(); 
+            base.LoadComplete();
         }
     }
 }
