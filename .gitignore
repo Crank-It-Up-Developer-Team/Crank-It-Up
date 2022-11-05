@@ -3,3 +3,4 @@
 CrankItUp.Resources/bin
 *.exe
 .vscode/*
+**/debug.txt
