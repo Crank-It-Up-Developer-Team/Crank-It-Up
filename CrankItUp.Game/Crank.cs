@@ -44,7 +44,7 @@ namespace CrankItUp.Game
             crankScaledHeight = Constants.CRANK_DEFAULT_HEIGHT * dilation;
             crankScaledLength = Constants.CRANK_DEFAULT_LENGTH * dilation; 
             
-            writer = new StreamWriter("C:\\Users\\fizzi\\Documents\\GitHub\\Crank-It-Up\\CrankItUp.Game\\debug.txt"); //you 
+            writer = new StreamWriter("./debug.txt");
             previousNearEnd = new Vector2(812,(float)crankScaledLength);
             previousFarEnd = new Vector2(813, -(float)crankScaledLength);
 
