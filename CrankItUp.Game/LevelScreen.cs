@@ -8,26 +8,32 @@ using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Input.Events;
 using osuTK;
 using System.Collections.Generic;
+using osu.Framework.Audio;
+using osu.Framework.Audio.Track;
 
 namespace CrankItUp.Game{
     public class LevelScreen : Screen {
         Crank crank;
         NoteManager manager;
+        private Track song;
 
        [BackgroundDependencyLoader]
-        private void load()
+        private void load(AudioManager audio)
         {
             crank = new Crank{
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
                     Position = new osuTK.Vector2(0,0),
                 };
+            
+            song = audio.Tracks.Get("Flamewall.mp3");
             manager = new NoteManager(this, 50, 100);
             InternalChildren = new Drawable[]
             {
             crank,
-            manager
+            manager,
             };
+            song.Start();
 
             
             

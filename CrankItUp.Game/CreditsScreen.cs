@@ -38,7 +38,7 @@ namespace CrankItUp.Game
             string[] credits = {
                 "AnnoyingRains - Original concept and Programming",
                 "MrJamesGaming - Programming",
-                
+                "Camellia - Allowing free use of the album 'Tera I/O'"
                 };
             SpriteText[] creditsTextList;
             creditsTextList = new SpriteText[credits.Length];
@@ -70,6 +70,7 @@ namespace CrankItUp.Game
             },
             creditsTextList[0],
             creditsTextList[1],
+            creditsTextList[2]
             };
             
         }
