@@ -18,6 +18,7 @@ namespace CrankItUp.Game
 
         BasicButton testLevelsButton;
         BasicButton settingsButton;
+        BasicButton creditsButton;
 
         [BackgroundDependencyLoader]
         private void load()
@@ -45,11 +46,23 @@ namespace CrankItUp.Game
                 Position = new Vector2(0, 50),
                 Action = () => pushSettings(),
             };
+            creditsButton = new BasicButton
+            {
+                Anchor = Anchor.Centre,
+                Text = "Credits",
+                BackgroundColour = Color4.AntiqueWhite,
+                Colour = Color4.Black,
+                Size = new Vector2(200, 40),
+                Margin = new MarginPadding(10),
+                Position = new Vector2(0, 100),
+                Action = () => pushCredits(),
+            };
 
             InternalChildren = new Drawable[] {
 
             testLevelsButton,
             settingsButton,
+            creditsButton,
 
             new SpriteText{
                 Y = 20,
@@ -73,6 +86,10 @@ namespace CrankItUp.Game
         public void pushLevel()
         {
             this.Push(new LevelScreen());
+        }
+        public void pushCredits()
+        {
+            this.Push(new CreditsScreen());
         }
 
 
