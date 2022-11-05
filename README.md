@@ -19,10 +19,17 @@ It would also have a single button to be occasionally used for special hit objec
 Hit objects would be normal notes for the slider, special notes for the button and “trick” notes requiring you to do a full rotation of the crank handle in the specified direction.
 They could be used to force you to take the long way to the next note. 
 
-<img src="https://media.discordapp.net/attachments/1008370489581912174/1021262339393200168/IMG_0912.png"/>
+<img src="https://media.discordapp.net/attachments/1008370489581912174/1021262339393200168/IMG_0912.png" height=400/>
 
 Red = moving handle
 White = screen edges and stationary centre of handle 
 Blue = example gameplay screen 
 
 The V displayed near the handle represents the scoring line. Inside the V = ok, outside the V = not ok. You do not get any points for having a note hit the outside of the V.
+
+## Song Licencing:
+
+> There is an album by Camellia in the files, how is this allowed?
+
+Camellia has marked the songs as free download and free to use in the title of the youtube video and Camellia clarified that its free to use by Rhythm games
+without permission in [this tweet](https://twitter.com/cametek/status/1306260281174097921).
