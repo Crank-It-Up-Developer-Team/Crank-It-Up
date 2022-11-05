@@ -29,6 +29,7 @@ namespace CrankItUp.Game
         private void load()
         {
             Resources.AddStore(new DllResourceStore(typeof(CrankItUpResources).Assembly));
+            Host.Window.Title = "Crank It Up!";
         }
     }
 }
