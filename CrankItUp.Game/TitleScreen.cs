@@ -5,7 +5,9 @@ using osu.Framework.Screens;
 using osuTK.Graphics;
 using osu.Framework.Graphics.UserInterface;
 using osuTK;
-
+using osu.Framework.Audio;
+using osu.Framework.Audio.Track;
+using osu.Framework.Bindables;
 
 
 namespace CrankItUp.Game
@@ -16,10 +18,14 @@ namespace CrankItUp.Game
         BasicButton testLevelsButton;
         BasicButton settingsButton;
         BasicButton creditsButton;
+        Track track;
 
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(AudioManager audio)
         {
+            track = audio.GetTrackStore().Get("Fly Wit Me.mp3");
+            audio.AddAdjustment(AdjustableProperty.Volume, new BindableDouble(Settings.volume.Value));
+            track.Start();
             testLevelsButton = new BasicButton
             {
                 Anchor = Anchor.Centre,
@@ -78,10 +84,12 @@ namespace CrankItUp.Game
         }
         public void pushLevel()
         {
+            track.Stop();
             this.Push(new LevelScreen());
         }
         public void pushCredits()
         {
+            track.Stop();
             this.Push(new CreditsScreen());
         }
 

@@ -5,7 +5,8 @@ using osu.Framework.Screens;
 using osuTK.Graphics;
 using osu.Framework.Graphics.UserInterface;
 using osuTK;
-
+using osu.Framework.Audio;
+using osu.Framework.Audio.Track;
 
 
 namespace CrankItUp.Game
@@ -15,10 +16,13 @@ namespace CrankItUp.Game
 
         BasicButton backButton;
         SpriteText creditsText;
+        Track track;
 
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(AudioManager audio)
         {
+            track = audio.GetTrackStore().Get("Tera I_O.mp3");
+            track.Start();
             backButton = new BasicButton
             {
                 Anchor = Anchor.Centre,
@@ -74,6 +78,7 @@ namespace CrankItUp.Game
 
         void PushMenu()
         {
+            track.Stop();
             this.Exit();
         }
         }
