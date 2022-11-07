@@ -1,4 +1,3 @@
-using osuTK;
 using System;
 namespace CrankItUp.Game{
     public class Line{

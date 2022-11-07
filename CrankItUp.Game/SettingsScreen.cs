@@ -1,12 +1,9 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
-using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Screens;
 using osuTK.Graphics;
 using osu.Framework.Graphics.UserInterface;
-using System;
-using osu.Framework.Input;
 using osuTK;
 
 namespace CrankItUp.Game
