@@ -7,7 +7,8 @@ using osu.Framework.Graphics.UserInterface;
 using osuTK;
 
 namespace CrankItUp.Game
-{
+
+
     public class CreditsScreen : Screen
     {
         BasicButton backButton;
@@ -71,6 +72,6 @@ namespace CrankItUp.Game
         void PushMenu()
         {
             this.Exit();
+
         }
     }
-}

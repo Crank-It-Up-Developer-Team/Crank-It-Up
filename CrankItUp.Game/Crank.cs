@@ -10,6 +10,7 @@ using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 
+
 namespace CrankItUp.Game
 {
     public class Crank : CompositeDrawable
