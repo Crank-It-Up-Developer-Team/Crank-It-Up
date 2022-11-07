@@ -81,7 +81,7 @@ namespace CrankItUp.Game
 
         public void pushMenu()
         {
-            this.Push(new TitleScreen());
+            this.Exit();
         }
     }
 }

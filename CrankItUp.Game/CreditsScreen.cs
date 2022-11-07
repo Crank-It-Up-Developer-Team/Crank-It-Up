@@ -70,7 +70,7 @@ namespace CrankItUp.Game
 
         void PushMenu()
         {
-            this.Push(new TitleScreen());
+            this.Exit();
         }
     }
 }

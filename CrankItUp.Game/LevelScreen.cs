@@ -48,7 +48,7 @@ namespace CrankItUp.Game
             if (e.Key == osuTK.Input.Key.Escape)
             {
                 song.Dispose();
-                this.Push(new TitleScreen());
+                this.Exit();
             }
             return base.OnKeyDown(e);
         }
