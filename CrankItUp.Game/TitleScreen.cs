@@ -71,10 +71,6 @@ namespace CrankItUp.Game
 
         };
         }
-        public void test()
-        {
-            testLevelsButton.Text = "button has been pushed";
-        }
 
         public void pushSettings()
         {
