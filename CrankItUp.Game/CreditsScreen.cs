@@ -15,7 +15,6 @@ namespace CrankItUp.Game
     {
 
         BasicButton backButton;
-        SpriteText creditsText;
         Track track;
 
         [BackgroundDependencyLoader]
