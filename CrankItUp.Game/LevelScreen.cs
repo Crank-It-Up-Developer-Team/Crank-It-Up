@@ -42,5 +42,15 @@ namespace CrankItUp.Game
             crank.updateRotation(dPos);
             return base.OnMouseMove(e);
         }
+
+        protected override bool OnKeyDown(KeyDownEvent e)
+        {
+            if (e.Key == osuTK.Input.Key.Escape)
+            {
+                song.Dispose();
+                this.Push(new TitleScreen());
+            }
+            return base.OnKeyDown(e);
+        }
     }
 }
