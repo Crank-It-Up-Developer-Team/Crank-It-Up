@@ -9,7 +9,6 @@ using osuTK;
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
-using osu.Framework.Input.Events;
 
 namespace CrankItUp.Game
 {

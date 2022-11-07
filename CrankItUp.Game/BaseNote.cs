@@ -4,11 +4,8 @@ using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
-using osu.Framework.Graphics.Cursor;
 using osuTK;
 using System;
-using osu.Framework.Input.Events;
-using osu.Framework.Physics;
 
 namespace CrankItUp.Game
 {

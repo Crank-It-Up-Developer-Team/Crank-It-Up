@@ -1,6 +1,5 @@
 ﻿using osu.Framework.Platform;
 using osu.Framework;
-using CrankItUp.Game;
 
 namespace CrankItUp.Game
 {
