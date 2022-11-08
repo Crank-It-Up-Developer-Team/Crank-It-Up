@@ -7,7 +7,7 @@ using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Bindables;
 using osuTK;
 using osu.Framework.Audio;
-
+using osu.Framework.Graphics.Textures;
 namespace CrankItUp.Game
 {
     class Settings
@@ -30,21 +30,20 @@ namespace CrankItUp.Game
 
     public class SettingsScreen : Screen
     {
-        BasicButton inputModeButton;
-        BasicButton backButton;
+        CIUButton inputModeButton;
+        CIUButton backButton;
         SpriteText volumeText;
         BasicSliderBar<double> volumeSlider;
 
         [BackgroundDependencyLoader]
-        private void load(AudioManager audio)
+        private void load(AudioManager audio, TextureStore textures)
         {
             audio.AddAdjustment(AdjustableProperty.Volume, Settings.volume);
-            inputModeButton = new BasicButton
+            inputModeButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Position = new Vector2(0, -50),
                 Text = "Input Mode: " + Settings.inputmode.ToString(),
-                BackgroundColour = Color4.White,
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Action = () => changeInputMode(),
@@ -67,12 +66,11 @@ namespace CrankItUp.Game
                     KeyboardStep = 1,
                     Current = Settings.volume
                 };
-            backButton = new BasicButton
+            backButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Position = new Vector2(0, 80),
                 Text = "Back to menu",
-                BackgroundColour = Color4.White,
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Action = () => pushMenu(audio),
