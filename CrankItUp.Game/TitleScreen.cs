@@ -3,11 +3,13 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Screens;
 using osuTK.Graphics;
+using osu.Framework.Graphics.Textures;
 using osu.Framework.Graphics.UserInterface;
 using osuTK;
 using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
 using osu.Framework.Bindables;
+using osu.Framework.Localisation;
 
 
 namespace CrankItUp.Game
@@ -15,49 +17,45 @@ namespace CrankItUp.Game
     public class TitleScreen : Screen
     {
 
-        BasicButton testLevelsButton;
-        BasicButton settingsButton;
-        BasicButton creditsButton;
+        CIUButton testLevelsButton;
+        CIUButton settingsButton;
+        CIUButton creditsButton;
         Track track;
 
         [BackgroundDependencyLoader]
-        private void load(AudioManager audio)
+        private void load(AudioManager audio, TextureStore textures)
         {
             track = audio.GetTrackStore().Get("Fly Wit Me.mp3");
             audio.AddAdjustment(AdjustableProperty.Volume, new BindableDouble(Settings.volume.Value));
             track.Start();
-            testLevelsButton = new BasicButton
+
+            testLevelsButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Text = "Begin Test Levels",
-                BackgroundColour = Color4.AntiqueWhite,
-                Colour = Color4.Black,
+                //BackgroundColour = Color4.AntiqueWhite,
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Position = new Vector2(0, 0),
+                Position = new Vector2(-100, 0),
                 Action = () => pushLevel(),
             };
 
-            settingsButton = new BasicButton
+            settingsButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Text = "Settings",
-                BackgroundColour = Color4.AntiqueWhite,
-                Colour = Color4.Black,
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Position = new Vector2(0, 50),
+                Position = new Vector2(-100, 50),
                 Action = () => pushSettings(),
             };
-            creditsButton = new BasicButton
+            creditsButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Text = "Credits",
-                BackgroundColour = Color4.AntiqueWhite,
-                Colour = Color4.Black,
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Position = new Vector2(0, 100),
+                Position = new Vector2(-100, 100),
                 Action = () => pushCredits(),
             };
 
