@@ -3,46 +3,57 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
+using osu.Framework.Input.Events;
 using osu.Framework.Localisation;
 using osuTK;
-
+using osu.Framework.Graphics.UserInterface;
 namespace CrankItUp.Game
 {
-    public class Button : ClickableContainer
+    public class CIUButton : Button
     {
-        public LocalisableString Text;
-        public Button(){}
+        TextureStore texturestore;
         
-        [BackgroundDependencyLoader]
-        private void load(TextureStore textures)
+        public LocalisableString Text // Most of this is from BasicButton
         {
-            InternalChild = new Container
+            get => text?.Text ?? default;
+            set
             {
-                AutoSizeAxes = Axes.Both,
-                Anchor = Anchor.Centre,
-                Origin = Anchor.Centre,
-                Children = new Drawable[]
-               {
-                    new SpriteText
-                    {
-                        RelativeSizeAxes = Axes.Both,
-                        Anchor = Anchor.Centre,
-                        Origin = Anchor.Centre,
-                        Text = Text,
-                        Font = new FontUsage(size: 30),
-                        Depth = 0
-                    },
+                if (text != null)
+                    text.Text = value;
+            }
+        }
+        
+        public Texture Texture;
+        public Colour4 TextColour = Colour4.White;
 
-                    new Sprite
-                    {
-                        Anchor = Anchor.Centre,
-                        Origin = Anchor.Centre,
-                        Size = Size,
-                        Texture = textures.Get("Button"),
-                        Depth = 1
-                    },
-               }
-            };
+        private Sprite background;
+        private SpriteText text;
+
+        public CIUButton(TextureStore texturestore){
+            if (Texture == null)
+            {
+                Texture = texturestore.Get("Button");
+            }
+            AddRange(new Drawable[]
+            {
+                background = new Sprite
+                {
+                    Anchor = Anchor.Centre,
+                    Origin = Anchor.Centre,
+                    RelativeSizeAxes = Axes.Both,
+                    Texture = Texture,
+                },
+
+                text = new SpriteText
+                {
+                    Anchor = Anchor.Centre,
+                    Origin = Anchor.Centre,
+                    Colour = TextColour,
+                    Text = Text,
+                    Depth = -1
+                },
+            }
+            );
         }
         protected override void LoadComplete()
         {
