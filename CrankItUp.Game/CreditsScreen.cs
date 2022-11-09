@@ -2,8 +2,6 @@ using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Screens;
-using osuTK.Graphics;
-using osu.Framework.Graphics.UserInterface;
 using osuTK;
 using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
@@ -43,8 +41,9 @@ namespace CrankItUp.Game
             SpriteText TempText;
             for (int i = 0; i < credits.Length; i++)
             {
-                
-                TempText = new SpriteText{
+
+                TempText = new SpriteText
+                {
                     Y = 100 + (i * 30),
                     Text = credits[i],
                     Anchor = Anchor.TopCentre,
@@ -54,7 +53,7 @@ namespace CrankItUp.Game
                 creditsTextList[i] = TempText;
             };
 
-            
+
             InternalChildren = new Drawable[] {
 
             backButton,
@@ -70,7 +69,7 @@ namespace CrankItUp.Game
             creditsTextList[1],
             creditsTextList[2]
             };
-            
+
         }
 
         void PushMenu()
@@ -78,6 +77,6 @@ namespace CrankItUp.Game
             track.Stop();
             this.Exit();
         }
-        }
     }
+}
 
