@@ -2,27 +2,27 @@ using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Screens;
-using osuTK.Graphics;
-using osu.Framework.Graphics.UserInterface;
 using osuTK;
-
-namespace CrankItUp.Game
-
+using osu.Framework.Audio;
+using osu.Framework.Audio.Track;
+using osu.Framework.Graphics.Textures;
 
     public class CreditsScreen : Screen
     {
-        BasicButton backButton;
-        SpriteText creditsText;
+
+
+        CIUButton backButton;
+        Track track;
 
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(AudioManager audio, TextureStore textures)
         {
-            backButton = new BasicButton
+            track = audio.GetTrackStore().Get("Tera I_O.mp3");
+            track.Start();
+            backButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Text = "Back to menu",
-                BackgroundColour = Color4.AntiqueWhite,
-                Colour = Color4.Black,
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(0, 0),
@@ -40,6 +40,7 @@ namespace CrankItUp.Game
             SpriteText TempText;
             for (int i = 0; i < credits.Length; i++)
             {
+
                 TempText = new SpriteText
                 {
                     Y = 100 + (i * 30),
@@ -67,11 +68,14 @@ namespace CrankItUp.Game
                 creditsTextList[1],
                 creditsTextList[2]
             };
+
         }
 
         void PushMenu()
         {
+            track.Stop();
             this.Exit();
-
         }
     }
+}
+

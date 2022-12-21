@@ -4,8 +4,10 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Screens;
 using osuTK.Graphics;
 using osu.Framework.Graphics.UserInterface;
+using osu.Framework.Bindables;
 using osuTK;
-
+using osu.Framework.Audio;
+using osu.Framework.Graphics.Textures;
 namespace CrankItUp.Game
 {
     class Settings
@@ -17,41 +19,68 @@ namespace CrankItUp.Game
         }
 
         // init vars
+        public static BindableDouble volume = new BindableDouble{
+            Default = 0.5,
+            Value = 0.5,
+            MinValue = 0,
+            MaxValue = 1
+        };
         public static InputMode inputmode = InputMode.Rotational;
     }
 
     public class SettingsScreen : Screen
     {
-        BasicButton inputModeButton;
-        BasicButton backButton;
-        Button test;
+        CIUButton inputModeButton;
+        CIUButton backButton;
+        SpriteText volumeText;
+        BasicSliderBar<double> volumeSlider;
 
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(AudioManager audio, TextureStore textures)
         {
-            inputModeButton = new BasicButton
+            audio.AddAdjustment(AdjustableProperty.Volume, Settings.volume);
+            inputModeButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
+                Position = new Vector2(0, -50),
                 Text = "Input Mode: " + Settings.inputmode.ToString(),
-                BackgroundColour = Color4.White,
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Action = () => changeInputMode(),
             };
-            backButton = new BasicButton
+            volumeText = new SpriteText
             {
                 Anchor = Anchor.Centre,
+                Position = new Vector2(0, 20),
+                Text = "Volume",
+                Colour = Color4.White,
+            };
+            volumeSlider = new BasicSliderBar<double>
+                {
+                    Anchor = Anchor.Centre,
+                    Position = new Vector2(10, 40), // shift 10 to the right as it looks odd otherwise, unsure why
+                    Size = new Vector2(200, 20),
+                    RangePadding = 20,
+                    BackgroundColour = Color4.White,
+                    SelectionColour = Color4.Blue,
+                    KeyboardStep = 1,
+                    Current = Settings.volume
+                };
+            backButton = new CIUButton(textures)
+            {
+                Anchor = Anchor.Centre,
+                Position = new Vector2(0, 80),
                 Text = "Back to menu",
-                BackgroundColour = Color4.White,
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Position = new Vector2(0, 50),
-                Action = () => pushMenu(),
+                Action = () => pushMenu(audio),
             };
 
             InternalChildren = new Drawable[]
             {
                 inputModeButton,
+                volumeText,
+                volumeSlider,
                 backButton,
                 new SpriteText
                 {
@@ -79,7 +108,7 @@ namespace CrankItUp.Game
             inputModeButton.Text = "Input Mode: " + Settings.inputmode.ToString();
         }
 
-        public void pushMenu()
+        public void pushMenu(AudioManager audio)
         {
             this.Exit();
         }
