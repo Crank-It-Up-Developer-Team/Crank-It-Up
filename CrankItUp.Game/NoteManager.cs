@@ -37,6 +37,11 @@ namespace CrankItUp.Game
 
         protected override void Update()
         {
+<<<<<<< Updated upstream
+=======
+            
+            
+>>>>>>> Stashed changes
             elapsedTime += (long)Time.Elapsed;
             if (nextNote.getSpawnTime() < elapsedTime && !stopSpawning)
             {
