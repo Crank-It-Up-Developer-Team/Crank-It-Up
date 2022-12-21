@@ -9,67 +9,49 @@ using osuTK;
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
-<<<<<<< Updated upstream
-=======
-using osu.Framework.Input.Events;
-using System.Collections.Generic;
-using osu.Framework.Physics;
->>>>>>> Stashed changes
 
 
 namespace CrankItUp.Game
 {
-    public class Crank : RigidBodyContainer<CompositeDrawable>
+    public class Crank : CompositeDrawable
     {
-        Queue<BaseNote> activeNotes;
         public Crank()
         {
-            activeNotes = new Queue<BaseNote>();
-            
-            Position = Constants.CORNER_TO_CENTER_TRANSFORMATION;
+            AutoSizeAxes = Axes.Both;
+            Origin = Anchor.Centre;
         }
 
         private Container box;
         private CursorContainer mouse;
         public static Line collisionLine;
+        String compositeString;
         StreamWriter writer;
         double previousDirection = 0;
-<<<<<<< Updated upstream
         Vector2 previousNearEnd,
             previousFarEnd;
         float dilation;
         double crankScaledHeight,
             crankScaledLength;
-=======
-        float dilation;
-        
->>>>>>> Stashed changes
 
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
         {
-<<<<<<< Updated upstream
-=======
-            AutoSizeAxes = Axes.Both;
->>>>>>> Stashed changes
             mouse = new CursorContainer();
             mouse.ToggleVisibility();
+            compositeString = "";
             dilation = (float)(NoteManager.radius / Constants.NOTE_DEFAULT_RADIUS);
-<<<<<<< Updated upstream
             crankScaledHeight = Constants.CRANK_DEFAULT_HEIGHT * dilation;
             crankScaledLength = Constants.CRANK_DEFAULT_LENGTH * dilation;
 
             writer = new StreamWriter("./debug.txt");
             previousNearEnd = new Vector2(812, (float)crankScaledLength);
             previousFarEnd = new Vector2(813, -(float)crankScaledLength);
-=======
-            
-            //writer = new StreamWriter("C:\\Users\\fizzi\\Documents\\GitHub\\Crank-It-Up\\CrankItUp.Game\\debug.txt"); //you 
->>>>>>> Stashed changes
 
             InternalChild = box = new Container
             {
-                
+                AutoSizeAxes = Axes.Both,
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
                 Children = new Drawable[]
                 {
                     new Box
@@ -96,7 +78,6 @@ namespace CrankItUp.Game
         [MethodImpl(MethodImplOptions.Synchronized)]
         protected override void Update()
         {
-<<<<<<< Updated upstream
             double direction = box.Rotation * (Math.PI / 180) - Math.PI / 2.0;
             double dtheta = direction - previousDirection;
 
@@ -137,32 +118,11 @@ namespace CrankItUp.Game
             previousDirection = direction;
             previousFarEnd = farEnd;
             previousNearEnd = nearEnd;
-=======
-            if(activeNotes.Count != 0){
-                Console.WriteLine(activeNotes.Peek().Position.ToString());
-                Console.WriteLine(Position.ToString());
-                if(CheckAndHandleCollisionWith(activeNotes.Peek())){
-                    activeNotes.Dequeue();
-                    Console.WriteLine("Hit!");
-
-                }
-            }
->>>>>>> Stashed changes
             base.Update();
         }
 
-<<<<<<< Updated upstream
         public void updateRotation(Vector2 MousePos)
         {
-=======
-        public void addNote(BaseNote note){
-            activeNotes.Enqueue(note);
-        }
-
-        
-
-        public void updateRotation(Vector2 MousePos){
->>>>>>> Stashed changes
             box.Rotation = (float)((180 / Math.PI) * Math.Atan2(MousePos.Y, MousePos.X));
         }
     }
