@@ -11,11 +11,7 @@ namespace CrankItUp.Game.Tests
         {
             base.LoadComplete();
 
-            AddRange(new Drawable[]
-            {
-                new TestBrowser("CrankItUp"),
-                new CursorContainer()
-            });
+            AddRange(new Drawable[] { new TestBrowser("CrankItUp"), new CursorContainer() });
         }
 
         public override void SetHost(GameHost host)

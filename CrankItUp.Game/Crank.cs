@@ -27,24 +27,24 @@ namespace CrankItUp.Game
         String compositeString;
         StreamWriter writer;
         double previousDirection = 0;
-        Vector2 previousNearEnd, previousFarEnd;
+        Vector2 previousNearEnd,
+            previousFarEnd;
         float dilation;
-        double crankScaledHeight, crankScaledLength;
+        double crankScaledHeight,
+            crankScaledLength;
 
-        
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
         {
-
             mouse = new CursorContainer();
             mouse.ToggleVisibility();
             compositeString = "";
             dilation = (float)(NoteManager.radius / Constants.NOTE_DEFAULT_RADIUS);
             crankScaledHeight = Constants.CRANK_DEFAULT_HEIGHT * dilation;
-            crankScaledLength = Constants.CRANK_DEFAULT_LENGTH * dilation; 
-            
+            crankScaledLength = Constants.CRANK_DEFAULT_LENGTH * dilation;
+
             writer = new StreamWriter("./debug.txt");
-            previousNearEnd = new Vector2(812,(float)crankScaledLength);
+            previousNearEnd = new Vector2(812, (float)crankScaledLength);
             previousFarEnd = new Vector2(813, -(float)crankScaledLength);
 
             InternalChild = box = new Container
@@ -53,7 +53,7 @@ namespace CrankItUp.Game
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
                 Children = new Drawable[]
-               {
+                {
                     new Box
                     {
                         RelativeSizeAxes = Axes.Both,
@@ -66,38 +66,45 @@ namespace CrankItUp.Game
                         Origin = Anchor.Centre,
                         Texture = textures.Get("crank")
                     },
-                  
-               }
-               
-
+                }
             };
         }
+
         protected override void LoadComplete()
         {
             base.LoadComplete();
         }
-        
-        [MethodImpl (MethodImplOptions.Synchronized)]
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         protected override void Update()
         {
             double direction = box.Rotation * (Math.PI / 180) - Math.PI / 2.0;
             double dtheta = direction - previousDirection;
 
-
             // compositeString += previousNearEnd.ToString() + "\n";
             // compositeString += previousFarEnd.ToString() + "\n";
-            
+
             // previousFarEnd = previousFarEnd - Constants.CORNER_TO_CENTER_TRANSFORMATION;
             // previousNearEnd = previousNearEnd - Constants.CORNER_TO_CENTER_TRANSFORMATION;
 
             compositeString += previousNearEnd.ToString() + "\n";
             compositeString += previousFarEnd.ToString() + "\n";
-            
-            Vector2 farEnd = new Vector2((float)(previousFarEnd.X * Math.Cos(dtheta) + previousFarEnd.Y * Math.Sin(dtheta)), (float)(-previousFarEnd.X * Math.Sin(dtheta) + previousFarEnd.Y * Math.Cos(dtheta)));
-            Vector2 nearEnd = new Vector2((float)(previousNearEnd.X * Math.Cos(dtheta) + previousNearEnd.Y * Math.Sin(dtheta)), (float)(-previousNearEnd.X * Math.Sin(dtheta) + previousNearEnd.Y * Math.Cos(dtheta)));
+
+            Vector2 farEnd = new Vector2(
+                (float)(previousFarEnd.X * Math.Cos(dtheta) + previousFarEnd.Y * Math.Sin(dtheta)),
+                (float)(-previousFarEnd.X * Math.Sin(dtheta) + previousFarEnd.Y * Math.Cos(dtheta))
+            );
+            Vector2 nearEnd = new Vector2(
+                (float)(
+                    previousNearEnd.X * Math.Cos(dtheta) + previousNearEnd.Y * Math.Sin(dtheta)
+                ),
+                (float)(
+                    -previousNearEnd.X * Math.Sin(dtheta) + previousNearEnd.Y * Math.Cos(dtheta)
+                )
+            );
             compositeString += nearEnd.ToString() + "\n";
             compositeString += farEnd.ToString() + "\n";
-            
+
             // nearEnd += Constants.CORNER_TO_CENTER_TRANSFORMATION;
             // farEnd += Constants.CORNER_TO_CENTER_TRANSFORMATION;
 
@@ -112,12 +119,10 @@ namespace CrankItUp.Game
             previousFarEnd = farEnd;
             previousNearEnd = nearEnd;
             base.Update();
-               
         }
 
-        
-
-        public void updateRotation(Vector2 MousePos){
+        public void updateRotation(Vector2 MousePos)
+        {
             box.Rotation = (float)((180 / Math.PI) * Math.Atan2(MousePos.Y, MousePos.X));
         }
     }

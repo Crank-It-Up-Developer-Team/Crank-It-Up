@@ -13,7 +13,6 @@ namespace CrankItUp.Game
 {
     public class TitleScreen : Screen
     {
-
         CIUButton testLevelsButton;
         CIUButton settingsButton;
         CIUButton creditsButton;
@@ -56,39 +55,43 @@ namespace CrankItUp.Game
                 Action = () => pushCredits(),
             };
 
-            InternalChildren = new Drawable[] {
-
-            testLevelsButton,
-            settingsButton,
-            creditsButton,
-
-            new SpriteText{
-                Y = 20,
-                Text = "Welcome to Crank it Up",
-                Anchor = Anchor.TopCentre,
-                Origin = Anchor.TopCentre,
-                Font = FontUsage.Default.With(size: 40)
-            },
-
-        };
+            InternalChildren = new Drawable[]
+            {
+                testLevelsButton,
+                settingsButton,
+                creditsButton,
+                new SpriteText
+                {
+                    Y = 20,
+                    Text = "Welcome to Crank it Up",
+                    Anchor = Anchor.TopCentre,
+                    Origin = Anchor.TopCentre,
+                    Font = FontUsage.Default.With(size: 40)
+                },
+            };
         }
+
+        public void test()
+        {
+            testLevelsButton.Text = "button has been pushed";
+        }
+
 
         public void pushSettings()
         {
             this.Push(new SettingsScreen());
         }
+
         public void pushLevel()
         {
             track.Stop();
             this.Push(new LevelScreen());
         }
+
         public void pushCredits()
         {
             track.Stop();
             this.Push(new CreditsScreen());
         }
-
-
     }
-
 }

@@ -1,5 +1,1 @@
-public class MainMenu {
-
-   
-
-}
+public class MainMenu { }

@@ -1,7 +1,6 @@
-﻿using osu.Framework.Allocation;
+using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Screens;
-
 
 
 namespace CrankItUp.Game
@@ -21,7 +20,7 @@ namespace CrankItUp.Game
         protected override void LoadComplete()
         {
             screenStack.Push(new TitleScreen());
-            base.LoadComplete(); 
+            base.LoadComplete();
         }
     }
 }
