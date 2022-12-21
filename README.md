@@ -31,5 +31,4 @@ The V displayed near the handle represents the scoring line. Inside the V = ok, 
 
 > There is an album by Camellia in the files, how is this allowed?
 
-Camellia has marked the songs as free download and free to use in the title of the youtube video and Camellia clarified that its free to use by Rhythm games
-without permission in [this tweet](https://twitter.com/cametek/status/1306260281174097921).
+Camellia has marked the songs as free download and as "free to use" in the title of the youtube video. Camellia also later clarified that its free to be used by Rhythm games without permission being required in [this tweet](https://twitter.com/cametek/status/1306260281174097921).
