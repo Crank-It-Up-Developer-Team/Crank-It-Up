@@ -4,10 +4,8 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Screens;
 using osuTK;
 using osu.Framework.Audio;
-using osu.Framework.Audio.Track;
 using osu.Framework.Graphics.Textures;
 using System.IO;
-using osu.Framework.Testing;
 
 namespace CrankItUp.Game
 {
