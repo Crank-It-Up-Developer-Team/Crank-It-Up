@@ -40,7 +40,6 @@ namespace CrankItUp.Game
                     )
                 )
             );
-            Console.WriteLine(Path.Combine("maps", mapname + "test"));
             track = trackStore.Get("music.mp3");
         }
 
