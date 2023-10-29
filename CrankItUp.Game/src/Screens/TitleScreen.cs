@@ -12,7 +12,7 @@ namespace CrankItUp.Game
 {
     public class TitleScreen : Screen
     {
-        CIUButton testLevelsButton;
+        CIUButton selectTrackButton;
         CIUButton settingsButton;
         CIUButton creditsButton;
         Track track;
@@ -27,15 +27,15 @@ namespace CrankItUp.Game
             );
             track.Start();
 
-            testLevelsButton = new CIUButton(textures)
+            selectTrackButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
-                Text = "Begin Test Levels",
+                Text = "Play!",
                 //BackgroundColour = Color4.AntiqueWhite,
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(-100, 0),
-                Action = () => pushLevel(),
+                Action = () => pushSelectTrack(),
             };
 
             settingsButton = new CIUButton(textures)
@@ -59,7 +59,7 @@ namespace CrankItUp.Game
 
             InternalChildren = new Drawable[]
             {
-                testLevelsButton,
+                selectTrackButton,
                 settingsButton,
                 creditsButton,
                 new SpriteText
@@ -73,20 +73,15 @@ namespace CrankItUp.Game
             };
         }
 
-        public void test()
-        {
-            testLevelsButton.Text = "button has been pushed";
-        }
-
         public void pushSettings()
         {
             this.Push(new SettingsScreen());
         }
 
-        public void pushLevel()
+        public void pushSelectTrack()
         {
             track.Stop();
-            this.Push(new LevelScreen());
+            this.Push(new TrackSelect());
         }
 
         public void pushCredits()

@@ -4,9 +4,7 @@ using osu.Framework.Screens;
 using osu.Framework.Input.Events;
 using osuTK;
 using osu.Framework.Audio;
-using osu.Framework.Audio.Track;
 using osu.Framework.Platform;
-using System;
 
 namespace CrankItUp.Game
 {
@@ -15,6 +13,14 @@ namespace CrankItUp.Game
         Crank crank;
         NoteManager manager;
         private Beatmap beatmap;
+        string map;
+        string difficulty;
+
+        public LevelScreen(string mapname, string difficultyname)
+        {
+            map = mapname;
+            difficulty = difficultyname;
+        }
 
         [BackgroundDependencyLoader]
         private void load(AudioManager audio, Storage storage)
@@ -26,7 +32,7 @@ namespace CrankItUp.Game
                 Position = new Vector2(0, 0),
             };
 
-            beatmap = new Beatmap("Test", "easy", audio, storage);
+            beatmap = new Beatmap(map, difficulty, audio, storage);
             manager = new NoteManager(this, 50, 100, beatmap);
             InternalChildren = new Drawable[] { crank, manager, };
             beatmap.track.Start();
