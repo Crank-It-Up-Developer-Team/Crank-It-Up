@@ -20,7 +20,7 @@ namespace CrankItUp.Game
         [BackgroundDependencyLoader]
         private void load(AudioManager audio, TextureStore textures)
         {
-            track = audio.GetTrackStore().Get("Fly Wit Me.mp3");
+            track = audio.GetTrackStore().Get("Body F10ating in the Zero Gravity Space.mp3");
             audio.AddAdjustment(
                 AdjustableProperty.Volume,
                 new BindableDouble(Settings.volume.Value)
