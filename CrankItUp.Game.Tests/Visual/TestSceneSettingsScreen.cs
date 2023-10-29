@@ -5,14 +5,14 @@ using NUnit.Framework;
 namespace CrankItUp.Game.Tests.Visual
 {
     [TestFixture]
-    public partial class TestSceneMainScreen : CrankItUpTestScene
+    public partial class TestSceneSettingsScreen : CrankItUpTestScene
     {
         // Add visual tests to ensure correct behaviour of your game: https://github.com/ppy/osu-framework/wiki/Development-and-Testing
         // You can make changes to classes associated with the tests and they will recompile and update immediately.
 
-        public TestSceneMainScreen()
+        public TestSceneSettingsScreen()
         {
-            Add(new ScreenStack(new MainScreen()) { RelativeSizeAxes = Axes.Both });
+            Add(new ScreenStack(new SettingsScreen()) { RelativeSizeAxes = Axes.Both });
         }
     }
 }
