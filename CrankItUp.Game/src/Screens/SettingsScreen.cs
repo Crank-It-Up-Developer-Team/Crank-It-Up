@@ -8,6 +8,7 @@ using osu.Framework.Bindables;
 using osuTK;
 using osu.Framework.Audio;
 using osu.Framework.Graphics.Textures;
+
 namespace CrankItUp.Game
 {
     class Settings
@@ -19,7 +20,8 @@ namespace CrankItUp.Game
         }
 
         // init vars
-        public static BindableDouble volume = new BindableDouble{
+        public static BindableDouble volume = new BindableDouble
+        {
             Default = 0.5,
             Value = 0.5,
             MinValue = 0,
@@ -56,16 +58,16 @@ namespace CrankItUp.Game
                 Colour = Color4.White,
             };
             volumeSlider = new BasicSliderBar<double>
-                {
-                    Anchor = Anchor.Centre,
-                    Position = new Vector2(10, 40), // shift 10 to the right as it looks odd otherwise, unsure why
-                    Size = new Vector2(200, 20),
-                    RangePadding = 20,
-                    BackgroundColour = Color4.White,
-                    SelectionColour = Color4.Blue,
-                    KeyboardStep = 1,
-                    Current = Settings.volume
-                };
+            {
+                Anchor = Anchor.Centre,
+                Position = new Vector2(10, 40), // shift 10 to the right as it looks odd otherwise, unsure why
+                Size = new Vector2(200, 20),
+                RangePadding = 20,
+                BackgroundColour = Color4.White,
+                SelectionColour = Color4.Blue,
+                KeyboardStep = 1,
+                Current = Settings.volume
+            };
             backButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
@@ -111,6 +113,11 @@ namespace CrankItUp.Game
         public void pushMenu(AudioManager audio)
         {
             this.Exit();
+        }
+
+        public override void OnEntering(ScreenTransitionEvent e)
+        {
+            this.FadeInFromZero(500, Easing.OutQuint);
         }
     }
 }

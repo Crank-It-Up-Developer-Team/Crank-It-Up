@@ -8,7 +8,6 @@ using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
 using osu.Framework.Bindables;
 
-
 namespace CrankItUp.Game
 {
     public class TitleScreen : Screen
@@ -22,7 +21,10 @@ namespace CrankItUp.Game
         private void load(AudioManager audio, TextureStore textures)
         {
             track = audio.GetTrackStore().Get("Fly Wit Me.mp3");
-            audio.AddAdjustment(AdjustableProperty.Volume, new BindableDouble(Settings.volume.Value));
+            audio.AddAdjustment(
+                AdjustableProperty.Volume,
+                new BindableDouble(Settings.volume.Value)
+            );
             track.Start();
 
             testLevelsButton = new CIUButton(textures)
@@ -76,7 +78,6 @@ namespace CrankItUp.Game
             testLevelsButton.Text = "button has been pushed";
         }
 
-
         public void pushSettings()
         {
             this.Push(new SettingsScreen());
@@ -92,6 +93,16 @@ namespace CrankItUp.Game
         {
             track.Stop();
             this.Push(new CreditsScreen());
+        }
+
+        public override void OnEntering(ScreenTransitionEvent e)
+        {
+            this.FadeInFromZero(500, Easing.OutQuint);
+        }
+
+        public override void OnResuming(ScreenTransitionEvent e)
+        {
+            this.FadeInFromZero(500, Easing.OutQuint);
         }
     }
 }

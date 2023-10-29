@@ -52,5 +52,10 @@ namespace CrankItUp.Game
             }
             return base.OnKeyDown(e);
         }
+
+        public override void OnEntering(ScreenTransitionEvent e)
+        {
+            this.FadeInFromZero(500, Easing.OutQuint);
+        }
     }
 }

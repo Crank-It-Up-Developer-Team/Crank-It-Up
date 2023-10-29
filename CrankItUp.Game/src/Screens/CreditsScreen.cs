@@ -69,6 +69,11 @@ namespace CrankItUp.Game
             };
         }
 
+        public override void OnEntering(ScreenTransitionEvent e)
+        {
+            this.FadeInFromZero(500, Easing.OutQuint);
+        }
+
         void PushMenu()
         {
             track.Stop();
