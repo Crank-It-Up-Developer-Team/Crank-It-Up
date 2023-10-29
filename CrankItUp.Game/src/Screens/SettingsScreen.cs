@@ -43,26 +43,19 @@ namespace CrankItUp.Game
         private void load(AudioManager audio, TextureStore textures)
         {
             audio.AddAdjustment(AdjustableProperty.Volume, Settings.volume);
-            inputModeButton = new CIUButton(textures)
-            {
-                Anchor = Anchor.Centre,
-                Position = new Vector2(0, -50),
-                Text = "Input Mode: " + Settings.inputmode.ToString(),
-                Size = new Vector2(200, 40),
-                Margin = new MarginPadding(10),
-                Action = () => changeInputMode(),
-            };
             volumeText = new SpriteText
             {
                 Anchor = Anchor.Centre,
-                Position = new Vector2(0, 20),
+                Origin = Anchor.Centre,
+                Position = new Vector2(0, -30),
                 Text = "Volume",
                 Colour = Color4.White,
             };
             volumeSlider = new BasicSliderBar<double>
             {
                 Anchor = Anchor.Centre,
-                Position = new Vector2(10, 40), // shift 10 to the right as it looks odd otherwise, unsure why
+                Origin = Anchor.Centre,
+                Position = new Vector2(0, -10),
                 Size = new Vector2(200, 20),
                 RangePadding = 20,
                 BackgroundColour = Color4.White,
@@ -70,9 +63,20 @@ namespace CrankItUp.Game
                 KeyboardStep = 1,
                 Current = Settings.volume
             };
+            inputModeButton = new CIUButton(textures)
+            {
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Position = new Vector2(0, 30),
+                Text = "Input Mode: " + Settings.inputmode.ToString(),
+                Size = new Vector2(200, 40),
+                Margin = new MarginPadding(10),
+                Action = () => changeInputMode(),
+            };
             setupButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
                 Position = new Vector2(0, 80),
                 Text = "Restart initial setup",
                 Size = new Vector2(200, 40),
@@ -82,6 +86,7 @@ namespace CrankItUp.Game
             backButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
                 Position = new Vector2(0, 130),
                 Text = "Back to menu",
                 Size = new Vector2(200, 40),

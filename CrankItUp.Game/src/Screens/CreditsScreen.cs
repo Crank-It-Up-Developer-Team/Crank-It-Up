@@ -22,36 +22,13 @@ namespace CrankItUp.Game
             backButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
                 Text = "Back to menu",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(0, 0),
                 Action = () => PushMenu(),
             };
-
-            string[] credits =
-            {
-                "AnnoyingRains - Original concept and Programming",
-                "MrJamesGaming - Programming",
-                "Camellia - Allowing free use of the album 'Tera I/O'"
-            };
-            SpriteText[] creditsTextList;
-            creditsTextList = new SpriteText[credits.Length];
-            SpriteText TempText;
-            for (int i = 0; i < credits.Length; i++)
-            {
-                TempText = new SpriteText
-                {
-                    Y = 100 + (i * 30),
-                    Text = credits[i],
-                    Anchor = Anchor.TopCentre,
-                    Origin = Anchor.TopCentre,
-                    Font = FontUsage.Default.With(size: 20)
-                };
-                creditsTextList[i] = TempText;
-            }
-            ;
-
             InternalChildren = new Drawable[]
             {
                 backButton,
@@ -63,10 +40,27 @@ namespace CrankItUp.Game
                     Origin = Anchor.TopCentre,
                     Font = FontUsage.Default.With(size: 40)
                 },
-                creditsTextList[0],
-                creditsTextList[1],
-                creditsTextList[2]
             };
+
+            string[] credits =
+            {
+                "AnnoyingRains - Original concept and Programming",
+                "MrJamesGaming - Programming",
+                "Camellia - Allowing free use of the album 'Tera I/O'"
+            };
+            for (int i = 0; i < credits.Length; i++)
+            {
+                AddInternal(
+                    new SpriteText
+                    {
+                        Y = 200 + (i * 30),
+                        Text = credits[i],
+                        Anchor = Anchor.TopCentre,
+                        Origin = Anchor.TopCentre,
+                        Font = FontUsage.Default.With(size: 20)
+                    }
+                );
+            }
         }
 
         public override void OnEntering(ScreenTransitionEvent e)
