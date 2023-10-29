@@ -6,6 +6,7 @@ using osuTK;
 using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
 using osu.Framework.Graphics.Textures;
+using osu.Framework.Input.Events;
 
 namespace CrankItUp.Game
 {
@@ -61,6 +62,15 @@ namespace CrankItUp.Game
                     }
                 );
             }
+        }
+
+        protected override bool OnKeyDown(KeyDownEvent e)
+        {
+            if (e.Key == osuTK.Input.Key.Escape)
+            {
+                PushMenu();
+            }
+            return base.OnKeyDown(e);
         }
 
         public override void OnEntering(ScreenTransitionEvent e)

@@ -10,6 +10,7 @@ using osu.Framework.Bindables;
 using System;
 using System.IO;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Input.Events;
 
 namespace CrankItUp.Game
 {
@@ -19,7 +20,7 @@ namespace CrankItUp.Game
         CIUButton backButton;
 
         [BackgroundDependencyLoader]
-        private void load(AudioManager audio, TextureStore textures)
+        private void load(TextureStore textures)
         {
             backButton = new CIUButton(textures)
             {
@@ -29,7 +30,7 @@ namespace CrankItUp.Game
                 Text = "Back to menu",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Action = () => pushMenu(audio),
+                Action = () => pushMenu(),
             };
             trackContainer = new Container()
             {
@@ -74,7 +75,7 @@ namespace CrankItUp.Game
             };
         }
 
-        private void pushMenu(AudioManager audio)
+        private void pushMenu()
         {
             this.Exit();
         }
@@ -82,6 +83,15 @@ namespace CrankItUp.Game
         public void pushDifficultySelect(string map)
         {
             this.Push(new DifficultySelect(map));
+        }
+
+        protected override bool OnKeyDown(KeyDownEvent e)
+        {
+            if (e.Key == osuTK.Input.Key.Escape)
+            {
+                pushMenu();
+            }
+            return base.OnKeyDown(e);
         }
 
         public override void OnEntering(ScreenTransitionEvent e)

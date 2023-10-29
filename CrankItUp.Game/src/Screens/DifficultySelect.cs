@@ -4,9 +4,9 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Screens;
 using osu.Framework.Graphics.Textures;
 using osuTK;
-using osu.Framework.Audio;
 using System.IO;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Input.Events;
 
 namespace CrankItUp.Game
 {
@@ -22,7 +22,7 @@ namespace CrankItUp.Game
         }
 
         [BackgroundDependencyLoader]
-        private void load(AudioManager audio, TextureStore textures)
+        private void load(TextureStore textures)
         {
             backButton = new CIUButton(textures)
             {
@@ -32,7 +32,7 @@ namespace CrankItUp.Game
                 Text = "Back",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Action = () => pushMenu(audio),
+                Action = () => pushMenu(),
             };
             trackContainer = new Container()
             {
@@ -82,7 +82,7 @@ namespace CrankItUp.Game
             };
         }
 
-        private void pushMenu(AudioManager audio)
+        private void pushMenu()
         {
             this.Exit();
         }
@@ -90,6 +90,15 @@ namespace CrankItUp.Game
         public void pushLevel(string difficultyname)
         {
             this.Push(new LevelScreen(map, difficultyname));
+        }
+
+        protected override bool OnKeyDown(KeyDownEvent e)
+        {
+            if (e.Key == osuTK.Input.Key.Escape)
+            {
+                pushMenu();
+            }
+            return base.OnKeyDown(e);
         }
 
         public override void OnEntering(ScreenTransitionEvent e)
