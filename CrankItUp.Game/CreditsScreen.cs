@@ -7,10 +7,10 @@ using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
 using osu.Framework.Graphics.Textures;
 
+namespace CrankItUp.Game
+{
     public class CreditsScreen : Screen
     {
-
-
         CIUButton backButton;
         Track track;
 
@@ -40,7 +40,6 @@ using osu.Framework.Graphics.Textures;
             SpriteText TempText;
             for (int i = 0; i < credits.Length; i++)
             {
-
                 TempText = new SpriteText
                 {
                     Y = 100 + (i * 30),
@@ -68,7 +67,6 @@ using osu.Framework.Graphics.Textures;
                 creditsTextList[1],
                 creditsTextList[2]
             };
-
         }
 
         void PushMenu()
@@ -78,4 +76,3 @@ using osu.Framework.Graphics.Textures;
         }
     }
 }
-
