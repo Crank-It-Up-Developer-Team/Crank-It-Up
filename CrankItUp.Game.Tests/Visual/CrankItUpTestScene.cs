@@ -1,17 +1,14 @@
 using osu.Framework.Testing;
 using osu.Framework.Graphics;
 
-
 namespace CrankItUp.Game.Tests.Visual
 {
-    public class CrankItUpTestScene : TestScene
+    public partial class CrankItUpTestScene : TestScene
     {
+        protected override ITestSceneTestRunner CreateRunner() =>
+            new CrankItUpTestSceneTestRunner();
 
-       
-        
-        protected override ITestSceneTestRunner CreateRunner() => new CrankItUpTestSceneTestRunner();
-
-        private class CrankItUpTestSceneTestRunner : CrankItUpGameBase, ITestSceneTestRunner
+        private partial class CrankItUpTestSceneTestRunner : CrankItUpGameBase, ITestSceneTestRunner
         {
             private TestSceneTestRunner.TestRunner runner;
 

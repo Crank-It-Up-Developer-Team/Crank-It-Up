@@ -10,7 +10,7 @@ using osu.Framework.Input.Events;
 
 namespace CrankItUp.Game
 {
-    public class CreditsScreen : Screen
+    public partial class CreditsScreen : Screen
     {
         CIUButton backButton;
         Track track;

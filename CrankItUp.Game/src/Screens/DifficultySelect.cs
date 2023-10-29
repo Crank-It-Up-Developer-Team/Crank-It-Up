@@ -10,7 +10,7 @@ using osu.Framework.Input.Events;
 
 namespace CrankItUp.Game
 {
-    public class DifficultySelect : Screen
+    public partial class DifficultySelect : Screen
     {
         Container trackContainer;
         CIUButton backButton;

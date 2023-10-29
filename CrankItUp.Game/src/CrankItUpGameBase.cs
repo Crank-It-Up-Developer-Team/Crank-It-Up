@@ -8,7 +8,7 @@ using System.IO;
 
 namespace CrankItUp.Game
 {
-    public class CrankItUpGameBase : osu.Framework.Game
+    public partial class CrankItUpGameBase : osu.Framework.Game
     {
         // Anything in this class is shared between the test browser and the game implementation.
         // It allows for caching global dependencies that should be accessible to tests, or changing

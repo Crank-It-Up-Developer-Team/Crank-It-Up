@@ -9,7 +9,7 @@ using System;
 
 namespace CrankItUp.Game
 {
-    public class BaseNote : CompositeDrawable
+    public partial class BaseNote : CompositeDrawable
     {
         /**
         so my thoughts on how mapping should be implemented

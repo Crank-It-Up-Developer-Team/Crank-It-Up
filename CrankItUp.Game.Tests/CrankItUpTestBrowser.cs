@@ -5,7 +5,7 @@ using osu.Framework.Testing;
 
 namespace CrankItUp.Game.Tests
 {
-    public class CrankItUpTestBrowser : CrankItUpGameBase
+    public partial class CrankItUpTestBrowser : CrankItUpGameBase
     {
         protected override void LoadComplete()
         {

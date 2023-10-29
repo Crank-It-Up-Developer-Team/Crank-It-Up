@@ -5,7 +5,7 @@ using System.IO;
 
 namespace CrankItUp.Game
 {
-    public class CrankItUpGame : CrankItUpGameBase
+    public partial class CrankItUpGame : CrankItUpGameBase
     {
         private ScreenStack screenStack;
 

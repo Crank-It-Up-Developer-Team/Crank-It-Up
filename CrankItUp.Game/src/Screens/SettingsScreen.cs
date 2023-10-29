@@ -31,7 +31,7 @@ namespace CrankItUp.Game
         public static InputMode inputmode = InputMode.Rotational;
     }
 
-    public class SettingsScreen : Screen
+    public partial class SettingsScreen : Screen
     {
         CIUButton inputModeButton;
         CIUButton backButton;

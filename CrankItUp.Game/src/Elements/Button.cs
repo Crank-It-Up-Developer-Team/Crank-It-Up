@@ -6,7 +6,7 @@ using osu.Framework.Graphics.UserInterface;
 
 namespace CrankItUp.Game
 {
-    public class CIUButton : Button
+    public partial class CIUButton : Button
     {
         TextureStore texturestore;
 

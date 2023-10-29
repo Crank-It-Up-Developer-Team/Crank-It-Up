@@ -11,7 +11,7 @@ using osu.Framework.Testing;
 
 namespace CrankItUp.Game
 {
-    public class InitialSetup : Screen
+    public partial class InitialSetup : Screen
     {
         CIUButton startButton;
 

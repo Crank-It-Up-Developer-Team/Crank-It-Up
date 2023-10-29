@@ -8,7 +8,7 @@ using osu.Framework.Platform;
 
 namespace CrankItUp.Game
 {
-    public class LevelScreen : Screen
+    public partial class LevelScreen : Screen
     {
         Crank crank;
         NoteManager manager;

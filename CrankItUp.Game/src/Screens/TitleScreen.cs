@@ -10,7 +10,7 @@ using osu.Framework.Bindables;
 
 namespace CrankItUp.Game
 {
-    public class TitleScreen : Screen
+    public partial class TitleScreen : Screen
     {
         CIUButton selectTrackButton;
         CIUButton settingsButton;

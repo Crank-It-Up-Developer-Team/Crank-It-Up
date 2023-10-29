@@ -14,7 +14,7 @@ using osu.Framework.Input.Events;
 
 namespace CrankItUp.Game
 {
-    public class TrackSelect : Screen
+    public partial class TrackSelect : Screen
     {
         Container trackContainer;
         CIUButton backButton;

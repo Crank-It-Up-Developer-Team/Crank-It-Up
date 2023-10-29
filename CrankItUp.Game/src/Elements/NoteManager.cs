@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CrankItUp.Game
 {
-    public class NoteManager : CompositeDrawable
+    public partial class NoteManager : CompositeDrawable
     {
         Queue<BaseNote> notes;
         Beatmap beatmap;
