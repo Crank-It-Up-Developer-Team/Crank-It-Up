@@ -3,6 +3,7 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Localisation;
 using osu.Framework.Graphics.UserInterface;
+
 namespace CrankItUp.Game
 {
     public class CIUButton : Button
@@ -31,27 +32,28 @@ namespace CrankItUp.Game
             {
                 Texture = texturestore.Get("Button");
             }
-            AddRange(new Drawable[]
-            {
-                background = new Sprite
+            AddRange(
+                new Drawable[]
                 {
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    RelativeSizeAxes = Axes.Both,
-                    Texture = Texture,
-                },
-
-                text = new SpriteText
-                {
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    Colour = TextColour,
-                    Text = Text,
-                    Depth = -1
-                },
-            }
+                    new Sprite
+                    {
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                        RelativeSizeAxes = Axes.Both,
+                        Texture = Texture,
+                    },
+                    text = new SpriteText
+                    {
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                        Colour = TextColour,
+                        Text = Text,
+                        Depth = -1
+                    },
+                }
             );
         }
+
         protected override void LoadComplete()
         {
             base.LoadComplete();
