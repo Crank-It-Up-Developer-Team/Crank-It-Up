@@ -4,6 +4,7 @@ using osu.Framework.Graphics.Containers;
 using osu.Framework.IO.Stores;
 using osuTK;
 using CrankItUp.Resources;
+using System.IO;
 
 namespace CrankItUp.Game
 {
@@ -30,6 +31,8 @@ namespace CrankItUp.Game
         [BackgroundDependencyLoader]
         private void load()
         {
+            Directory.CreateDirectory(Constants.APPDATA_DIR);
+            Directory.SetCurrentDirectory(Constants.APPDATA_DIR);
             Resources.AddStore(new DllResourceStore(typeof(CrankItUpResources).Assembly));
             Host.Window.Title = "Crank It Up!";
         }
