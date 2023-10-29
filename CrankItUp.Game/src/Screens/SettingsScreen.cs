@@ -122,6 +122,15 @@ namespace CrankItUp.Game
             inputModeButton.Text = "Input Mode: " + Settings.inputmode.ToString();
         }
 
+        protected override bool OnKeyDown(KeyDownEvent e)
+        {
+            if (e.Key == osuTK.Input.Key.Escape)
+            {
+                this.Exit();
+            }
+            return base.OnKeyDown(e);
+        }
+
         public void pushMenu(AudioManager audio)
         {
             this.Exit();
