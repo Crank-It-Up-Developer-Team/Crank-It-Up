@@ -21,7 +21,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore --use-current-runtime CrankItUp.Desktop
+      run: dotnet build --use-current-runtime CrankItUp.Desktop
     - name: Test
       run: dotnet test --no-build --verbosity normal CrankItUp.Desktop
     - name: Upload a Build Artifact
@@ -41,7 +41,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore --use-current-runtime CrankItUp.Desktop
+      run: dotnet build --use-current-runtime CrankItUp.Desktop
     - name: Test
       run: dotnet test --no-build --verbosity normal CrankItUp.Desktop
     - name: Upload a Build Artifact
