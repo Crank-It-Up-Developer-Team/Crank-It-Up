@@ -33,7 +33,7 @@ namespace CrankItUp.Game
             };
 
             beatmap = new Beatmap(map, difficulty, audio, storage);
-            manager = new NoteManager(this, 50, 100, beatmap);
+            manager = new NoteManager(this, beatmap);
             InternalChildren = new Drawable[] { crank, manager, };
             beatmap.track.Start();
         }

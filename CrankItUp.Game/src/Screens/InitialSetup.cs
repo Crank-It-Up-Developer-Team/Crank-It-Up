@@ -79,15 +79,19 @@ namespace CrankItUp.Game
             StreamWriter testmap = File.CreateText("maps/Test/easy.json");
             // yes I know this creates a really ugly file, but it works
             testmap.WriteLine(
-                @"{
-                            'BaseNoteQueue':[
-                                {'position': 0, 'spawnTime': 0},
-                                {'position': 5, 'spawnTime': 200},
-                                {'position': 10, 'spawnTime': 400},
-                                {'position': 15, 'spawnTime': 600},
-                                {'position': 20, 'spawnTime': 800}
-                            ]
-                        }"
+                "{"
+                    + "'meta': {"
+                    + "'radius': 50,"
+                    + "'approachRate': 100"
+                    + "},"
+                    + "'BaseNoteQueue':["
+                    + "{'position': 0, 'spawnTime': 0},"
+                    + "{'position': 5, 'spawnTime': 200},"
+                    + "{'position': 10, 'spawnTime': 400},"
+                    + "{'position': 15, 'spawnTime': 600},"
+                    + "{'position': 20, 'spawnTime': 800}"
+                    + "]"
+                    + "}"
             );
             testmap.Close();
             FileStream testsong = File.Create("maps/Test/music.mp3");

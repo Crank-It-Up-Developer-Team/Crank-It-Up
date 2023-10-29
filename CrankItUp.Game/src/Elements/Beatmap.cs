@@ -14,6 +14,8 @@ namespace CrankItUp.Game
     {
         private JObject beatmap;
         public Track track;
+        public readonly double noteRadius;
+        public readonly double approachRate;
 
         public Beatmap(string mapname, string difficulty, AudioManager audio, Storage storage)
         {
@@ -41,6 +43,10 @@ namespace CrankItUp.Game
                 )
             );
             track = trackStore.Get("music.mp3");
+
+            JToken meta = beatmap.GetValue("meta");
+            noteRadius = meta.GetValue<double>("radius");
+            approachRate = meta.GetValue<double>("approachRate");
         }
 
         public Queue<BaseNote> GetBaseNoteQueue()

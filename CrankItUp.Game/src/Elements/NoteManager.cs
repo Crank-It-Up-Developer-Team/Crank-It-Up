@@ -17,17 +17,12 @@ namespace CrankItUp.Game
 
         LevelScreen screen;
 
-        public NoteManager(
-            LevelScreen screen,
-            double setRadius,
-            double setApproachRate,
-            Beatmap map
-        )
+        public NoteManager(LevelScreen screen, Beatmap map)
         {
-            radius = setRadius;
-            approachRate = setApproachRate;
             this.screen = screen;
             beatmap = map;
+            radius = beatmap.noteRadius;
+            approachRate = beatmap.approachRate;
         }
 
         Boolean stopSpawning;
