@@ -5,6 +5,8 @@ using osu.Framework.Input.Events;
 using osuTK;
 using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
+using osu.Framework.Platform;
+using System;
 
 namespace CrankItUp.Game
 {
@@ -12,22 +14,22 @@ namespace CrankItUp.Game
     {
         Crank crank;
         NoteManager manager;
-        private Track song;
+        private Beatmap beatmap;
 
         [BackgroundDependencyLoader]
-        private void load(AudioManager audio)
+        private void load(AudioManager audio, Storage storage)
         {
             crank = new Crank
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
-                Position = new osuTK.Vector2(0, 0),
+                Position = new Vector2(0, 0),
             };
 
-            song = audio.Tracks.Get("Flamewall.mp3");
-            manager = new NoteManager(this, 50, 100);
+            beatmap = new Beatmap("Test", "easy", audio, storage);
+            manager = new NoteManager(this, 50, 100, beatmap);
             InternalChildren = new Drawable[] { crank, manager, };
-            song.Start();
+            beatmap.track.Start();
         }
 
         public void addNote(BaseNote note)
@@ -47,7 +49,7 @@ namespace CrankItUp.Game
         {
             if (e.Key == osuTK.Input.Key.Escape)
             {
-                song.Dispose();
+                beatmap.track.Dispose();
                 this.Exit();
             }
             return base.OnKeyDown(e);

@@ -8,6 +8,7 @@ using osu.Framework.Bindables;
 using osuTK;
 using osu.Framework.Audio;
 using osu.Framework.Graphics.Textures;
+using osu.Framework.Input.Events;
 
 namespace CrankItUp.Game
 {
@@ -34,6 +35,7 @@ namespace CrankItUp.Game
     {
         CIUButton inputModeButton;
         CIUButton backButton;
+        CIUButton setupButton;
         SpriteText volumeText;
         BasicSliderBar<double> volumeSlider;
 
@@ -68,10 +70,19 @@ namespace CrankItUp.Game
                 KeyboardStep = 1,
                 Current = Settings.volume
             };
-            backButton = new CIUButton(textures)
+            setupButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Position = new Vector2(0, 80),
+                Text = "Restart initial setup",
+                Size = new Vector2(200, 40),
+                Margin = new MarginPadding(10),
+                Action = () => pushInitialSetup(audio),
+            };
+            backButton = new CIUButton(textures)
+            {
+                Anchor = Anchor.Centre,
+                Position = new Vector2(0, 130),
                 Text = "Back to menu",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
@@ -83,6 +94,7 @@ namespace CrankItUp.Game
                 inputModeButton,
                 volumeText,
                 volumeSlider,
+                setupButton,
                 backButton,
                 new SpriteText
                 {
@@ -113,6 +125,11 @@ namespace CrankItUp.Game
         public void pushMenu(AudioManager audio)
         {
             this.Exit();
+        }
+
+        public void pushInitialSetup(AudioManager audio)
+        {
+            this.Push(new InitialSetup());
         }
 
         public override void OnEntering(ScreenTransitionEvent e)

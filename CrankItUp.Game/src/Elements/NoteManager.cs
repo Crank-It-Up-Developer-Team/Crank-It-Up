@@ -1,3 +1,5 @@
+using osu.Framework.Allocation;
+using osu.Framework.Audio;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using System;
@@ -8,6 +10,7 @@ namespace CrankItUp.Game
     public class NoteManager : CompositeDrawable
     {
         Queue<BaseNote> notes;
+        Beatmap beatmap;
         long elapsedTime;
         BaseNote nextNote;
         public static double radius,
@@ -16,20 +19,25 @@ namespace CrankItUp.Game
 
         LevelScreen screen;
 
-        public NoteManager(LevelScreen screen, double setRadius, double setApproachRate)
+        public NoteManager(
+            LevelScreen screen,
+            double setRadius,
+            double setApproachRate,
+            Beatmap map
+        )
         {
             radius = setRadius;
             approachRate = setApproachRate;
             this.screen = screen;
+            beatmap = map;
         }
 
         Boolean stopSpawning;
 
         protected override void LoadComplete()
         {
-            notes = new Queue<BaseNote>();
+            notes = beatmap.GetBaseNoteQueue();
             dilation = (float)(radius / Constants.NOTE_DEFAULT_RADIUS);
-            notes.Enqueue(new BaseNote(Math.PI / 4.0, 500));
             elapsedTime = 0;
             nextNote = notes.Dequeue();
             stopSpawning = false;
@@ -38,7 +46,7 @@ namespace CrankItUp.Game
         protected override void Update()
         {
             elapsedTime += (long)Time.Elapsed;
-            if (nextNote.getSpawnTime() < elapsedTime && !stopSpawning)
+            if (nextNote.getSpawnTime() <= elapsedTime && !stopSpawning)
             {
                 //determine which note it is by using switch case chain and subclass parking
                 //default case is base note so that is impl I am going with
