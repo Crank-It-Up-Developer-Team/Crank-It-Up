@@ -1,5 +1,6 @@
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Screens;
 using System;
 using System.Collections.Generic;
 
@@ -30,8 +31,17 @@ namespace CrankItUp.Game
         {
             notes = beatmap.GetBaseNoteQueue();
             dilation = (float)(radius / Constants.NOTE_DEFAULT_RADIUS);
-            nextNote = notes.Dequeue();
-            stopSpawning = false;
+            try
+            {
+                nextNote = notes.Dequeue();
+                stopSpawning = false;
+            }
+            catch
+            {
+                Console.WriteLine("Level has no notes?");
+                nextNote = new BaseNote(0, 0);
+                stopSpawning = true;
+            }
         }
 
         protected override void Update()
@@ -57,6 +67,15 @@ namespace CrankItUp.Game
                 else
                 {
                     nextNote = notes.Dequeue();
+                }
+            }
+            if (beatmap.track.CurrentTime >= beatmap.endTime)
+            {
+                beatmap.track.Dispose();
+                if (screen.IsCurrentScreen())
+                {
+                    beatmap.track.Dispose();
+                    screen.Exit();
                 }
             }
 

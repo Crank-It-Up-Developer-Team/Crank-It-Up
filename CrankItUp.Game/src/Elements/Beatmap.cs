@@ -16,6 +16,7 @@ namespace CrankItUp.Game
         public Track track;
         public readonly double noteRadius;
         public readonly double approachRate;
+        public readonly double endTime;
 
         public Beatmap(string mapname, string difficulty, AudioManager audio, Storage storage)
         {
@@ -47,6 +48,17 @@ namespace CrankItUp.Game
             JToken meta = beatmap.GetValue("meta");
             noteRadius = meta.GetValue<double>("radius");
             approachRate = meta.GetValue<double>("approachRate");
+            try
+            {
+                endTime = meta.GetValue<double>("endTime");
+            }
+            catch
+            {
+                Console.WriteLine(
+                    "Map does not specify an endTime! Falling back to the song length."
+                );
+                endTime = track.Length;
+            }
         }
 
         public Queue<BaseNote> GetBaseNoteQueue()
