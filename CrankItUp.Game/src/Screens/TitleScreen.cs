@@ -103,7 +103,6 @@ namespace CrankItUp.Game
 
         public void pushCredits()
         {
-            track.Stop();
             this.Push(new CreditsScreen());
         }
 

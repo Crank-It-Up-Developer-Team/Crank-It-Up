@@ -13,13 +13,10 @@ namespace CrankItUp.Game
     public partial class CreditsScreen : Screen
     {
         CIUButton backButton;
-        Track track;
 
         [BackgroundDependencyLoader]
         private void load(AudioManager audio, TextureStore textures)
         {
-            track = audio.GetTrackStore().Get("Tera I_O.mp3");
-            track.Start();
             backButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
@@ -80,7 +77,6 @@ namespace CrankItUp.Game
 
         void PushMenu()
         {
-            track.Stop();
             this.Exit();
         }
     }
