@@ -26,7 +26,7 @@ namespace CrankItUp.Game
                 Text = "Back to menu",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Position = new Vector2(0, 100),
+                Position = new Vector2(0, 110),
                 Action = () => PushMenu(),
             };
             continueButton = new CIUButton(textures)
@@ -36,7 +36,7 @@ namespace CrankItUp.Game
                 Text = "Next",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Position = new Vector2(0, 50),
+                Position = new Vector2(0, 60),
                 Action = () => PushSetupDifficulty(),
             };
             mapsFolderButton = new CIUButton(textures)
@@ -46,7 +46,7 @@ namespace CrankItUp.Game
                 Text = "Open maps folder",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Position = new Vector2(0, 0),
+                Position = new Vector2(0, 10),
                 Action = () => openMapFolder(),
             };
             InternalChildren = new Drawable[]
@@ -73,7 +73,8 @@ namespace CrankItUp.Game
                 "3: Put the mp3 of the song wish to map inside this folder",
                 "4: rename the mp3 file to `music` (keep the file extension intact)",
                 "5: return here and select the map you wish to add a difficulty for!",
-                "6: When you are finished mapping, rename the folder to the name of the map"
+                "6: When you are finished mapping in the editor, rename the folder to the name of the map",
+                "7: You can then edit the positions of these objects by editing the json file in a text editor"
             };
             for (int i = 0; i < info.Length; i++)
             {
