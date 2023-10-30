@@ -18,6 +18,17 @@ namespace CrankItUp.Game
         public readonly double approachRate;
         public readonly double endTime;
 
+        /// <summary>Creates a new instance of the Beatmap class.</summary>
+        /// <param name="mapname">The name of the map.</param>
+        /// <param name="difficulty">The difficulty level of the map.</param>
+        /// <param name="audio">An instance of the AudioManager class.</param>
+        /// <param name="storage">An instance of the Storage class.</param>
+        /// <remarks>
+        /// This constructor initializes a Beatmap object by reading the map data from a JSON file.
+        /// The map data is located in the "maps" directory, under the specified mapname and difficulty.
+        /// The audio and storage objects are used to retrieve additional information and resources.
+        /// If the map does not specify an endTime, the song length will be used
+        /// </remarks>
         public Beatmap(string mapname, string difficulty, AudioManager audio, Storage storage)
         {
             try
