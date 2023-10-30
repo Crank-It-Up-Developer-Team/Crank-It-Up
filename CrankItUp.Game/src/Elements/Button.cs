@@ -8,8 +8,6 @@ namespace CrankItUp.Game
 {
     public partial class CIUButton : Button
     {
-        TextureStore texturestore;
-
         public LocalisableString Text // Most of this is from BasicButton
         {
             get => text?.Text ?? default;
@@ -22,8 +20,6 @@ namespace CrankItUp.Game
 
         public Texture Texture;
         public Colour4 TextColour = Colour4.White;
-
-        private Sprite background;
         private SpriteText text;
 
         public CIUButton(TextureStore texturestore)
