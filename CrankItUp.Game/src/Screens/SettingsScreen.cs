@@ -9,6 +9,9 @@ using osuTK;
 using osu.Framework.Audio;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Events;
+using Newtonsoft.Json.Linq;
+using System.IO;
+using NuGet.Protocol;
 
 namespace CrankItUp.Game
 {
@@ -91,7 +94,7 @@ namespace CrankItUp.Game
                 Text = "Back to menu",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Action = () => pushMenu(audio),
+                Action = () => pushMenu(),
             };
 
             InternalChildren = new Drawable[]
@@ -131,13 +134,23 @@ namespace CrankItUp.Game
         {
             if (e.Key == osuTK.Input.Key.Escape)
             {
-                this.Exit();
+                pushMenu();
             }
             return base.OnKeyDown(e);
         }
 
-        public void pushMenu(AudioManager audio)
+        public void pushMenu()
         {
+            // save settings to disk
+            JObject settings = new JObject
+            {
+                { "inputMode", (int)Settings.inputmode },
+                { "volume", Settings.volume.Value }
+            };
+            StreamWriter settingswriter = File.CreateText("settings.json");
+            settingswriter.Write(settings.ToJson());
+            settingswriter.Close();
+            // finally, exit
             this.Exit();
         }
 
