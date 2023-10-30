@@ -15,6 +15,7 @@ namespace CrankItUp.Game
         CIUButton selectTrackButton;
         CIUButton settingsButton;
         CIUButton creditsButton;
+        CIUButton mappingButton;
         Track track;
 
         [BackgroundDependencyLoader]
@@ -47,13 +48,22 @@ namespace CrankItUp.Game
                 Position = new Vector2(-100, 50),
                 Action = () => pushSettings(),
             };
+            mappingButton = new CIUButton(textures)
+            {
+                Anchor = Anchor.Centre,
+                Text = "Map editor",
+                Size = new Vector2(200, 40),
+                Margin = new MarginPadding(10),
+                Position = new Vector2(-100, 100),
+                Action = () => pushMappingSetup(),
+            };
             creditsButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Text = "Credits",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Position = new Vector2(-100, 100),
+                Position = new Vector2(-100, 150),
                 Action = () => pushCredits(),
             };
 
@@ -61,6 +71,7 @@ namespace CrankItUp.Game
             {
                 selectTrackButton,
                 settingsButton,
+                mappingButton,
                 creditsButton,
                 new SpriteText
                 {
@@ -82,6 +93,12 @@ namespace CrankItUp.Game
         {
             track.Stop();
             this.Push(new TrackSelect());
+        }
+
+        public void pushMappingSetup()
+        {
+            track.Stop();
+            this.Push(new MappingSetupTrack());
         }
 
         public void pushCredits()
