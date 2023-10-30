@@ -27,6 +27,7 @@ namespace CrankItUp.Game
                 new BindableDouble(Settings.volume.Value)
             );
             track.Start();
+            track.Looping = true;
 
             selectTrackButton = new CIUButton(textures)
             {
