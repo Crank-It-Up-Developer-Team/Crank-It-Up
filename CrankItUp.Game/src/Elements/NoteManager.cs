@@ -9,7 +9,6 @@ namespace CrankItUp.Game
     {
         Queue<BaseNote> notes;
         Beatmap beatmap;
-        long elapsedTime;
         BaseNote nextNote;
         public static double radius,
             approachRate; //mapping parameter AR is gonna be in pixels/second
@@ -31,15 +30,13 @@ namespace CrankItUp.Game
         {
             notes = beatmap.GetBaseNoteQueue();
             dilation = (float)(radius / Constants.NOTE_DEFAULT_RADIUS);
-            elapsedTime = 0;
             nextNote = notes.Dequeue();
             stopSpawning = false;
         }
 
         protected override void Update()
         {
-            elapsedTime += (long)Time.Elapsed;
-            if (nextNote.getSpawnTime() <= elapsedTime && !stopSpawning)
+            if (nextNote.getSpawnTime() <= beatmap.track.CurrentTime && !stopSpawning)
             {
                 //determine which note it is by using switch case chain and subclass parking
                 //default case is base note so that is impl I am going with
