@@ -2,11 +2,11 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using NuGet.ProjectModel;
 using System.Collections.Generic;
-using System;
 using osu.Framework.Audio.Track;
 using osu.Framework.Audio;
 using osu.Framework.IO.Stores;
 using osu.Framework.Platform;
+using osu.Framework.Logging;
 
 namespace CrankItUp.Game
 {
@@ -17,6 +17,7 @@ namespace CrankItUp.Game
         public readonly double noteRadius;
         public readonly double approachRate;
         public readonly double endTime;
+        public readonly double startTime;
 
         /// <summary>Creates a new instance of the Beatmap class.</summary>
         /// <param name="mapname">The name of the map.</param>
@@ -44,8 +45,7 @@ namespace CrankItUp.Game
             }
             catch (IOException e)
             {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
+                Logger.Error(e, "Failed to read the beatmap json!");
             }
             var trackStore = audio.GetTrackStore(
                 new StorageBackedResourceStore(
@@ -59,17 +59,21 @@ namespace CrankItUp.Game
             JToken meta = beatmap.GetValue("meta");
             noteRadius = meta.GetValue<double>("radius");
             approachRate = meta.GetValue<double>("approachRate");
-            try
+            endTime = meta.GetValue<double>("endTime");
+            // for some reason, GetValue<double> returns 0 if the value is not found
+            if (endTime == 0)
             {
-                endTime = meta.GetValue<double>("endTime");
-            }
-            catch
-            {
-                Console.WriteLine(
+                // this is cursed, but .Length does not seem to work unless the song has been started
+                track.Start();
+                track.Stop(); // I know we might have skipped a ms or two of music this way, but we seek back later
+                endTime = track.Length;
+                Logger.LogPrint(
                     "Map does not specify an endTime! Falling back to the song length."
                 );
-                endTime = track.Length;
             }
+            // in this case, the default value of 0 is fine
+            startTime = meta.GetValue<double>("startTime");
+            track.Seek(startTime);
         }
 
         public Queue<BaseNote> GetBaseNoteQueue()
