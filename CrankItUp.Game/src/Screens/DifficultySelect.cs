@@ -7,6 +7,7 @@ using osuTK;
 using System.IO;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Input.Events;
+using osu.Framework.Platform;
 
 namespace CrankItUp.Game
 {
@@ -22,7 +23,7 @@ namespace CrankItUp.Game
         }
 
         [BackgroundDependencyLoader]
-        private void load(TextureStore textures)
+        private void load(TextureStore textures, Storage storage)
         {
             backButton = new CIUButton(textures)
             {
@@ -40,7 +41,7 @@ namespace CrankItUp.Game
                 Origin = Anchor.BottomRight,
                 Position = new Vector2(0, 100)
             };
-            var difficulties = Directory.EnumerateFiles("maps/" + map);
+            var difficulties = storage.GetFiles(Path.Combine("maps", map));
             Vector2 position = new Vector2(0, 0);
             foreach (string difficulty in difficulties)
             {

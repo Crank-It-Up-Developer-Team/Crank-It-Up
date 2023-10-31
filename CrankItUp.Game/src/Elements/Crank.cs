@@ -9,6 +9,7 @@ using osuTK;
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
+using osu.Framework.Platform;
 
 namespace CrankItUp.Game
 {
@@ -24,7 +25,7 @@ namespace CrankItUp.Game
         private CursorContainer mouse;
         public static Line collisionLine;
         String compositeString;
-        StreamWriter writer;
+        public StreamWriter writer;
         double previousDirection = 0;
         Vector2 previousNearEnd,
             previousFarEnd;
@@ -33,7 +34,7 @@ namespace CrankItUp.Game
             crankScaledLength;
 
         [BackgroundDependencyLoader]
-        private void load(TextureStore textures)
+        private void load(TextureStore textures, Storage storage)
         {
             mouse = new CursorContainer();
             mouse.ToggleVisibility();
@@ -42,7 +43,7 @@ namespace CrankItUp.Game
             crankScaledHeight = Constants.CRANK_DEFAULT_HEIGHT * dilation;
             crankScaledLength = Constants.CRANK_DEFAULT_LENGTH * dilation;
 
-            writer = new StreamWriter("./debug.txt");
+            writer = new StreamWriter(storage.CreateFileSafely("./debug.txt"));
             previousNearEnd = new Vector2(812, (float)crankScaledLength);
             previousFarEnd = new Vector2(813, -(float)crankScaledLength);
 

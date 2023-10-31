@@ -7,6 +7,7 @@ using osu.Framework.Audio;
 using osu.Framework.IO.Stores;
 using osu.Framework.Platform;
 using osu.Framework.Logging;
+using osu.Framework.Extensions;
 
 namespace CrankItUp.Game
 {
@@ -18,6 +19,7 @@ namespace CrankItUp.Game
         public readonly double approachRate;
         public readonly double endTime;
         public readonly double startTime;
+        private readonly Storage mapStorage;
 
         /// <summary>Creates a new instance of the Beatmap class.</summary>
         /// <param name="mapname">The name of the map.</param>
@@ -32,11 +34,14 @@ namespace CrankItUp.Game
         /// </remarks>
         public Beatmap(string mapname, string difficulty, AudioManager audio, Storage storage)
         {
+            mapStorage = storage.GetStorageForDirectory("maps").GetStorageForDirectory(mapname);
             try
             {
                 // Open the text file using a stream reader.
                 using (
-                    var sr = new StreamReader(Path.Combine("maps", mapname, difficulty + ".json"))
+                    var sr = new StreamReader(
+                        mapStorage.GetStream(difficulty + ".json", mode: FileMode.Open)
+                    )
                 )
                 {
                     // Read the stream as a string, and write the string to the console.
@@ -47,12 +52,9 @@ namespace CrankItUp.Game
             {
                 Logger.Error(e, "Failed to read the beatmap json!");
             }
-            var trackStore = audio.GetTrackStore(
-                new StorageBackedResourceStore(
-                    storage.GetStorageForDirectory(
-                        Path.Combine(Constants.APPDATA_DIR, "maps", mapname)
-                    )
-                )
+
+            ITrackStore trackStore = audio.GetTrackStore(
+                new StorageBackedResourceStore(mapStorage)
             );
             track = trackStore.Get("music.mp3");
 

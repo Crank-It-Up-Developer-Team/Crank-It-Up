@@ -12,6 +12,7 @@ using osu.Framework.Input.Events;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using NuGet.Protocol;
+using osu.Framework.Platform;
 
 namespace CrankItUp.Game
 {
@@ -41,10 +42,12 @@ namespace CrankItUp.Game
         CIUButton setupButton;
         SpriteText volumeText;
         BasicSliderBar<double> volumeSlider;
+        Storage storage;
 
         [BackgroundDependencyLoader]
-        private void load(AudioManager audio, TextureStore textures)
+        private void load(AudioManager audio, TextureStore textures, Storage store)
         {
+            storage = store;
             audio.AddAdjustment(AdjustableProperty.Volume, Settings.volume);
             volumeText = new SpriteText
             {
@@ -147,7 +150,9 @@ namespace CrankItUp.Game
                 { "inputMode", (int)Settings.inputmode },
                 { "volume", Settings.volume.Value }
             };
-            StreamWriter settingswriter = File.CreateText("settings.json");
+            StreamWriter settingswriter = new StreamWriter(
+                storage.CreateFileSafely("settings.json")
+            );
             settingswriter.Write(settings.ToJson());
             settingswriter.Close();
             // finally, exit

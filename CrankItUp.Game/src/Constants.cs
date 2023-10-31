@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using osuTK;
 
 namespace CrankItUp.Game
@@ -13,9 +11,5 @@ namespace CrankItUp.Game
 
         public static readonly double CRANK_DEFAULT_LENGTH = 337;
         public static readonly double CRANK_DEFAULT_HEIGHT = 70;
-        public static readonly string APPDATA_DIR = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "CrankItUp"
-        );
     }
 }

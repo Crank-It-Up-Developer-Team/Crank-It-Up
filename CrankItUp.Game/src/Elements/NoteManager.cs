@@ -1,5 +1,6 @@
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Logging;
 using osu.Framework.Screens;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace CrankItUp.Game
             }
             catch
             {
-                Console.WriteLine("Level has no notes?");
+                Logger.Log("Level has no notes?");
                 nextNote = new BaseNote(0, 0);
                 stopSpawning = true;
             }

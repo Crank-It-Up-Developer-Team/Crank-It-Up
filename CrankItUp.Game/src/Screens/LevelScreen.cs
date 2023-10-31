@@ -65,5 +65,11 @@ namespace CrankItUp.Game
         {
             this.FadeInFromZero(500, Easing.OutQuint);
         }
+
+        public override bool OnExiting(ScreenExitEvent e)
+        {
+            crank.writer.Dispose();
+            return base.OnExiting(e);
+        }
     }
 }

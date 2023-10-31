@@ -7,6 +7,7 @@ using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Events;
 using System.Diagnostics;
 using System.IO;
+using osu.Framework.Platform;
 
 namespace CrankItUp.Game
 {
@@ -17,7 +18,7 @@ namespace CrankItUp.Game
         CIUButton mapsFolderButton;
 
         [BackgroundDependencyLoader]
-        private void load(TextureStore textures)
+        private void load(TextureStore textures, Storage storage)
         {
             backButton = new CIUButton(textures)
             {
@@ -47,7 +48,7 @@ namespace CrankItUp.Game
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(0, 10),
-                Action = () => openMapFolder(),
+                Action = () => storage.GetStorageForDirectory("maps").PresentExternally(),
             };
             InternalChildren = new Drawable[]
             {
@@ -113,17 +114,6 @@ namespace CrankItUp.Game
         void PushSetupDifficulty()
         {
             this.Push(new MappingSetupDifficulty());
-        }
-
-        void openMapFolder()
-        {
-            Process.Start(
-                new ProcessStartInfo
-                {
-                    FileName = Path.Combine(Constants.APPDATA_DIR, "maps"),
-                    UseShellExecute = true
-                }
-            );
         }
     }
 }

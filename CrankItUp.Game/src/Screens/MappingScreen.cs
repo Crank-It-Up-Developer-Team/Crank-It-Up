@@ -20,6 +20,7 @@ namespace CrankItUp.Game
         Track track;
         JObject beatmap = new JObject();
         JArray BaseNoteQueue = new JArray();
+        Storage storage;
 
         public MappingScreen(string difficultyname)
         {
@@ -27,13 +28,12 @@ namespace CrankItUp.Game
         }
 
         [BackgroundDependencyLoader]
-        private void load(AudioManager audio, Storage storage)
+        private void load(AudioManager audio, Storage store)
         {
+            storage = store;
             var trackStore = audio.GetTrackStore(
                 new StorageBackedResourceStore(
-                    storage.GetStorageForDirectory(
-                        Path.Combine(Constants.APPDATA_DIR, "maps", "WIP")
-                    )
+                    storage.GetStorageForDirectory(Path.Combine("maps", "WIP"))
                 )
             );
 
@@ -87,11 +87,11 @@ namespace CrankItUp.Game
                 beatmap.Add("meta", meta);
                 beatmap.Add("BaseNoteQueue", BaseNoteQueue);
                 // save it to disk
-                StreamWriter mapfile = File.CreateText(
-                    Path.Combine("maps", "WIP", difficulty + ".json")
+                StreamWriter mapfile = new StreamWriter(
+                    storage.CreateFileSafely(Path.Combine("maps", "WIP", difficulty + ".json"))
                 );
                 mapfile.Write(beatmap.ToJson(Newtonsoft.Json.Formatting.Indented));
-                mapfile.Close();
+                mapfile.Dispose();
                 // clean up and exit
                 track.Stop();
                 this.Exit();

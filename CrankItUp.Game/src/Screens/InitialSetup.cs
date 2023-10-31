@@ -6,6 +6,10 @@ using osuTK;
 using osu.Framework.Audio;
 using osu.Framework.Graphics.Textures;
 using System.IO;
+using osu.Framework.Platform;
+using CrankItUp.Resources;
+using osu.Framework.IO.Stores;
+using osu.Framework.Logging;
 
 namespace CrankItUp.Game
 {
@@ -14,7 +18,7 @@ namespace CrankItUp.Game
         CIUButton startButton;
 
         [BackgroundDependencyLoader]
-        private void load(AudioManager audio, TextureStore textures)
+        private void load(AudioManager audio, TextureStore textures, Storage storage)
         {
             startButton = new CIUButton(textures)
             {
@@ -23,7 +27,7 @@ namespace CrankItUp.Game
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(0, 0),
-                Action = () => PushMenu(audio),
+                Action = () => PushMenu(audio, storage),
             };
 
             string[] Intro =
@@ -72,31 +76,24 @@ namespace CrankItUp.Game
             this.FadeInFromZero(500, Easing.OutQuint);
         }
 
-        void PushMenu(AudioManager audio)
+        void PushMenu(AudioManager audio, Storage storage)
         {
-            Directory.CreateDirectory("maps");
-            Directory.CreateDirectory("maps/Test");
-            StreamWriter testmap = File.CreateText("maps/Test/easy.json");
-            // yes I know this creates a really ugly file, but it works
-            testmap.WriteLine(
-                "{"
-                    + "'meta': {"
-                    + "'radius': 50,"
-                    + "'approachRate': 100"
-                    + "},"
-                    + "'BaseNoteQueue':["
-                    + "{'position': 0, 'spawnTime': 0},"
-                    + "{'position': 5, 'spawnTime': 200},"
-                    + "{'position': 10, 'spawnTime': 400},"
-                    + "{'position': 15, 'spawnTime': 600},"
-                    + "{'position': 20, 'spawnTime': 800}"
-                    + "]"
-                    + "}"
+            Stream exampleMapFileStream = storage.CreateFileSafely("maps/Example/easy.json");
+            // there is no *store class for text files, so we have to pull it from the ResourceAssembly manually
+            Stream exampleMap = CrankItUpResources.ResourceAssembly.GetManifestResourceStream(
+                "CrankItUp.Resources.Beatmaps.Example.easy.json"
             );
-            testmap.Close();
-            FileStream testsong = File.Create("maps/Test/music.mp3");
-            audio.GetTrackStore().GetStream("Tera I_O.mp3").CopyTo(testsong);
-            testsong.Close();
+
+            Logger.Log(exampleMap.ToString());
+
+            exampleMap.CopyTo(exampleMapFileStream);
+
+            exampleMapFileStream.Dispose();
+            exampleMap.Dispose();
+
+            Stream exampleSong = storage.CreateFileSafely("maps/Example/music.mp3");
+            audio.GetTrackStore().GetStream("Tera I_O.mp3").CopyTo(exampleSong);
+            exampleSong.Dispose();
             this.Push(new TitleScreen());
         }
     }

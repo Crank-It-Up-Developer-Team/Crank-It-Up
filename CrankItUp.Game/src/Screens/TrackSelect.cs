@@ -4,9 +4,10 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Screens;
 using osu.Framework.Graphics.Textures;
 using osuTK;
-using System.IO;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Input.Events;
+using osu.Framework.Platform;
+using osu.Framework.Logging;
 
 namespace CrankItUp.Game
 {
@@ -16,7 +17,7 @@ namespace CrankItUp.Game
         CIUButton backButton;
 
         [BackgroundDependencyLoader]
-        private void load(TextureStore textures)
+        private void load(TextureStore textures, Storage storage)
         {
             backButton = new CIUButton(textures)
             {
@@ -34,11 +35,12 @@ namespace CrankItUp.Game
                 Origin = Anchor.BottomRight,
                 Position = new Vector2(0, 100)
             };
-            var maps = Directory.EnumerateDirectories("maps");
+            var maps = storage.GetDirectories("maps");
             Vector2 position = new Vector2(0, 0);
             foreach (string mapPath in maps)
             {
                 var map = mapPath[5..];
+                Logger.Log("Found map: " + map);
                 trackContainer.Add(
                     new CIUButton(textures)
                     {
