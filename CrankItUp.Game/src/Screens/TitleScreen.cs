@@ -7,6 +7,7 @@ using osuTK;
 using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
 using osu.Framework.Bindables;
+using osu.Framework.Graphics.Containers;
 
 namespace CrankItUp.Game
 {
@@ -70,18 +71,21 @@ namespace CrankItUp.Game
 
             InternalChildren = new Drawable[]
             {
-                selectTrackButton,
-                settingsButton,
-                mappingButton,
-                creditsButton,
-                new SpriteText
+                new DrawSizePreservingFillContainer
                 {
-                    Y = 20,
-                    Text = "Welcome to Crank it Up",
-                    Anchor = Anchor.TopCentre,
-                    Origin = Anchor.TopCentre,
-                    Font = FontUsage.Default.With(size: 40)
-                },
+                    selectTrackButton,
+                    settingsButton,
+                    mappingButton,
+                    creditsButton,
+                    new SpriteText
+                    {
+                        Y = 20,
+                        Text = "Welcome to Crank it Up",
+                        Anchor = Anchor.TopCentre,
+                        Origin = Anchor.TopCentre,
+                        Font = FontUsage.Default.With(size: 40)
+                    },
+                }
             };
         }
 

@@ -5,6 +5,7 @@ using osu.Framework.Input.Events;
 using osuTK;
 using osu.Framework.Audio;
 using osu.Framework.Platform;
+using osu.Framework.Graphics.Containers;
 
 namespace CrankItUp.Game
 {
@@ -34,7 +35,10 @@ namespace CrankItUp.Game
 
             beatmap = new Beatmap(map, difficulty, audio, storage);
             manager = new NoteManager(this, beatmap);
-            InternalChildren = new Drawable[] { crank, manager, };
+            InternalChildren = new Drawable[]
+            {
+                new DrawSizePreservingFillContainer { crank, manager, }
+            };
             beatmap.track.Start();
         }
 

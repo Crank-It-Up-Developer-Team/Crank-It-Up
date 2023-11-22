@@ -10,6 +10,7 @@ using osu.Framework.Platform;
 using CrankItUp.Resources;
 using osu.Framework.IO.Stores;
 using osu.Framework.Logging;
+using osu.Framework.Graphics.Containers;
 
 namespace CrankItUp.Game
 {
@@ -55,19 +56,22 @@ namespace CrankItUp.Game
 
             InternalChildren = new Drawable[]
             {
-                startButton,
-                new SpriteText
+                new DrawSizePreservingFillContainer
                 {
-                    Y = 20,
-                    Text = "Initial Setup",
-                    Anchor = Anchor.TopCentre,
-                    Origin = Anchor.TopCentre,
-                    Font = FontUsage.Default.With(size: 40)
-                },
-                introTextList[0],
-                introTextList[1],
-                introTextList[2],
-                introTextList[3]
+                    startButton,
+                    new SpriteText
+                    {
+                        Y = 20,
+                        Text = "Initial Setup",
+                        Anchor = Anchor.TopCentre,
+                        Origin = Anchor.TopCentre,
+                        Font = FontUsage.Default.With(size: 40)
+                    },
+                    introTextList[0],
+                    introTextList[1],
+                    introTextList[2],
+                    introTextList[3]
+                }
             };
         }
 

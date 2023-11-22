@@ -7,6 +7,7 @@ using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Events;
+using osu.Framework.Graphics.Containers;
 
 namespace CrankItUp.Game
 {
@@ -29,15 +30,18 @@ namespace CrankItUp.Game
             };
             InternalChildren = new Drawable[]
             {
-                backButton,
-                new SpriteText
+                new DrawSizePreservingFillContainer
                 {
-                    Y = 20,
-                    Text = "Crank It up - Credits",
-                    Anchor = Anchor.TopCentre,
-                    Origin = Anchor.TopCentre,
-                    Font = FontUsage.Default.With(size: 40)
-                },
+                    backButton,
+                    new SpriteText
+                    {
+                        Y = 20,
+                        Text = "Crank It up - Credits",
+                        Anchor = Anchor.TopCentre,
+                        Origin = Anchor.TopCentre,
+                        Font = FontUsage.Default.With(size: 40)
+                    },
+                }
             };
 
             string[] credits =

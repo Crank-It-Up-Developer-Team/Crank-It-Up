@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using NuGet.Protocol;
 using osu.Framework.Graphics.Sprites;
 using osuTK;
+using osu.Framework.Graphics.Containers;
 
 namespace CrankItUp.Game
 {
@@ -39,12 +40,15 @@ namespace CrankItUp.Game
 
             InternalChildren = new Drawable[]
             {
-                new SpriteText
+                new DrawSizePreservingFillContainer
                 {
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    Position = new Vector2(0, 0),
-                    Text = "Tap ctrl, space or Z to add a note, press esc when you are done",
+                    new SpriteText
+                    {
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                        Position = new Vector2(0, 0),
+                        Text = "Tap ctrl, space or Z to add a note, press esc when you are done",
+                    }
                 }
             };
 

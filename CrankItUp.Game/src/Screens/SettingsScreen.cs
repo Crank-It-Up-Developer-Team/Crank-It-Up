@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using NuGet.Protocol;
 using osu.Framework.Platform;
+using osu.Framework.Graphics.Containers;
 
 namespace CrankItUp.Game
 {
@@ -102,19 +103,22 @@ namespace CrankItUp.Game
 
             InternalChildren = new Drawable[]
             {
-                inputModeButton,
-                volumeText,
-                volumeSlider,
-                setupButton,
-                backButton,
-                new SpriteText
+                new DrawSizePreservingFillContainer
                 {
-                    Y = 20,
-                    Text = "Settings",
-                    Anchor = Anchor.TopCentre,
-                    Origin = Anchor.TopCentre,
-                    Font = FontUsage.Default.With(size: 40)
-                },
+                    inputModeButton,
+                    volumeText,
+                    volumeSlider,
+                    setupButton,
+                    backButton,
+                    new SpriteText
+                    {
+                        Y = 20,
+                        Text = "Settings",
+                        Anchor = Anchor.TopCentre,
+                        Origin = Anchor.TopCentre,
+                        Font = FontUsage.Default.With(size: 40)
+                    },
+                }
             };
         }
 

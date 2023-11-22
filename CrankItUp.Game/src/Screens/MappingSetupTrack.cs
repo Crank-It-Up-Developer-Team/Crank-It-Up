@@ -8,6 +8,7 @@ using osu.Framework.Input.Events;
 using System.Diagnostics;
 using System.IO;
 using osu.Framework.Platform;
+using osu.Framework.Graphics.Containers;
 
 namespace CrankItUp.Game
 {
@@ -52,17 +53,20 @@ namespace CrankItUp.Game
             };
             InternalChildren = new Drawable[]
             {
-                new SpriteText
+                new DrawSizePreservingFillContainer
                 {
-                    Y = 20,
-                    Text = "Mapping Setup",
-                    Anchor = Anchor.TopCentre,
-                    Origin = Anchor.TopCentre,
-                    Font = FontUsage.Default.With(size: 40)
-                },
-                mapsFolderButton,
-                continueButton,
-                backButton,
+                    new SpriteText
+                    {
+                        Y = 20,
+                        Text = "Mapping Setup",
+                        Anchor = Anchor.TopCentre,
+                        Origin = Anchor.TopCentre,
+                        Font = FontUsage.Default.With(size: 40)
+                    },
+                    mapsFolderButton,
+                    continueButton,
+                    backButton,
+                }
             };
 
             string[] info =

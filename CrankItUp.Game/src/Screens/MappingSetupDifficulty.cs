@@ -6,6 +6,7 @@ using osuTK;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Events;
 using osu.Framework.Graphics.UserInterface;
+using osu.Framework.Graphics.Containers;
 
 namespace CrankItUp.Game
 {
@@ -51,17 +52,20 @@ namespace CrankItUp.Game
 
             InternalChildren = new Drawable[]
             {
-                backButton,
-                difficultySelector,
-                confirmButton,
-                new SpriteText
+                new DrawSizePreservingFillContainer
                 {
-                    Y = 20,
-                    Text = "Difficulty Setup",
-                    Anchor = Anchor.TopCentre,
-                    Origin = Anchor.TopCentre,
-                    Font = FontUsage.Default.With(size: 40)
-                },
+                    backButton,
+                    difficultySelector,
+                    confirmButton,
+                    new SpriteText
+                    {
+                        Y = 20,
+                        Text = "Difficulty Setup",
+                        Anchor = Anchor.TopCentre,
+                        Origin = Anchor.TopCentre,
+                        Font = FontUsage.Default.With(size: 40)
+                    },
+                }
             };
         }
 

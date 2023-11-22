@@ -21,9 +21,9 @@ namespace CrankItUp.Game
         {
             backButton = new CIUButton(textures)
             {
-                Anchor = Anchor.TopCentre,
-                Origin = Anchor.TopCentre,
-                Position = new Vector2(0, 700),
+                Anchor = Anchor.BottomCentre,
+                Origin = Anchor.BottomCentre,
+                Position = new Vector2(0, 0),
                 Text = "Back to menu",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
@@ -60,16 +60,19 @@ namespace CrankItUp.Game
             }
             InternalChildren = new Drawable[]
             {
-                new SpriteText
+                new DrawSizePreservingFillContainer
                 {
-                    Y = 20,
-                    Text = "Select a track",
-                    Anchor = Anchor.TopCentre,
-                    Origin = Anchor.TopCentre,
-                    Font = FontUsage.Default.With(size: 40)
+                    new SpriteText
+                    {
+                        Y = 20,
+                        Text = "Select a track",
+                        Anchor = Anchor.TopCentre,
+                        Origin = Anchor.TopCentre,
+                        Font = FontUsage.Default.With(size: 40)
+                    },
+                    trackContainer,
+                    backButton
                 },
-                backButton,
-                trackContainer,
             };
         }
 
