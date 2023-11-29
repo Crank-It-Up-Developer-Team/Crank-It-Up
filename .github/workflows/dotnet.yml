@@ -26,13 +26,14 @@ jobs:
       run: sudo flatpak install --noninteractive --assumeyes flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08
     - name: Get PupNet
       run: dotnet tool install -g KuiperZone.PupNet
+      
     - name: Build RPM
       run: pupnet -y -k rpm -o CrankItUp.rpm
     - name: Build deb
       run: pupnet -y -k deb -o CrankItUp.deb
-    - name: Build Appimage
+    - name: Build AppImage
       run: pupnet -y -k appimage -o CrankItUp.appimage
-    - name: Build flatpak
+    - name: Build Flatpak
       run: pupnet -y -k flatpak -o CrankItUp.flatpak
     - name: Build zip
       run: pupnet -y -k zip -o CrankItUp.zip
@@ -41,31 +42,31 @@ jobs:
       uses: actions/upload-artifact@v3.1.3
       with:
         name: CrankItUp.rpm
-        path: CrankItUp.Desktop/Deploy/bin/CrankItUp.rpm
+        path: Deploy/bin/CrankItUp.rpm
 
     - name: Upload deb
       uses: actions/upload-artifact@v3.1.3
       with:
         name: CrankItUp.deb
-        path: CrankItUp.Desktop/Deploy/bin/CrankItUp.deb
+        path: Deploy/bin/CrankItUp.deb
 
     - name: Upload appimage
       uses: actions/upload-artifact@v3.1.3
       with:
         name: CrankItUp.appimage
-        path: CrankItUp.Desktop/Deploy/bin/CrankItUp.appimage
+        path: Deploy/bin/CrankItUp.appimage
 
     - name: Upload flatpak
       uses: actions/upload-artifact@v3.1.3
       with:
         name: CrankItUp.flatpak
-        path: CrankItUp.Desktop/Deploy/bin/CrankItUp.flatpak
+        path: Deploy/bin/CrankItUp.flatpak
 
     - name: Upload zip
       uses: actions/upload-artifact@v3.1.3
       with:
         name: CrankItUp.zip
-        path: CrankItUp.Desktop/Deploy/bin/CrankItUp.zip
+        path: Deploy/bin/CrankItUp.zip
 
   build-windows:
     runs-on: windows-latest
