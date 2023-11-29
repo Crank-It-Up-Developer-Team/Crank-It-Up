@@ -29,7 +29,7 @@ jobs:
       with:
         name: CrankItUp-Linux
         path: CrankItUp.Desktop/bin/Debug/net6.0/*
-        
+
   build-appimage:
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +41,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Prepare
-      run: chmod +x ./publish-appimage
+      run: chmod +x ./CrankItUp.Desktop/publish-appimage
     - name: Build
       run: ./CrankItUp.Desktop/publish-appimage
     - name: Upload a Build Artifact
