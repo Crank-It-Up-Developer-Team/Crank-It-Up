@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-ubuntu:
+  build-linux:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -18,40 +18,53 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --use-current-runtime CrankItUp.Desktop
-    - name: Test
-      run: dotnet test --no-build --verbosity normal CrankItUp.Desktop
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.3
-      with:
-        name: CrankItUp-Linux
-        path: CrankItUp.Desktop/bin/Debug/net6.0/*
-
-  build-appimage:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Download appimagetool
-      run: cd CrankitUp.Desktop && wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
-    - name: Prepare
-      run: chmod +x publish-appimage && chmod a+x appimagetool-x86_64.AppImage
-    - name: Build
-      run: ./publish-appimage -y
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.3
-      with:
-        name: CrankItUp-Appimage
-        path: CrankItUp.Desktop/Appimages/CrankItUp-x86_64.AppImage
+    - name: Get flatpak-builder
+      run: DEBIAN_FRONTEND=noninteractive apt -y install flatpak-builder flatpak
+    - name: Get Flatpak freedesktop SDK
+      run: flatpak install flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08
+    - name: Get PupNet
+      run: dotnet tool install -g KuiperZone.PupNet
+    - name: Build RPM
+      run: pupnet -y -k rpm -o CrankItUp.rpm
+    - name: Build deb
+      run: pupnet -y -k deb -o CrankItUp.deb
+    - name: Build Appimage
+      run: pupnet -y -k appimage -o CrankItUp.appimage
+    - name: Build flatpak
+      run: pupnet -y -k flatpak -o CrankItUp.flatpak
+    - name: Build zip
+      run: pupnet -y -k zip -o CrankItUp.zip
       
+    - name: Upload RPM
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        name: CrankItUp.rpm
+        path: CrankItUp.Desktop/Deploy/bin/CrankItUp.rpm
+
+    - name: Upload deb
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        name: CrankItUp.deb
+        path: CrankItUp.Desktop/Deploy/bin/CrankItUp.deb
+
+    - name: Upload appimage
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        name: CrankItUp.appimage
+        path: CrankItUp.Desktop/Deploy/bin/CrankItUp.appimage
+
+    - name: Upload flatpak
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        name: CrankItUp.flatpak
+        path: CrankItUp.Desktop/Deploy/bin/CrankItUp.flatpak
+
+    - name: Upload zip
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        name: CrankItUp.zip
+        path: CrankItUp.Desktop/Deploy/bin/CrankItUp.zip
+        
   build-windows:
     runs-on: windows-latest
     steps:
