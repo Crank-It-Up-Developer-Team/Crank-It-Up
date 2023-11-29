@@ -23,7 +23,7 @@ jobs:
     - name: add flathub
       run: sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     - name: Get Flatpak freedesktop SDK
-      run: sudo flatpak install flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08
+      run: sudo flatpak install --noninteractive --assumeyes flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08
     - name: Get PupNet
       run: dotnet tool install -g KuiperZone.PupNet
     - name: Build RPM
