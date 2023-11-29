@@ -87,34 +87,3 @@ jobs:
       with:
         name: CrankItUp-Windows
         path: CrankItUp.Desktop/bin/Debug/net6.0/*
-
-  build-ios:
-
-    runs-on: macos-latest
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set default Xamarin SDK versions
-      run: |
-        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12
-    
-    - name: Set default Xcode 14.0.1
-      run: |
-        XCODE_ROOT=/Applications/Xcode_14.0.1.app
-        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
-        sudo xcode-select -s $XCODE_ROOT
-
-    - name: Setup .NET Core SDK 6.0.x
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
-
-    - name: Install dependencies
-      run: nuget restore
-    - name: Build
-      run: msbuild CrankItUp.iOS /p:BuildIpa=True /p:IpaPackageDir=/bin /p:IpaPackageName=CrankItUp.ipa /p:Platform=iPhone /p:Configuration=Release /t:Build
-
-    - uses: actions/upload-artifact@v3.1.3
-      with:
-        name: CrankItUp-iOS
-        path: bin/CrankItUp.ipa
