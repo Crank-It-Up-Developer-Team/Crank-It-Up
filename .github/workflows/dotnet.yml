@@ -19,9 +19,9 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Get flatpak-builder
-      run: DEBIAN_FRONTEND=noninteractive apt -y install flatpak-builder flatpak
+      run: DEBIAN_FRONTEND=noninteractive sudo apt -y install flatpak-builder flatpak
     - name: Get Flatpak freedesktop SDK
-      run: flatpak install flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08
+      run: sudo flatpak install flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08
     - name: Get PupNet
       run: dotnet tool install -g KuiperZone.PupNet
     - name: Build RPM
@@ -64,7 +64,7 @@ jobs:
       with:
         name: CrankItUp.zip
         path: CrankItUp.Desktop/Deploy/bin/CrankItUp.zip
-        
+
   build-windows:
     runs-on: windows-latest
     steps:
