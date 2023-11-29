@@ -11,5 +11,7 @@ namespace CrankItUp.Game
 
         public static readonly double CRANK_DEFAULT_LENGTH = 337;
         public static readonly double CRANK_DEFAULT_HEIGHT = 70;
+
+        public static readonly int MAP_DATAVERSION = 1;
     }
 }

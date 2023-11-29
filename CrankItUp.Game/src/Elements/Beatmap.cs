@@ -7,7 +7,6 @@ using osu.Framework.Audio;
 using osu.Framework.IO.Stores;
 using osu.Framework.Platform;
 using osu.Framework.Logging;
-using osu.Framework.Extensions;
 
 namespace CrankItUp.Game
 {
@@ -82,14 +81,27 @@ namespace CrankItUp.Game
         {
             Queue<BaseNote> noteQueue = new Queue<BaseNote>();
 
-            foreach (JToken noteobject in beatmap.GetValue("BaseNoteQueue"))
+            foreach (JToken noteobject in beatmap.GetValue("noteQueue"))
             {
-                noteQueue.Enqueue(
-                    new BaseNote(
-                        noteobject.GetValue<float>("position"),
-                        noteobject.GetValue<int>("spawnTime")
-                    )
-                );
+                switch (noteobject.GetValue<string>("noteType"))
+                {
+                    case "Standard":
+                        noteQueue.Enqueue(
+                            new BaseNote(
+                                noteobject.GetValue<float>("position"),
+                                noteobject.GetValue<int>("spawnTime")
+                            )
+                        );
+                        break;
+                    case "Special":
+                        Logger.Log(
+                            "Map tried to spawn a special note, which is not yet implemented"
+                        );
+                        break;
+                    default:
+                        Logger.Log("Unknown note type!");
+                        break;
+                }
             }
             return noteQueue;
         }

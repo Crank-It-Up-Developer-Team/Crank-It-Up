@@ -8,6 +8,10 @@ using System.IO;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Input.Events;
 using osu.Framework.Platform;
+using Newtonsoft.Json.Linq;
+using System;
+using osu.Framework.Logging;
+using NuGet.ProjectModel;
 
 namespace CrankItUp.Game
 {
@@ -43,11 +47,64 @@ namespace CrankItUp.Game
             };
             var difficulties = storage.GetFiles(Path.Combine("maps", map));
             Vector2 position = new Vector2(0, 0);
+            Storage mapStorage = storage.GetStorageForDirectory("maps").GetStorageForDirectory(map);
+            int invalidDifficultyCount = 0;
             foreach (string difficulty in difficulties)
             {
+                JObject beatmap;
                 if (difficulty.EndsWith(".json"))
                 {
-                    string difficultyname = difficulty[
+                    string difficultyname = difficulty[(difficulty.LastIndexOf("/") + 1)..];
+                    using (
+                        var sr = new StreamReader(
+                            mapStorage.GetStream(difficultyname, mode: FileMode.Open)
+                        )
+                    )
+                    {
+                        // Read the stream as a string, and write the string to the console.
+                        try
+                        {
+                            beatmap = JObject.Parse(sr.ReadToEnd());
+                        }
+                        catch (Exception e)
+                        {
+                            Logger.Error(
+                                e,
+                                "Error while loading difficuly JSON! Skipping difficulty"
+                            );
+                            invalidDifficultyCount += 1;
+                            continue;
+                        }
+                    }
+                    int dataVersion;
+                    try
+                    {
+                        JToken meta = beatmap.GetValue("meta");
+                        dataVersion = meta.GetValue<int>("dataVersion");
+                    }
+                    catch (Exception e)
+                    {
+                        Logger.Error(
+                            e,
+                            "Error while checking difficulty dataVersion! Skipping difficulty"
+                        );
+                        invalidDifficultyCount += 1;
+                        continue;
+                    }
+                    if (dataVersion != Constants.MAP_DATAVERSION)
+                    {
+                        Logger.Log(
+                            "Difficulty "
+                                + difficultyname
+                                + " has an invalid dataVersion for this version of the game!",
+                            LoggingTarget.Runtime,
+                            LogLevel.Important
+                        );
+                        invalidDifficultyCount += 1;
+                        continue;
+                    }
+
+                    difficultyname = difficulty[
                         (difficulty.LastIndexOf("/") + 1)..(difficulty.Length - 5)
                     ];
                     trackContainer.Add(
@@ -68,6 +125,23 @@ namespace CrankItUp.Game
                     position.X += 250;
                 }
             }
+
+            SpriteText invalidDifficultyText;
+            if (invalidDifficultyCount > 0)
+            {
+                invalidDifficultyText = new SpriteText
+                {
+                    X = 10,
+                    Y = 10,
+                    Text =
+                        "Warning: Map contains " + invalidDifficultyCount + " invalid difficulties!"
+                };
+            }
+            else
+            {
+                // make an empty spritetext, as there is nothing to say
+                invalidDifficultyText = new SpriteText { };
+            }
             InternalChildren = new Drawable[]
             {
                 new DrawSizePreservingFillContainer
@@ -82,6 +156,7 @@ namespace CrankItUp.Game
                     },
                     backButton,
                     trackContainer,
+                    invalidDifficultyText,
                 }
             };
         }

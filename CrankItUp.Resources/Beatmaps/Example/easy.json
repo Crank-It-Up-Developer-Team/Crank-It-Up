@@ -1,26 +1,32 @@
 {
     "meta": {
         "radius": 50,
-        "approachRate": 100
+        "approachRate": 100,
+        "dataVersion": 1
     },
-    "BaseNoteQueue": [
+    "noteQueue": [
         {
+            "noteType": "Standard",
             "position": 0,
             "spawnTime": 0
         },
         {
+            "noteType": "Standard",
             "position": 5,
             "spawnTime": 200
         },
         {
+            "noteType": "Standard",
             "position": 10,
             "spawnTime": 400
         },
         {
+            "noteType": "Standard",
             "position": 15,
             "spawnTime": 600
         },
         {
+            "noteType": "Standard",
             "position": 20,
             "spawnTime": 800
         }

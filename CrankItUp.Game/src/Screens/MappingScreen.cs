@@ -20,7 +20,7 @@ namespace CrankItUp.Game
         string difficulty;
         Track track;
         JObject beatmap = new JObject();
-        JArray BaseNoteQueue = new JArray();
+        JArray NoteQueue = new JArray();
         Storage storage;
 
         public MappingScreen(string difficultyname)
@@ -71,10 +71,11 @@ namespace CrankItUp.Game
             {
                 JObject note = new JObject
                 {
+                    { "noteType", "Standard" },
                     { "position", 0 },
                     { "spawnTime", track.CurrentTime }
                 };
-                BaseNoteQueue.Add(note);
+                NoteQueue.Add(note);
             }
             // if the user wishes to exit
             else if (e.Key == osuTK.Input.Key.Escape)
@@ -82,14 +83,16 @@ namespace CrankItUp.Game
                 JObject meta = new JObject
                 {
                     // use default values for now
+                    { "dataVersion", "1" },
                     { "radius", 50 },
                     { "approachRate", 100 },
                     // set the current time as the endTime
-                    { "endTime", track.CurrentTime }
+                    { "endTime", track.CurrentTime },
+                    { "startTime", 0 }
                 };
                 // add everything to the beatmap
                 beatmap.Add("meta", meta);
-                beatmap.Add("BaseNoteQueue", BaseNoteQueue);
+                beatmap.Add("noteQueue", NoteQueue);
                 // save it to disk
                 StreamWriter mapfile = new StreamWriter(
                     storage.CreateFileSafely(Path.Combine("maps", "WIP", difficulty + ".json"))
