@@ -43,7 +43,7 @@ jobs:
     - name: Prepare
       run: chmod +x ./CrankItUp.Desktop/publish-appimage
     - name: Build
-      run: ./CrankItUp.Desktop/publish-appimage
+      run: cd CrankItUp.Desktop && publish-appimage -y
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.3
       with:
