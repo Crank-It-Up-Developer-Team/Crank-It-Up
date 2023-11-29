@@ -21,7 +21,7 @@ jobs:
     - name: Get flatpak-builder
       run: DEBIAN_FRONTEND=noninteractive sudo apt -y install flatpak-builder flatpak
     - name: add flathub
-      run: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+      run: sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     - name: Get Flatpak freedesktop SDK
       run: sudo flatpak install flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08
     - name: Get PupNet
