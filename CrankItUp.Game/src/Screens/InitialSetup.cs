@@ -87,13 +87,22 @@ namespace CrankItUp.Game
             Stream exampleMap = CrankItUpResources.ResourceAssembly.GetManifestResourceStream(
                 "CrankItUp.Resources.Beatmaps.Example.easy.json"
             );
-
-            Logger.Log(exampleMap.ToString());
-
             exampleMap.CopyTo(exampleMapFileStream);
 
             exampleMapFileStream.Dispose();
             exampleMap.Dispose();
+
+            Stream exampleMetadataFileStream = storage.CreateFileSafely(
+                "maps/Example/metadata.json"
+            );
+            // there is no *store class for text files, so we have to pull it from the ResourceAssembly manually
+            Stream exampleMetadata = CrankItUpResources.ResourceAssembly.GetManifestResourceStream(
+                "CrankItUp.Resources.Beatmaps.Example.metadata.json"
+            );
+            exampleMetadata.CopyTo(exampleMetadataFileStream);
+
+            exampleMetadataFileStream.Dispose();
+            exampleMetadata.Dispose();
 
             Stream exampleSong = storage.CreateFileSafely("maps/Example/music.mp3");
             audio.GetTrackStore().GetStream("Tera I_O.mp3").CopyTo(exampleSong);

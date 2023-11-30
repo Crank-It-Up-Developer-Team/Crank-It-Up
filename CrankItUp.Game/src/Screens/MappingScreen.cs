@@ -18,14 +18,16 @@ namespace CrankItUp.Game
     public partial class MappingScreen : Screen
     {
         string difficulty;
+        private string trackFilename;
         Track track;
         JObject beatmap = new JObject();
         JArray NoteQueue = new JArray();
         Storage storage;
 
-        public MappingScreen(string difficultyname)
+        public MappingScreen(string difficulty, string trackFilename)
         {
-            difficulty = difficultyname;
+            this.difficulty = difficulty;
+            this.trackFilename = trackFilename;
         }
 
         [BackgroundDependencyLoader]
@@ -52,7 +54,7 @@ namespace CrankItUp.Game
                 }
             };
 
-            track = trackStore.Get("music.mp3");
+            track = trackStore.Get(trackFilename);
         }
 
         protected override void LoadComplete()

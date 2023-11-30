@@ -13,5 +13,6 @@ namespace CrankItUp.Game
         public static readonly double CRANK_DEFAULT_HEIGHT = 70;
 
         public static readonly int MAP_DATAVERSION = 1;
+        public static readonly int METADATA_DATAVERSION = 1;
     }
 }

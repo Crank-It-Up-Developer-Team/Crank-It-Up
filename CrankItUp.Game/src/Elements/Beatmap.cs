@@ -19,6 +19,7 @@ namespace CrankItUp.Game
         public readonly double endTime;
         public readonly double startTime;
         private readonly Storage mapStorage;
+        private readonly TrackMetadata trackmeta;
 
         /// <summary>Creates a new instance of the Beatmap class.</summary>
         /// <param name="mapname">The name of the map.</param>
@@ -55,12 +56,13 @@ namespace CrankItUp.Game
             ITrackStore trackStore = audio.GetTrackStore(
                 new StorageBackedResourceStore(mapStorage)
             );
-            track = trackStore.Get("music.mp3");
+            trackmeta = new TrackMetadata(mapStorage.GetStream("metadata.json"));
+            track = trackStore.Get(trackmeta.trackFilename);
 
-            JToken meta = beatmap.GetValue("meta");
-            noteRadius = meta.GetValue<double>("radius");
-            approachRate = meta.GetValue<double>("approachRate");
-            endTime = meta.GetValue<double>("endTime");
+            JToken meta = beatmap.GetValueOrFail("meta");
+            noteRadius = meta.GetValueOrFail<double>("radius");
+            approachRate = meta.GetValueOrFail<double>("approachRate");
+            endTime = meta.GetValueOrFail<double>("endTime");
             // for some reason, GetValue<double> returns 0 if the value is not found
             if (endTime == 0)
             {

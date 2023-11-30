@@ -12,6 +12,9 @@ using Newtonsoft.Json.Linq;
 using System;
 using osu.Framework.Logging;
 using NuGet.ProjectModel;
+using osu.Framework.Audio;
+using osu.Framework.IO.Stores;
+using osu.Framework.Audio.Track;
 
 namespace CrankItUp.Game
 {
@@ -19,15 +22,18 @@ namespace CrankItUp.Game
     {
         Container trackContainer;
         CIUButton backButton;
+        Track track;
         string map;
+        TrackMetadata trackmeta;
 
-        public DifficultySelect(string mapname)
+        public DifficultySelect(string mapname, TrackMetadata trackmeta)
         {
             map = mapname;
+            this.trackmeta = trackmeta;
         }
 
         [BackgroundDependencyLoader]
-        private void load(TextureStore textures, Storage storage)
+        private void load(AudioManager audio, TextureStore textures, Storage storage)
         {
             backButton = new CIUButton(textures)
             {
@@ -45,10 +51,19 @@ namespace CrankItUp.Game
                 Origin = Anchor.BottomRight,
                 Position = new Vector2(0, 100)
             };
+
+            ITrackStore trackStore = audio.GetTrackStore(
+                new StorageBackedResourceStore(
+                    storage.GetStorageForDirectory(Path.Combine("maps", map))
+                )
+            );
+            track = trackStore.Get(trackmeta.trackFilename);
+
             var difficulties = storage.GetFiles(Path.Combine("maps", map));
             Vector2 position = new Vector2(0, 0);
             Storage mapStorage = storage.GetStorageForDirectory("maps").GetStorageForDirectory(map);
             int invalidDifficultyCount = 0;
+
             foreach (string difficulty in difficulties)
             {
                 JObject beatmap;
@@ -61,7 +76,6 @@ namespace CrankItUp.Game
                         )
                     )
                     {
-                        // Read the stream as a string, and write the string to the console.
                         try
                         {
                             beatmap = JObject.Parse(sr.ReadToEnd());
@@ -127,6 +141,7 @@ namespace CrankItUp.Game
             }
 
             SpriteText invalidDifficultyText;
+            invalidDifficultyCount -= 1; // the metadata file will always be an invalid difficulty
             if (invalidDifficultyCount > 0)
             {
                 invalidDifficultyText = new SpriteText
@@ -161,6 +176,12 @@ namespace CrankItUp.Game
             };
         }
 
+        protected override void LoadComplete()
+        {
+            track.Start();
+            track.Seek(trackmeta.trackPreviewStart);
+        }
+
         private void pushMenu()
         {
             this.Exit();
@@ -188,6 +209,12 @@ namespace CrankItUp.Game
         public override void OnResuming(ScreenTransitionEvent e)
         {
             this.FadeInFromZero(500, Easing.OutQuint);
+        }
+
+        public override bool OnExiting(ScreenExitEvent e)
+        {
+            track.Stop();
+            return base.OnExiting(e);
         }
     }
 }

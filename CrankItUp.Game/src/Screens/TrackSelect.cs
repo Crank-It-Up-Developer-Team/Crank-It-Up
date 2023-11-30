@@ -15,6 +15,7 @@ namespace CrankItUp.Game
     {
         Container trackContainer;
         CIUButton backButton;
+        TrackMetadata trackmeta;
 
         [BackgroundDependencyLoader]
         private void load(TextureStore textures, Storage storage)
@@ -41,14 +42,24 @@ namespace CrankItUp.Game
             {
                 var map = mapPath[5..];
                 Logger.Log("Found map: " + map);
+
+                var mapStorage = storage.GetStorageForDirectory(mapPath);
+                try
+                {
+                    trackmeta = new TrackMetadata(mapStorage.GetStream("metadata.json"));
+                }
+                catch
+                {
+                    continue;
+                }
                 trackContainer.Add(
                     new CIUButton(textures)
                     {
-                        Text = map,
+                        Text = trackmeta.name,
                         Size = new Vector2(200, 40),
                         Margin = new MarginPadding(10),
                         Position = position,
-                        Action = () => pushDifficultySelect(map),
+                        Action = () => pushDifficultySelect(map, mapPath, storage),
                     }
                 );
                 position.Y += 50;
@@ -81,9 +92,11 @@ namespace CrankItUp.Game
             this.Exit();
         }
 
-        public void pushDifficultySelect(string map)
+        public void pushDifficultySelect(string map, string mapPath, Storage storage)
         {
-            this.Push(new DifficultySelect(map));
+            var mapStorage = storage.GetStorageForDirectory(mapPath);
+            trackmeta = new TrackMetadata(mapStorage.GetStream("metadata.json"));
+            this.Push(new DifficultySelect(map, trackmeta));
         }
 
         protected override bool OnKeyDown(KeyDownEvent e)

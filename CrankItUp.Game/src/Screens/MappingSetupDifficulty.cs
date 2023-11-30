@@ -15,6 +15,12 @@ namespace CrankItUp.Game
         CIUButton backButton;
         CIUButton confirmButton;
         BasicTextBox difficultySelector;
+        string trackFilename;
+
+        public MappingSetupDifficulty(string trackFilename)
+        {
+            this.trackFilename = trackFilename;
+        }
 
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
@@ -85,7 +91,7 @@ namespace CrankItUp.Game
 
         void PushMappingScreen()
         {
-            this.Push(new MappingScreen(difficultySelector.Text));
+            this.Push(new MappingScreen(difficultySelector.Text, trackFilename));
         }
 
         void PushMenu()
