@@ -208,12 +208,18 @@ namespace CrankItUp.Game
 
         public override void OnResuming(ScreenTransitionEvent e)
         {
+            track.Start();
             this.FadeInFromZero(500, Easing.OutQuint);
+        }
+
+        public override void OnSuspending(ScreenTransitionEvent e)
+        {
+            track.Stop();
         }
 
         public override bool OnExiting(ScreenExitEvent e)
         {
-            track.Stop();
+            track.Dispose();
             return base.OnExiting(e);
         }
     }
