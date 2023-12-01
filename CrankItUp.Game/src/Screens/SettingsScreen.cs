@@ -9,11 +9,13 @@ using osuTK;
 using osu.Framework.Audio;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Events;
+using osu.Framework.Configuration;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using NuGet.Protocol;
 using osu.Framework.Platform;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Logging;
 
 namespace CrankItUp.Game
 {
@@ -25,66 +27,119 @@ namespace CrankItUp.Game
             Linear
         }
 
-        // init vars
-        public static BindableDouble volume = new BindableDouble
-        {
-            Default = 0.5,
-            Value = 0.5,
-            MinValue = 0,
-            MaxValue = 1
-        };
         public static InputMode inputmode = InputMode.Rotational;
     }
 
     public partial class SettingsScreen : Screen
     {
         CIUButton inputModeButton;
+        CIUButton windowModeButton;
         CIUButton backButton;
         CIUButton setupButton;
-        SpriteText volumeText;
-        BasicSliderBar<double> volumeSlider;
+        SpriteText globalVolumeText;
+        BasicSliderBar<double> globalVolumeSlider;
+        SpriteText musicVolumeText;
+        private BasicSliderBar<double> musicVolumeSlider;
+        private SpriteText effectsVolumeText;
+        private BasicSliderBar<double> effectsVolumeSlider;
         Storage storage;
+        Bindable<WindowMode> windowModeBindable;
 
         [BackgroundDependencyLoader]
-        private void load(AudioManager audio, TextureStore textures, Storage store)
+        private void load(
+            AudioManager audio,
+            TextureStore textures,
+            Storage store,
+            FrameworkConfigManager frameworkConfig
+        )
         {
             storage = store;
-            audio.AddAdjustment(AdjustableProperty.Volume, Settings.volume);
-            volumeText = new SpriteText
+            globalVolumeText = new SpriteText
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
-                Position = new Vector2(0, -30),
-                Text = "Volume",
+                Position = new Vector2(0, -170),
+                Text = "Global Volume",
                 Colour = Color4.White,
             };
-            volumeSlider = new BasicSliderBar<double>
+            globalVolumeSlider = new BasicSliderBar<double>
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
-                Position = new Vector2(0, -10),
+                Position = new Vector2(0, -140),
                 Size = new Vector2(200, 20),
                 RangePadding = 20,
                 BackgroundColour = Color4.White,
                 SelectionColour = Color4.Blue,
-                KeyboardStep = 1,
-                Current = Settings.volume
+                KeyboardStep = 0.1f,
+                Current = frameworkConfig.GetBindable<double>(FrameworkSetting.VolumeUniversal)
+            };
+            musicVolumeText = new SpriteText
+            {
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Position = new Vector2(0, -110),
+                Text = "Music Volume",
+                Colour = Color4.White,
+            };
+            musicVolumeSlider = new BasicSliderBar<double>
+            {
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Position = new Vector2(0, -80),
+                Size = new Vector2(200, 20),
+                RangePadding = 20,
+                BackgroundColour = Color4.White,
+                SelectionColour = Color4.Blue,
+                KeyboardStep = 0.1f,
+                Current = frameworkConfig.GetBindable<double>(FrameworkSetting.VolumeMusic)
+            };
+            effectsVolumeText = new SpriteText
+            {
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Position = new Vector2(0, -50),
+                Text = "Effects Volume",
+                Colour = Color4.White,
+            };
+            effectsVolumeSlider = new BasicSliderBar<double>
+            {
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Position = new Vector2(0, -20),
+                Size = new Vector2(200, 20),
+                RangePadding = 20,
+                BackgroundColour = Color4.White,
+                SelectionColour = Color4.Blue,
+                KeyboardStep = 0.1f,
+                Current = frameworkConfig.GetBindable<double>(FrameworkSetting.VolumeEffect)
             };
             inputModeButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
                 Position = new Vector2(0, 30),
-                Text = "Input Mode: " + Settings.inputmode.ToString(),
+                Text = "Input mode: " + Settings.inputmode.ToString(),
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Action = () => changeInputMode(),
+            };
+            windowModeButton = new CIUButton(textures)
+            {
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Position = new Vector2(0, 80),
+                Text =
+                    "Window type: " + frameworkConfig.Get<WindowMode>(FrameworkSetting.WindowMode),
+                Size = new Vector2(200, 40),
+                Margin = new MarginPadding(10),
+                Action = () => changeWindowMode(frameworkConfig),
             };
             setupButton = new CIUButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
-                Position = new Vector2(0, 80),
+                Position = new Vector2(0, 130),
                 Text = "Restart initial setup",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
@@ -94,7 +149,7 @@ namespace CrankItUp.Game
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
-                Position = new Vector2(0, 130),
+                Position = new Vector2(0, 180),
                 Text = "Back to menu",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
@@ -106,8 +161,13 @@ namespace CrankItUp.Game
                 new DrawSizePreservingFillContainer
                 {
                     inputModeButton,
-                    volumeText,
-                    volumeSlider,
+                    windowModeButton,
+                    globalVolumeText,
+                    globalVolumeSlider,
+                    effectsVolumeText,
+                    effectsVolumeSlider,
+                    musicVolumeText,
+                    musicVolumeSlider,
                     setupButton,
                     backButton,
                     new SpriteText
@@ -120,6 +180,24 @@ namespace CrankItUp.Game
                     },
                 }
             };
+            // set up bindables and events
+            windowModeBindable = frameworkConfig.GetBindable<WindowMode>(
+                FrameworkSetting.WindowMode
+            );
+            windowModeBindable.ValueChanged += onWindowModeChange;
+        }
+
+        private void onWindowModeChange(ValueChangedEvent<WindowMode> @event)
+        {
+            Logger.Log(@event.NewValue.ToString());
+            windowModeButton.Text = "Window mode: " + @event.NewValue.ToString();
+        }
+
+        private void changeWindowMode(FrameworkConfigManager frameworkConfig)
+        {
+            // this function only changes the window mode, it doesn't change the text, as that is handled by the event
+            WindowMode currentvalue = frameworkConfig.Get<WindowMode>(FrameworkSetting.WindowMode);
+            frameworkConfig.SetValue(FrameworkSetting.WindowMode, currentvalue + 1);
         }
 
         public void changeInputMode()
@@ -134,7 +212,7 @@ namespace CrankItUp.Game
                 Settings.inputmode = Settings.InputMode.Rotational;
             }
             // update button text
-            inputModeButton.Text = "Input Mode: " + Settings.inputmode.ToString();
+            inputModeButton.Text = "Input mode: " + Settings.inputmode.ToString();
         }
 
         protected override bool OnKeyDown(KeyDownEvent e)
@@ -149,11 +227,7 @@ namespace CrankItUp.Game
         public void pushMenu()
         {
             // save settings to disk
-            JObject settings = new JObject
-            {
-                { "inputMode", (int)Settings.inputmode },
-                { "volume", Settings.volume.Value }
-            };
+            JObject settings = new JObject { { "inputMode", (int)Settings.inputmode }, };
             StreamWriter settingswriter = new StreamWriter(
                 storage.CreateFileSafely("settings.json")
             );

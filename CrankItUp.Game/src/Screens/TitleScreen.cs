@@ -23,10 +23,6 @@ namespace CrankItUp.Game
         private void load(AudioManager audio, TextureStore textures)
         {
             track = audio.GetTrackStore().Get("Body F10ating in the Zero Gravity Space.mp3");
-            audio.AddAdjustment(
-                AdjustableProperty.Volume,
-                new BindableDouble(Settings.volume.Value)
-            );
             track.Start();
             track.Looping = true;
 
