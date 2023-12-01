@@ -90,6 +90,7 @@ namespace CrankItUp.Game
                             continue;
                         }
                     }
+
                     int dataVersion;
                     try
                     {
@@ -132,6 +133,8 @@ namespace CrankItUp.Game
                         }
                     );
                 }
+
+                // Create a grid of buttons, same as TrackSelect.cs
                 position.Y += 50;
                 if (position.Y == 600)
                 {
@@ -157,6 +160,7 @@ namespace CrankItUp.Game
                 // make an empty spritetext, as there is nothing to say
                 invalidDifficultyText = new SpriteText { };
             }
+
             InternalChildren = new Drawable[]
             {
                 new DrawSizePreservingFillContainer

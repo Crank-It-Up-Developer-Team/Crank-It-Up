@@ -36,8 +36,9 @@ namespace CrankItUp.Game
                 Origin = Anchor.BottomRight,
                 Position = new Vector2(0, 100)
             };
-            var maps = storage.GetDirectories("maps");
+
             Vector2 position = new Vector2(0, 0);
+            var maps = storage.GetDirectories("maps");
             foreach (string mapPath in maps)
             {
                 var map = mapPath[5..];
@@ -50,8 +51,11 @@ namespace CrankItUp.Game
                 }
                 catch
                 {
+                    // if we can't get a metadata.json, or it's invalid, we can skip it
+                    // logging the specific issue in the file is done by the TrackMetadata class
                     continue;
                 }
+
                 trackContainer.Add(
                     new CIUButton(textures)
                     {
@@ -62,6 +66,8 @@ namespace CrankItUp.Game
                         Action = () => pushDifficultySelect(map, mapPath, storage),
                     }
                 );
+
+                // change the position, relative to it's current position, preventing overlap
                 position.Y += 50;
                 if (position.Y == 600)
                 {
@@ -94,6 +100,7 @@ namespace CrankItUp.Game
 
         public void pushDifficultySelect(string map, string mapPath, Storage storage)
         {
+            // we get the metadata again here, as the metadata gathered in load() is overwriten each loop
             var mapStorage = storage.GetStorageForDirectory(mapPath);
             trackmeta = new TrackMetadata(mapStorage.GetStream("metadata.json"));
             this.Push(new DifficultySelect(map, trackmeta));

@@ -3,8 +3,6 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Screens;
 using osuTK;
-using osu.Framework.Audio;
-using osu.Framework.Audio.Track;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Events;
 using osu.Framework.Graphics.Containers;
@@ -16,7 +14,7 @@ namespace CrankItUp.Game
         CIUButton backButton;
 
         [BackgroundDependencyLoader]
-        private void load(AudioManager audio, TextureStore textures)
+        private void load(TextureStore textures)
         {
             backButton = new CIUButton(textures)
             {

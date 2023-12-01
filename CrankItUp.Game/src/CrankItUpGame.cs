@@ -24,7 +24,6 @@ namespace CrankItUp.Game
             try
             {
                 var sr = new StreamReader(store.GetStream("settings.json"));
-                // Read the stream as a string, and write the string to the console.
                 var settings = JObject.Parse(sr.ReadToEnd());
                 Settings.inputmode = (Settings.InputMode)settings.GetValue<int>("inputMode");
             }
