@@ -20,6 +20,7 @@
                 dotnetCorePackages.sdk_6_0
                 mono
                 # running environment
+                dotnet-runtime
                 libglvnd
                 udev
                 alsa-lib
