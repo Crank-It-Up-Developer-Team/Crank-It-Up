@@ -26,7 +26,7 @@ namespace CrankItUp.Game
                     .TryGetValue(name, StringComparison.CurrentCulture, out JToken value) == false
             )
             {
-                throw new ArgumentException("Value not found!");
+                throw new ArgumentException("Value " + name + " not found!");
             }
             return value.Value<T>();
         }
