@@ -1,3 +1,4 @@
+using CrankItUp.Game.Screens;
 using osu.Framework.Allocation;
 using osu.Framework.Platform;
 using NUnit.Framework;

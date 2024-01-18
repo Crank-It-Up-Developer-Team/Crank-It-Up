@@ -1,23 +1,23 @@
+using CrankItUp.Game.Elements;
 using osu.Framework.Allocation;
-using osu.Framework.Graphics;
-using osu.Framework.Graphics.Sprites;
-using osu.Framework.Screens;
-using osu.Framework.Graphics.Textures;
-using osuTK;
 using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
-using osu.Framework.Bindables;
+using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Textures;
+using osu.Framework.Screens;
+using osuTK;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Screens
 {
     public partial class TitleScreen : Screen
     {
-        CIUButton selectTrackButton;
-        CIUButton settingsButton;
-        CIUButton creditsButton;
-        CIUButton mappingButton;
-        Track track;
+        private CiuButton selectTrackButton;
+        private CiuButton settingsButton;
+        private CiuButton creditsButton;
+        private CiuButton mappingButton;
+        private Track track;
 
         [BackgroundDependencyLoader]
         private void load(AudioManager audio, TextureStore textures)
@@ -26,7 +26,7 @@ namespace CrankItUp.Game
             track.Start();
             track.Looping = true;
 
-            selectTrackButton = new CIUButton(textures)
+            selectTrackButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Text = "Play!",
@@ -34,35 +34,35 @@ namespace CrankItUp.Game
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(-100, 0),
-                Action = () => pushSelectTrack(),
+                Action = PushSelectTrack,
             };
 
-            settingsButton = new CIUButton(textures)
+            settingsButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Text = "Settings",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(-100, 50),
-                Action = () => pushSettings(),
+                Action = PushSettings,
             };
-            mappingButton = new CIUButton(textures)
+            mappingButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Text = "Map editor",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(-100, 100),
-                Action = () => pushMappingSetup(),
+                Action = PushMappingSetup,
             };
-            creditsButton = new CIUButton(textures)
+            creditsButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Text = "Credits",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(-100, 150),
-                Action = () => pushCredits(),
+                Action = PushCredits,
             };
 
             InternalChildren = new Drawable[]
@@ -85,24 +85,24 @@ namespace CrankItUp.Game
             };
         }
 
-        public void pushSettings()
+        public void PushSettings()
         {
             this.Push(new SettingsScreen());
         }
 
-        public void pushSelectTrack()
+        public void PushSelectTrack()
         {
             track.Stop();
             this.Push(new TrackSelect());
         }
 
-        public void pushMappingSetup()
+        public void PushMappingSetup()
         {
             track.Stop();
             this.Push(new MappingSetupTrack());
         }
 
-        public void pushCredits()
+        public void PushCredits()
         {
             this.Push(new CreditsScreen());
         }

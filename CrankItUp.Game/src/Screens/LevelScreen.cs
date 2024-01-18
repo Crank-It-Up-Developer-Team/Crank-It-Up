@@ -1,26 +1,27 @@
+using CrankItUp.Game.Elements;
 using osu.Framework.Allocation;
-using osu.Framework.Graphics;
-using osu.Framework.Screens;
-using osu.Framework.Input.Events;
-using osuTK;
 using osu.Framework.Audio;
-using osu.Framework.Platform;
+using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Input.Events;
+using osu.Framework.Platform;
+using osu.Framework.Screens;
+using osuTK;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Screens
 {
     public partial class LevelScreen : Screen
     {
-        Crank crank;
-        NoteManager manager;
+        private Crank crank;
+        private NoteManager manager;
         private Beatmap beatmap;
-        string map;
-        string difficulty;
+        private readonly string map;
+        private readonly string difficulty;
 
-        public LevelScreen(string mapname, string difficultyname)
+        public LevelScreen(string mapName, string difficultyName)
         {
-            map = mapname;
-            difficulty = difficultyname;
+            map = mapName;
+            difficulty = difficultyName;
         }
 
         [BackgroundDependencyLoader]
@@ -39,19 +40,19 @@ namespace CrankItUp.Game
             {
                 new DrawSizePreservingFillContainer { crank, manager, }
             };
-            beatmap.track.Start();
+            beatmap.Track.Start();
         }
 
-        public void addNote(BaseNote note)
+        public void AddNote(BaseNote note)
         {
-            crank.ScaleTo(manager.dilation);
+            crank.ScaleTo(manager.Dilation);
             AddInternal(note);
         }
 
         protected override bool OnMouseMove(MouseMoveEvent e)
         {
             Vector2 dPos = e.MousePosition - Constants.CORNER_TO_CENTER_TRANSFORMATION;
-            crank.updateRotation(dPos);
+            crank.UpdateRotation(dPos);
             return base.OnMouseMove(e);
         }
 
@@ -59,9 +60,10 @@ namespace CrankItUp.Game
         {
             if (e.Key == osuTK.Input.Key.Escape)
             {
-                beatmap.track.Dispose();
+                beatmap.Track.Dispose();
                 this.Exit();
             }
+
             return base.OnKeyDown(e);
         }
 
@@ -72,7 +74,7 @@ namespace CrankItUp.Game
 
         public override bool OnExiting(ScreenExitEvent e)
         {
-            crank.writer.Dispose();
+            crank.Writer.Dispose();
             return base.OnExiting(e);
         }
     }

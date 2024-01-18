@@ -1,5 +1,3 @@
-using osu.Framework.Graphics;
-using osu.Framework.Screens;
 using NUnit.Framework;
 
 namespace CrankItUp.Game.Tests.Visual

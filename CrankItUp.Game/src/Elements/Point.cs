@@ -1,12 +1,13 @@
 using osuTK;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Elements
 {
     public class Point
     {
         //essentially going to be a nullable wrapper for Vector2, to be used in the Line class
-        private float x,
-            y;
+        private readonly float x;
+
+        private readonly float y;
 
         public Point(float x, float y)
         {
@@ -20,17 +21,17 @@ namespace CrankItUp.Game
             this.y = point.Y;
         }
 
-        public float getX()
+        public float GetX()
         {
             return x;
         }
 
-        public float getY()
+        public float GetY()
         {
             return y;
         }
 
-        public string toString()
+        public override string ToString()
         {
             return "(" + x + "," + y + ")";
         }

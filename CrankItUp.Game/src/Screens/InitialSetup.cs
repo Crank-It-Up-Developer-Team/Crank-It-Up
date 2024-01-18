@@ -1,57 +1,56 @@
+using System.Diagnostics;
+using System.IO;
+using CrankItUp.Game.Elements;
+using CrankItUp.Resources;
 using osu.Framework.Allocation;
+using osu.Framework.Audio;
 using osu.Framework.Graphics;
+using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Textures;
+using osu.Framework.Platform;
 using osu.Framework.Screens;
 using osuTK;
-using osu.Framework.Audio;
-using osu.Framework.Graphics.Textures;
-using System.IO;
-using osu.Framework.Platform;
-using CrankItUp.Resources;
-using osu.Framework.IO.Stores;
-using osu.Framework.Logging;
-using osu.Framework.Graphics.Containers;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Screens
 {
     public partial class InitialSetup : Screen
     {
-        CIUButton startButton;
+        private CiuButton startButton;
 
         [BackgroundDependencyLoader]
         private void load(AudioManager audio, TextureStore textures, Storage storage)
         {
-            startButton = new CIUButton(textures)
+            startButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Text = "Start setup",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(0, 0),
-                Action = () => PushMenu(audio, storage),
+                Action = () => pushMenu(audio, storage),
             };
 
-            string[] Intro =
+            string[] intro =
             {
                 "Hi! Welcome to Crank It Up!",
                 "We need to do some initial setup before we can get started",
                 "So just hit that big shiny button below!",
                 "If the game freezes after clicking the button, don't panic! It might take a while though"
             };
-            Drawable[] introTextList;
-            introTextList = new SpriteText[Intro.Length];
-            SpriteText TempText;
-            for (int i = 0; i < Intro.Length; i++)
+            var introTextList = new Drawable[intro.Length];
+
+            for (int i = 0; i < intro.Length; i++)
             {
-                TempText = new SpriteText
+                var tempText = new SpriteText
                 {
                     Y = 100 + (i * 30),
-                    Text = Intro[i],
+                    Text = intro[i],
                     Anchor = Anchor.TopCentre,
                     Origin = Anchor.TopCentre,
                     Font = FontUsage.Default.With(size: 20)
                 };
-                introTextList[i] = TempText;
+                introTextList[i] = tempText;
             }
 
             InternalChildren = new Drawable[]
@@ -80,13 +79,14 @@ namespace CrankItUp.Game
             this.FadeInFromZero(500, Easing.OutQuint);
         }
 
-        void PushMenu(AudioManager audio, Storage storage)
+        private void pushMenu(AudioManager audio, Storage storage)
         {
             Stream exampleMapFileStream = storage.CreateFileSafely("maps/Example/easy.json");
             // there is no *store class for text files, so we have to pull it from the ResourceAssembly manually
             Stream exampleMap = CrankItUpResources.ResourceAssembly.GetManifestResourceStream(
                 "CrankItUp.Resources.Beatmaps.Example.easy.json"
             );
+            Debug.Assert(exampleMap != null, nameof(exampleMap) + " != null");
             exampleMap.CopyTo(exampleMapFileStream);
 
             exampleMapFileStream.Dispose();
@@ -99,6 +99,7 @@ namespace CrankItUp.Game
             Stream exampleMetadata = CrankItUpResources.ResourceAssembly.GetManifestResourceStream(
                 "CrankItUp.Resources.Beatmaps.Example.metadata.json"
             );
+            Debug.Assert(exampleMetadata != null, nameof(exampleMetadata) + " != null");
             exampleMetadata.CopyTo(exampleMetadataFileStream);
 
             exampleMetadataFileStream.Dispose();

@@ -6,13 +6,14 @@ using osu.Framework.Platform;
 using osu.Framework.Screens;
 using System;
 using System.IO;
+using CrankItUp.Game.Screens;
 
 namespace CrankItUp.Game
 {
     public partial class CrankItUpGame : CrankItUpGameBase
     {
         private ScreenStack screenStack;
-        bool showSetup;
+        private bool showSetup;
 
         [BackgroundDependencyLoader]
         private void load(Storage store)
@@ -20,17 +21,19 @@ namespace CrankItUp.Game
             // Add your top-level game components here.
             // A screen stack and sample screen has been provided for convenience, but you can replace it if you don't want to use screens.
             Child = screenStack = new ScreenStack { RelativeSizeAxes = Axes.Both };
+
             // load settings
             try
             {
                 var sr = new StreamReader(store.GetStream("settings.json"));
                 var settings = JObject.Parse(sr.ReadToEnd());
-                Settings.inputmode = (Settings.InputMode)settings.GetValue<int>("inputMode");
+                Settings.Inputmode = (Settings.InputMode)settings.GetValue<int>("inputMode");
             }
             catch
             {
                 Console.WriteLine("Invalid or non-existant settings! Using default values");
             }
+
             showSetup = !store.ExistsDirectory("maps");
         }
 
@@ -45,6 +48,7 @@ namespace CrankItUp.Game
             {
                 screenStack.Push(new TitleScreen());
             }
+
             base.LoadComplete();
         }
     }

@@ -1,21 +1,22 @@
+using CrankItUp.Game.Elements;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
+using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Textures;
+using osu.Framework.Graphics.UserInterface;
+using osu.Framework.Input.Events;
 using osu.Framework.Screens;
 using osuTK;
-using osu.Framework.Graphics.Textures;
-using osu.Framework.Input.Events;
-using osu.Framework.Graphics.UserInterface;
-using osu.Framework.Graphics.Containers;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Screens
 {
     public partial class MappingSetupDifficulty : Screen
     {
-        CIUButton backButton;
-        CIUButton confirmButton;
-        BasicTextBox difficultySelector;
-        string trackFilename;
+        private CiuButton backButton;
+        private CiuButton confirmButton;
+        private BasicTextBox difficultySelector;
+        private readonly string trackFilename;
 
         public MappingSetupDifficulty(string trackFilename)
         {
@@ -25,7 +26,7 @@ namespace CrankItUp.Game
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
         {
-            backButton = new CIUButton(textures)
+            backButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -33,10 +34,10 @@ namespace CrankItUp.Game
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(0, 50),
-                Action = () => PushMenu(),
+                Action = pushMenu,
             };
 
-            confirmButton = new CIUButton(textures)
+            confirmButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -44,10 +45,10 @@ namespace CrankItUp.Game
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(0, 0),
-                Action = () => PushMappingScreen(),
+                Action = pushMappingScreen,
             };
 
-            difficultySelector = new BasicTextBox()
+            difficultySelector = new BasicTextBox
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -79,8 +80,9 @@ namespace CrankItUp.Game
         {
             if (e.Key == osuTK.Input.Key.Escape)
             {
-                PushMenu();
+                pushMenu();
             }
+
             return base.OnKeyDown(e);
         }
 
@@ -89,12 +91,12 @@ namespace CrankItUp.Game
             this.FadeInFromZero(500, Easing.OutQuint);
         }
 
-        void PushMappingScreen()
+        private void pushMappingScreen()
         {
             this.Push(new MappingScreen(difficultySelector.Text, trackFilename));
         }
 
-        void PushMenu()
+        private void pushMenu()
         {
             this.Exit();
         }

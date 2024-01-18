@@ -8,20 +8,20 @@ namespace CrankItUp.Game
 {
     public class TrackMetadata
     {
-        public string name;
-        public string description;
-        public string mapperName;
-        public string trackArtistName;
-        public string trackFilename;
-        public float trackPreviewStart;
-        public string coverImageFilename;
-        public string customBackgroundFilename;
-
-        private JObject metadata;
+        public string Name;
+        public string Description;
+        public string MapperName;
+        public string TrackArtistName;
+        public string TrackFilename;
+        public float TrackPreviewStart;
+        public string CoverImageFilename;
+        public string CustomBackgroundFilename;
 
         public TrackMetadata(Stream metaStream)
         {
+            JObject metadata;
             var reader = new StreamReader(metaStream);
+
             try
             {
                 metadata = JObject.Parse(reader.ReadToEnd());
@@ -38,6 +38,7 @@ namespace CrankItUp.Game
             try
             {
                 int dataVersion = metadata.GetValue<int>("dataVersion");
+
                 if (dataVersion != Constants.METADATA_DATAVERSION)
                 {
                     var e = new InvalidDataException(
@@ -60,21 +61,22 @@ namespace CrankItUp.Game
             // required properties
             try
             {
-                name = metadata.GetValueOrFail<string>("name");
-                mapperName = metadata.GetValueOrFail<string>("mapperName");
-                trackArtistName = metadata.GetValueOrFail<string>("trackArtistName");
+                Name = metadata.GetValueOrFail<string>("name");
+                MapperName = metadata.GetValueOrFail<string>("mapperName");
+                TrackArtistName = metadata.GetValueOrFail<string>("trackArtistName");
                 // TODO check if the file paths are valid
-                trackFilename = metadata.GetValueOrFail<string>("trackFilename");
+                TrackFilename = metadata.GetValueOrFail<string>("trackFilename");
             }
             catch (Exception e)
             {
                 Logger.Error(e, "Required attributes could not be read!");
                 throw;
             }
-            description = metadata.GetValue<string>("description");
-            trackPreviewStart = metadata.GetValue<float>("trackPreviewStart");
-            coverImageFilename = metadata.GetValue<string>("coverImageFilename");
-            customBackgroundFilename = metadata.GetValue<string>("customBackgroundFilename");
+
+            Description = metadata.GetValue<string>("description");
+            TrackPreviewStart = metadata.GetValue<float>("trackPreviewStart");
+            CoverImageFilename = metadata.GetValue<string>("coverImageFilename");
+            CustomBackgroundFilename = metadata.GetValue<string>("customBackgroundFilename");
         }
     }
 }

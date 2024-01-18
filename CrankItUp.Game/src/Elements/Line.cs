@@ -1,14 +1,18 @@
 using System;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Elements
 {
     public class Line
     {
-        private Point point1,
-            point2;
-        private float slope,
-            intercept;
-        private SlopeState slopeState;
+        private readonly Point point1;
+
+        private readonly Point point2;
+
+        private readonly float slope;
+
+        private readonly float intercept;
+
+        private readonly SlopeState slopeState;
 
         public enum SlopeState
         {
@@ -22,15 +26,17 @@ namespace CrankItUp.Game
             point1 = p1;
             point2 = p2;
 
-            if (p1.getX() - p2.getX() == 0)
-            { //x=a, unlikely but should be accounted for
+            if (p1.GetX() - p2.GetX() == 0)
+            {
+                //x=a, unlikely but should be accounted for
                 slopeState = SlopeState.DNE;
-                intercept = p1.getX();
+                intercept = p1.GetX();
             }
             else
             {
-                slope = (p2.getY() - p1.getY()) / (p2.getX() - p1.getX());
-                intercept = p1.getY() - slope * p1.getX();
+                slope = (p2.GetY() - p1.GetY()) / (p2.GetX() - p1.GetX());
+                intercept = p1.GetY() - slope * p1.GetX();
+
                 if (slope == 0)
                 {
                     slopeState = SlopeState.ZERO;
@@ -46,21 +52,22 @@ namespace CrankItUp.Game
         returns the point of intersections of 2 lines
         returns null if no solution exists
         **/
-        public Point intersection(Line other)
+        public Point Intersection(Line other)
         {
-            if (slopeState == SlopeState.DNE || other.getSlopeState() == SlopeState.DNE)
+            if (slopeState == SlopeState.DNE || other.GetSlopeState() == SlopeState.DNE)
             {
                 if (slopeState == SlopeState.DNE)
                 {
                     if (
-                        Math.Min(other.getPoint1().getX(), other.getPoint2().getX()) < intercept
-                        && intercept < Math.Max(other.getPoint1().getX(), other.getPoint2().getX())
+                        Math.Min(other.GetPoint1().GetX(), other.GetPoint2().GetX()) < intercept
+                        && intercept < Math.Max(other.GetPoint1().GetX(), other.GetPoint2().GetX())
                     )
                     {
                         Point intersection = new Point(
-                            getIntercept(),
-                            other.evaluate(other.getIntercept())
+                            GetIntercept(),
+                            other.Evaluate(other.GetIntercept())
                         );
+
                         if (
                             existsOnLineSegment(intersection)
                             && other.existsOnLineSegment(intersection)
@@ -81,14 +88,15 @@ namespace CrankItUp.Game
                 else
                 {
                     if (
-                        Math.Min(getPoint1().getX(), getPoint2().getX()) < other.getIntercept()
-                        && other.getIntercept() < Math.Max(getPoint1().getX(), getPoint2().getX())
+                        Math.Min(GetPoint1().GetX(), GetPoint2().GetX()) < other.GetIntercept()
+                        && other.GetIntercept() < Math.Max(GetPoint1().GetX(), GetPoint2().GetX())
                     )
                     {
                         Point intersection = new Point(
-                            other.getIntercept(),
-                            evaluate(other.getIntercept())
+                            other.GetIntercept(),
+                            Evaluate(other.GetIntercept())
                         );
+
                         if (
                             existsOnLineSegment(intersection)
                             && other.existsOnLineSegment(intersection)
@@ -109,15 +117,17 @@ namespace CrankItUp.Game
             }
             else
             {
-                if (slope - other.getSlope() == 0)
+                if (slope - other.GetSlope() == 0)
                 {
                     return null; //TODO handle an edge case where we have infinite solutions show up, this could cause noclipping or crashing depending on how the logic handles this
                 }
-                float x = (other.getIntercept() - intercept) / (slope - other.getSlope());
-                if (evaluate(x) == other.evaluate(x))
+
+                float x = (other.GetIntercept() - intercept) / (slope - other.GetSlope());
+
+                if (Evaluate(x) == other.Evaluate(x))
                 {
-                    Point intersection = new Point(x, evaluate(x));
-                    ;
+                    Point intersection = new Point(x, Evaluate(x));
+
                     if (
                         existsOnLineSegment(intersection) && other.existsOnLineSegment(intersection)
                     )
@@ -130,61 +140,61 @@ namespace CrankItUp.Game
                     }
                 }
             }
+
             return null;
         }
 
         public Boolean existsOnLineSegment(Point p)
         {
-            return Math.Min(getPoint1().getX(), getPoint2().getX()) < p.getX()
-                && Math.Max(getPoint1().getX(), getPoint2().getX()) > p.getX()
-                && Math.Min(getPoint1().getY(), getPoint2().getY()) < p.getY()
-                && Math.Max(getPoint1().getY(), getPoint2().getY()) > p.getY();
+            return Math.Min(GetPoint1().GetX(), GetPoint2().GetX()) < p.GetX()
+                   && Math.Max(GetPoint1().GetX(), GetPoint2().GetX()) > p.GetX()
+                   && Math.Min(GetPoint1().GetY(), GetPoint2().GetY()) < p.GetY()
+                   && Math.Max(GetPoint1().GetY(), GetPoint2().GetY()) > p.GetY();
         }
 
-        public float evaluate(float x)
+        public float Evaluate(float x)
         {
             return slope * x + intercept;
         }
 
-        public float getSlope()
+        public float GetSlope()
         {
             return slope;
         }
 
-        public float getIntercept()
+        public float GetIntercept()
         {
             return intercept;
         }
 
-        public SlopeState getSlopeState()
+        public SlopeState GetSlopeState()
         {
             return slopeState;
         }
 
-        public Point getPoint1()
+        public Point GetPoint1()
         {
             return point1;
         }
 
-        public Point getPoint2()
+        public Point GetPoint2()
         {
             return point2;
         }
 
-        public String toString()
+        public override String ToString()
         {
             return "y = " + slope + "x" + " + " + intercept;
         }
 
         //for outputting line segments to desmos
-        public string toStringFull()
+        public string ToStringFull()
         {
-            return toString()
-                + "\\left\\{"
-                + Math.Min(point1.getX(), point2.getX())
-                + "< x < "
-                + Math.Max(point1.getX(), point2.getX())
-                + "\\right\\}";
+            return ToString() + "\\left\\{"
+                              + Math.Min(point1.GetX(), point2.GetX())
+                              + "< x < "
+                              + Math.Max(point1.GetX(), point2.GetX())
+                              + "\\right\\}";
         }
     }
 }

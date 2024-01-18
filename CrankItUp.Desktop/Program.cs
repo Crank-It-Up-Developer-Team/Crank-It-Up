@@ -1,17 +1,15 @@
-﻿using osu.Framework.Platform;
+﻿using CrankItUp.Game;
 using osu.Framework;
-using CrankItUp.Game;
-using System;
-using CrankItUp.Desktop;
+using osu.Framework.Platform;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Desktop
 {
     public static class Program
     {
-        private static osu.Framework.Game game = new CrankItUpGame();
-        private static GameHost host = Host.GetSuitableDesktopHost(@"CrankItUp");
+        private static readonly osu.Framework.Game game = new CrankItUpGame();
+        private static readonly GameHost host = Host.GetSuitableDesktopHost(@"CrankItUp");
 
-        public static Discord discordrpc = new Discord();
+        private static readonly Discord discordrpc = new Discord();
 
         public static void Main()
         {
@@ -21,7 +19,7 @@ namespace CrankItUp.Game
                 host.Run(game);
         }
 
-        public static CrankItUpGame getGame()
+        public static CrankItUpGame GetGame()
         {
             return (CrankItUpGame)game;
         }

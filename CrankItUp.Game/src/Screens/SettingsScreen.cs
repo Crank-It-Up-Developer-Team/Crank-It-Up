@@ -1,25 +1,26 @@
-using osu.Framework.Allocation;
-using osu.Framework.Graphics;
-using osu.Framework.Graphics.Sprites;
-using osu.Framework.Screens;
-using osuTK.Graphics;
-using osu.Framework.Graphics.UserInterface;
-using osu.Framework.Bindables;
-using osuTK;
-using osu.Framework.Audio;
-using osu.Framework.Graphics.Textures;
-using osu.Framework.Input.Events;
-using osu.Framework.Configuration;
-using Newtonsoft.Json.Linq;
 using System.IO;
+using CrankItUp.Game.Elements;
+using Newtonsoft.Json.Linq;
 using NuGet.Protocol;
-using osu.Framework.Platform;
+using osu.Framework.Allocation;
+using osu.Framework.Audio;
+using osu.Framework.Bindables;
+using osu.Framework.Configuration;
+using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Textures;
+using osu.Framework.Graphics.UserInterface;
+using osu.Framework.Input.Events;
 using osu.Framework.Logging;
+using osu.Framework.Platform;
+using osu.Framework.Screens;
+using osuTK;
+using osuTK.Graphics;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Screens
 {
-    class Settings
+    internal class Settings
     {
         public enum InputMode
         {
@@ -27,23 +28,23 @@ namespace CrankItUp.Game
             Linear
         }
 
-        public static InputMode inputmode = InputMode.Rotational;
+        public static InputMode Inputmode = InputMode.Rotational;
     }
 
     public partial class SettingsScreen : Screen
     {
-        CIUButton inputModeButton;
-        CIUButton windowModeButton;
-        CIUButton backButton;
-        CIUButton setupButton;
-        SpriteText globalVolumeText;
-        BasicSliderBar<double> globalVolumeSlider;
-        SpriteText musicVolumeText;
+        private CiuButton inputModeButton;
+        private CiuButton windowModeButton;
+        private CiuButton backButton;
+        private CiuButton setupButton;
+        private SpriteText globalVolumeText;
+        private BasicSliderBar<double> globalVolumeSlider;
+        private SpriteText musicVolumeText;
         private BasicSliderBar<double> musicVolumeSlider;
         private SpriteText effectsVolumeText;
         private BasicSliderBar<double> effectsVolumeSlider;
-        Storage storage;
-        Bindable<WindowMode> windowModeBindable;
+        private Storage storage;
+        private Bindable<WindowMode> windowModeBindable;
 
         [BackgroundDependencyLoader]
         private void load(
@@ -114,17 +115,17 @@ namespace CrankItUp.Game
                 KeyboardStep = 0.1f,
                 Current = frameworkConfig.GetBindable<double>(FrameworkSetting.VolumeEffect)
             };
-            inputModeButton = new CIUButton(textures)
+            inputModeButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
                 Position = new Vector2(0, 30),
-                Text = "Input mode: " + Settings.inputmode.ToString(),
+                Text = "Input mode: " + Settings.Inputmode.ToString(),
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Action = () => changeInputMode(),
+                Action = ChangeInputMode,
             };
-            windowModeButton = new CIUButton(textures)
+            windowModeButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -135,7 +136,7 @@ namespace CrankItUp.Game
                 Margin = new MarginPadding(10),
                 Action = () => changeWindowMode(frameworkConfig),
             };
-            setupButton = new CIUButton(textures)
+            setupButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -143,9 +144,9 @@ namespace CrankItUp.Game
                 Text = "Restart initial setup",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Action = () => pushInitialSetup(audio),
+                Action = () => PushInitialSetup(audio),
             };
-            backButton = new CIUButton(textures)
+            backButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -153,7 +154,7 @@ namespace CrankItUp.Game
                 Text = "Back to menu",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Action = () => pushMenu(),
+                Action = PushMenu,
             };
 
             InternalChildren = new Drawable[]
@@ -196,38 +197,40 @@ namespace CrankItUp.Game
         private void changeWindowMode(FrameworkConfigManager frameworkConfig)
         {
             // this function only changes the window mode, it doesn't change the text, as that is handled by the event
-            WindowMode currentvalue = frameworkConfig.Get<WindowMode>(FrameworkSetting.WindowMode);
-            frameworkConfig.SetValue(FrameworkSetting.WindowMode, currentvalue + 1);
+            WindowMode currentValue = frameworkConfig.Get<WindowMode>(FrameworkSetting.WindowMode);
+            frameworkConfig.SetValue(FrameworkSetting.WindowMode, currentValue + 1);
         }
 
-        public void changeInputMode()
+        public void ChangeInputMode()
         {
             // switch input modes
-            if (Settings.inputmode == Settings.InputMode.Rotational)
+            if (Settings.Inputmode == Settings.InputMode.Rotational)
             {
-                Settings.inputmode = Settings.InputMode.Linear;
+                Settings.Inputmode = Settings.InputMode.Linear;
             }
             else
             {
-                Settings.inputmode = Settings.InputMode.Rotational;
+                Settings.Inputmode = Settings.InputMode.Rotational;
             }
+
             // update button text
-            inputModeButton.Text = "Input mode: " + Settings.inputmode.ToString();
+            inputModeButton.Text = "Input mode: " + Settings.Inputmode.ToString();
         }
 
         protected override bool OnKeyDown(KeyDownEvent e)
         {
             if (e.Key == osuTK.Input.Key.Escape)
             {
-                pushMenu();
+                PushMenu();
             }
+
             return base.OnKeyDown(e);
         }
 
-        public void pushMenu()
+        public void PushMenu()
         {
             // save settings to disk
-            JObject settings = new JObject { { "inputMode", (int)Settings.inputmode }, };
+            JObject settings = new JObject { { "inputMode", (int)Settings.Inputmode }, };
             StreamWriter settingswriter = new StreamWriter(
                 storage.CreateFileSafely("settings.json")
             );
@@ -237,7 +240,7 @@ namespace CrankItUp.Game
             this.Exit();
         }
 
-        public void pushInitialSetup(AudioManager audio)
+        public void PushInitialSetup(AudioManager audio)
         {
             this.Push(new InitialSetup());
         }

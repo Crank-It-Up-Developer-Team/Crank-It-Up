@@ -1,12 +1,12 @@
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
-using osu.Framework.Localisation;
 using osu.Framework.Graphics.UserInterface;
+using osu.Framework.Localisation;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Elements
 {
-    public partial class CIUButton : Button
+    public partial class CiuButton : Button
     {
         public LocalisableString Text // Most of this is from BasicButton
         {
@@ -20,14 +20,15 @@ namespace CrankItUp.Game
 
         public Texture Texture;
         public Colour4 TextColour = Colour4.White;
-        private SpriteText text;
+        private readonly SpriteText text;
 
-        public CIUButton(TextureStore texturestore)
+        public CiuButton(TextureStore textureStore)
         {
             if (Texture == null)
             {
-                Texture = texturestore.Get("Button");
+                Texture = textureStore.Get("Button");
             }
+
             AddRange(
                 new Drawable[]
                 {
@@ -48,11 +49,6 @@ namespace CrankItUp.Game
                     },
                 }
             );
-        }
-
-        protected override void LoadComplete()
-        {
-            base.LoadComplete();
         }
     }
 }

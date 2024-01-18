@@ -1,3 +1,4 @@
+using System;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
@@ -5,22 +6,21 @@ using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osuTK;
-using System;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Elements
 {
     public partial class BaseNote : CompositeDrawable
     {
         /**
         so my thoughts on how mapping should be implemented
         we have a ring where notes can be placed of all the potential spots for the platter to
-        be (may be a bit complicated because mapping a circle to a non circlular object, we can probably
+        be (may be a bit complicated because mapping a circle to a non circular object, we can probably
         make a ring of some thickness tho to account for that if my mental math is right)
         this also makes it so all we have to do to instantiate any given note is pass in its radial direction and then use a
         vector of some static magnitude to be able to project it onto the spawning circle
         **/
-
         private double radians;
+
         private long spawnTime;
         private long travelTime;
         Sprite note;
@@ -28,7 +28,7 @@ namespace CrankItUp.Game
         Vector2 velocity;
         Boolean firstCollision;
 
-        private static float PROJECTION_VECTOR_MAGNITUDE = 375; //pixels
+        private static readonly float projection_vector_magnitude = 375; //pixels
 
         public BaseNote(double radians, long spawnTime)
         {
@@ -65,70 +65,71 @@ namespace CrankItUp.Game
         protected override void Update()
         {
             Vector2 centerPosition = new Vector2(
-                (float)(X + NoteManager.radius),
-                (float)(Y + NoteManager.radius)
+                (float)(X + NoteManager.Radius),
+                (float)(Y + NoteManager.Radius)
             );
             double leftStartAngle = radians - Math.PI / 2.0;
             Vector2 leftTangent = new Vector2(
-                centerPosition.X - (float)(NoteManager.radius * Math.Cos(leftStartAngle)),
-                centerPosition.Y - (float)(NoteManager.radius * Math.Sin(leftStartAngle))
+                centerPosition.X - (float)(NoteManager.Radius * Math.Cos(leftStartAngle)),
+                centerPosition.Y - (float)(NoteManager.Radius * Math.Sin(leftStartAngle))
             );
             Vector2 leftWaypoint = new Vector2(
-                leftTangent.X - (float)(NoteManager.radius * Math.Cos(radians)),
-                leftTangent.Y - (float)(NoteManager.radius * Math.Sin(radians))
+                leftTangent.X - (float)(NoteManager.Radius * Math.Cos(radians)),
+                leftTangent.Y - (float)(NoteManager.Radius * Math.Sin(radians))
             );
             double rightStartAngle = radians + Math.PI / 2.0;
             Vector2 rightTangent = new Vector2(
-                centerPosition.X - (float)(NoteManager.radius * Math.Cos(rightStartAngle)),
-                centerPosition.Y - (float)(NoteManager.radius * Math.Sin(rightStartAngle))
+                centerPosition.X - (float)(NoteManager.Radius * Math.Cos(rightStartAngle)),
+                centerPosition.Y - (float)(NoteManager.Radius * Math.Sin(rightStartAngle))
             );
             Vector2 rightWaypoint = new Vector2(
-                rightTangent.X - (float)(NoteManager.radius * Math.Cos(radians)),
-                rightTangent.Y - (float)(NoteManager.radius * Math.Sin(radians))
+                rightTangent.X - (float)(NoteManager.Radius * Math.Cos(radians)),
+                rightTangent.Y - (float)(NoteManager.Radius * Math.Sin(radians))
             );
             Line collision = new Line(new Point(rightWaypoint), new Point(leftWaypoint));
 
-            if (collision.intersection(Crank.collisionLine) != null)
+            if (collision.Intersection(Crank.CollisionLine) != null)
             {
                 //collision has happened, we do some math to determine the accuracy
                 ClearTransforms();
+
                 if (firstCollision)
                 {
-                    Console.WriteLine(Crank.collisionLine.toString());
-                    Console.WriteLine(Crank.collisionLine.getPoint2().toString());
-                    Console.WriteLine(Crank.collisionLine.getPoint1().toString());
+                    Console.WriteLine(Crank.CollisionLine.ToString());
+                    Console.WriteLine(Crank.CollisionLine.GetPoint2().ToString());
+                    Console.WriteLine(Crank.CollisionLine.GetPoint1().ToString());
                     Console.WriteLine("");
-                    Console.WriteLine(collision.toString());
-                    Console.WriteLine(collision.getPoint2().toString());
-                    Console.WriteLine(collision.getPoint1().toString());
-                    Console.WriteLine(collision.intersection(Crank.collisionLine).toString());
+                    Console.WriteLine(collision.ToString());
+                    Console.WriteLine(collision.GetPoint2().ToString());
+                    Console.WriteLine(collision.GetPoint1().ToString());
+                    Console.WriteLine(collision.Intersection(Crank.CollisionLine).ToString());
                     firstCollision = false;
                 }
             }
         }
 
-        public void spawn()
+        public void Spawn()
         {
-            double finalMagnitude = PROJECTION_VECTOR_MAGNITUDE - NoteManager.radius;
+            double finalMagnitude = projection_vector_magnitude - NoteManager.Radius;
             Vector2 spawnPointCenteredCoordinates = new Vector2(
                 (float)(finalMagnitude * Math.Cos(-radians)),
                 (float)(finalMagnitude * Math.Sin(-radians))
             );
             Position = spawnPointCenteredCoordinates + Constants.NOTE_DESTINATION;
             velocity = new Vector2(
-                (float)(NoteManager.approachRate * Math.Cos(radians)),
-                (float)(NoteManager.approachRate * Math.Sin(radians))
+                (float)(NoteManager.ApproachRate * Math.Cos(radians)),
+                (float)(NoteManager.ApproachRate * Math.Sin(radians))
             );
-            double timeSeconds = finalMagnitude / NoteManager.approachRate;
+            double timeSeconds = finalMagnitude / NoteManager.ApproachRate;
             travelTime = (long)(timeSeconds * 1000);
         }
 
-        public long getTravelTime()
+        public long GetTravelTime()
         {
             return travelTime;
         }
 
-        public long getSpawnTime()
+        public long GetSpawnTime()
         {
             return spawnTime;
         }

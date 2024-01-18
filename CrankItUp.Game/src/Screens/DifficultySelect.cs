@@ -1,30 +1,31 @@
-using osu.Framework.Allocation;
-using osu.Framework.Graphics;
-using osu.Framework.Graphics.Sprites;
-using osu.Framework.Screens;
-using osu.Framework.Graphics.Textures;
-using osuTK;
-using System.IO;
-using osu.Framework.Graphics.Containers;
-using osu.Framework.Input.Events;
-using osu.Framework.Platform;
-using Newtonsoft.Json.Linq;
 using System;
-using osu.Framework.Logging;
+using System.IO;
+using CrankItUp.Game.Elements;
+using Newtonsoft.Json.Linq;
 using NuGet.ProjectModel;
+using osu.Framework.Allocation;
 using osu.Framework.Audio;
-using osu.Framework.IO.Stores;
 using osu.Framework.Audio.Track;
+using osu.Framework.Graphics;
+using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Textures;
+using osu.Framework.Input.Events;
+using osu.Framework.IO.Stores;
+using osu.Framework.Logging;
+using osu.Framework.Platform;
+using osu.Framework.Screens;
+using osuTK;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Screens
 {
     public partial class DifficultySelect : Screen
     {
-        Container trackContainer;
-        CIUButton backButton;
-        Track track;
-        string map;
-        TrackMetadata trackmeta;
+        private Container trackContainer;
+        private CiuButton backButton;
+        private Track track;
+        private readonly string map;
+        private readonly TrackMetadata trackmeta;
 
         public DifficultySelect(string mapname, TrackMetadata trackmeta)
         {
@@ -35,7 +36,7 @@ namespace CrankItUp.Game
         [BackgroundDependencyLoader]
         private void load(AudioManager audio, TextureStore textures, Storage storage)
         {
-            backButton = new CIUButton(textures)
+            backButton = new CiuButton(textures)
             {
                 Anchor = Anchor.BottomCentre,
                 Origin = Anchor.BottomCentre,
@@ -43,9 +44,9 @@ namespace CrankItUp.Game
                 Text = "Back",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Action = () => pushMenu(),
+                Action = pushMenu,
             };
-            trackContainer = new Container()
+            trackContainer = new Container
             {
                 Anchor = Anchor.TopLeft,
                 Origin = Anchor.BottomRight,
@@ -57,7 +58,7 @@ namespace CrankItUp.Game
                     storage.GetStorageForDirectory(Path.Combine("maps", map))
                 )
             );
-            track = trackStore.Get(trackmeta.trackFilename);
+            track = trackStore.Get(trackmeta.TrackFilename);
 
             var difficulties = storage.GetFiles(Path.Combine("maps", map));
             Vector2 position = new Vector2(0, 0);
@@ -66,10 +67,11 @@ namespace CrankItUp.Game
 
             foreach (string difficulty in difficulties)
             {
-                JObject beatmap;
                 if (difficulty.EndsWith(".json"))
                 {
-                    string difficultyname = difficulty[(difficulty.LastIndexOf("/") + 1)..];
+                    string difficultyname = difficulty[(difficulty.LastIndexOf("/", StringComparison.Ordinal) + 1)..];
+                    JObject beatmap;
+
                     using (
                         var sr = new StreamReader(
                             mapStorage.GetStream(difficultyname, mode: FileMode.Open)
@@ -92,6 +94,7 @@ namespace CrankItUp.Game
                     }
 
                     int dataVersion;
+
                     try
                     {
                         JToken meta = beatmap.GetValue("meta");
@@ -106,12 +109,13 @@ namespace CrankItUp.Game
                         invalidDifficultyCount += 1;
                         continue;
                     }
+
                     if (dataVersion != Constants.MAP_DATAVERSION)
                     {
                         Logger.Log(
                             "Difficulty "
-                                + difficultyname
-                                + " has an invalid dataVersion for this version of the game!",
+                            + difficultyname
+                            + " has an invalid dataVersion for this version of the game!",
                             LoggingTarget.Runtime,
                             LogLevel.Important
                         );
@@ -120,22 +124,23 @@ namespace CrankItUp.Game
                     }
 
                     difficultyname = difficulty[
-                        (difficulty.LastIndexOf("/") + 1)..(difficulty.Length - 5)
+                        (difficulty.LastIndexOf("/", StringComparison.Ordinal) + 1)..^5
                     ];
                     trackContainer.Add(
-                        new CIUButton(textures)
+                        new CiuButton(textures)
                         {
                             Text = difficultyname,
                             Size = new Vector2(200, 40),
                             Margin = new MarginPadding(10),
                             Position = position,
-                            Action = () => pushLevel(difficultyname),
+                            Action = () => PushLevel(difficultyname),
                         }
                     );
                 }
 
                 // Create a grid of buttons, same as TrackSelect.cs
                 position.Y += 50;
+
                 if (position.Y == 600)
                 {
                     position.Y = 0;
@@ -145,6 +150,7 @@ namespace CrankItUp.Game
 
             SpriteText invalidDifficultyText;
             invalidDifficultyCount -= 1; // the metadata file will always be an invalid difficulty
+
             if (invalidDifficultyCount > 0)
             {
                 invalidDifficultyText = new SpriteText
@@ -183,7 +189,7 @@ namespace CrankItUp.Game
         protected override void LoadComplete()
         {
             track.Start();
-            track.Seek(trackmeta.trackPreviewStart);
+            track.Seek(trackmeta.TrackPreviewStart);
         }
 
         private void pushMenu()
@@ -191,7 +197,7 @@ namespace CrankItUp.Game
             this.Exit();
         }
 
-        public void pushLevel(string difficultyname)
+        public void PushLevel(string difficultyname)
         {
             this.Push(new LevelScreen(map, difficultyname));
         }
@@ -202,6 +208,7 @@ namespace CrankItUp.Game
             {
                 pushMenu();
             }
+
             return base.OnKeyDown(e);
         }
 

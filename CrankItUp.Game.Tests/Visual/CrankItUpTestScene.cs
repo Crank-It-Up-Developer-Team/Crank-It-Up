@@ -1,5 +1,4 @@
 using osu.Framework.Testing;
-using osu.Framework.Graphics;
 
 namespace CrankItUp.Game.Tests.Visual
 {

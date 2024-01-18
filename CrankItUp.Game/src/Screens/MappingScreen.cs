@@ -1,28 +1,28 @@
-using osu.Framework.Allocation;
-using osu.Framework.Graphics;
-using osu.Framework.Screens;
-using osu.Framework.Input.Events;
-using osu.Framework.Audio;
-using osu.Framework.Platform;
-using osu.Framework.Audio.Track;
-using osu.Framework.IO.Stores;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using NuGet.Protocol;
-using osu.Framework.Graphics.Sprites;
-using osuTK;
+using osu.Framework.Allocation;
+using osu.Framework.Audio;
+using osu.Framework.Audio.Track;
+using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Sprites;
+using osu.Framework.Input.Events;
+using osu.Framework.IO.Stores;
+using osu.Framework.Platform;
+using osu.Framework.Screens;
+using osuTK;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Screens
 {
     public partial class MappingScreen : Screen
     {
-        string difficulty;
-        private string trackFilename;
-        Track track;
-        JObject beatmap = new JObject();
-        JArray NoteQueue = new JArray();
-        Storage storage;
+        private readonly string difficulty;
+        private readonly string trackFilename;
+        private Track track;
+        private readonly JObject beatmap = new JObject();
+        private readonly JArray noteQueue = new JArray();
+        private Storage storage;
 
         public MappingScreen(string difficulty, string trackFilename)
         {
@@ -77,7 +77,7 @@ namespace CrankItUp.Game
                     { "position", 0 },
                     { "spawnTime", track.CurrentTime }
                 };
-                NoteQueue.Add(note);
+                noteQueue.Add(note);
             }
             // if the user wishes to exit
             else if (e.Key == osuTK.Input.Key.Escape)
@@ -94,7 +94,7 @@ namespace CrankItUp.Game
                 };
                 // add everything to the beatmap
                 beatmap.Add("meta", meta);
-                beatmap.Add("noteQueue", NoteQueue);
+                beatmap.Add("noteQueue", noteQueue);
                 // save it to disk
                 StreamWriter mapfile = new StreamWriter(
                     storage.CreateFileSafely(Path.Combine("maps", "WIP", difficulty + ".json"))

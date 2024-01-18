@@ -15,7 +15,7 @@ namespace CrankItUp.Game
                 host.Run(game);
         }
 
-        public static CrankItUpGame getGame()
+        public static CrankItUpGame GetGame()
         {
             return (CrankItUpGame)game;
         }

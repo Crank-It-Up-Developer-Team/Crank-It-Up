@@ -1,25 +1,26 @@
+using System.IO;
+using CrankItUp.Game.Elements;
+using Newtonsoft.Json.Linq;
+using NuGet.Protocol;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
+using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
-using osu.Framework.Screens;
-using osuTK;
 using osu.Framework.Graphics.Textures;
+using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Input.Events;
 using osu.Framework.Platform;
-using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.UserInterface;
-using Newtonsoft.Json.Linq;
-using System.IO;
-using NuGet.Protocol;
+using osu.Framework.Screens;
+using osuTK;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Screens
 {
     public partial class MappingSetupTrack : Screen
     {
-        CIUButton backButton;
-        CIUButton continueButton;
-        CIUButton mapsFolderButton;
-        BasicTextBox trackFileNameBox;
+        private CiuButton backButton;
+        private CiuButton continueButton;
+        private CiuButton mapsFolderButton;
+        private BasicTextBox trackFileNameBox;
         private BasicTextBox trackNameBox;
         private BasicTextBox mapperNameBox;
         private BasicTextBox artistNameBox;
@@ -28,7 +29,7 @@ namespace CrankItUp.Game
         [BackgroundDependencyLoader]
         private void load(TextureStore textures, Storage storage)
         {
-            backButton = new CIUButton(textures)
+            backButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -36,9 +37,9 @@ namespace CrankItUp.Game
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(0, 170),
-                Action = () => PushMenu(),
+                Action = pushMenu,
             };
-            continueButton = new CIUButton(textures)
+            continueButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -46,9 +47,9 @@ namespace CrankItUp.Game
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(0, 110),
-                Action = () => PushSetupDifficulty(storage),
+                Action = () => pushSetupDifficulty(storage),
             };
-            mapsFolderButton = new CIUButton(textures)
+            mapsFolderButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -59,7 +60,7 @@ namespace CrankItUp.Game
                 Action = () => storage.GetStorageForDirectory("maps").PresentExternally(),
             };
 
-            trackFileNameBox = new BasicTextBox()
+            trackFileNameBox = new BasicTextBox
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -67,7 +68,7 @@ namespace CrankItUp.Game
                 Size = new Vector2(200, 40),
                 PlaceholderText = "Song filename"
             };
-            trackNameBox = new BasicTextBox()
+            trackNameBox = new BasicTextBox
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -75,7 +76,7 @@ namespace CrankItUp.Game
                 Size = new Vector2(200, 40),
                 PlaceholderText = "Track name"
             };
-            mapperNameBox = new BasicTextBox()
+            mapperNameBox = new BasicTextBox
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -83,7 +84,7 @@ namespace CrankItUp.Game
                 Size = new Vector2(200, 40),
                 PlaceholderText = "Mapper name (you)"
             };
-            artistNameBox = new BasicTextBox()
+            artistNameBox = new BasicTextBox
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -91,7 +92,7 @@ namespace CrankItUp.Game
                 Size = new Vector2(200, 40),
                 PlaceholderText = "Artist Name"
             };
-            trackPreviewStartBox = new BasicTextBox()
+            trackPreviewStartBox = new BasicTextBox
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -135,6 +136,7 @@ namespace CrankItUp.Game
                 "6: When you are finished mapping in the editor, rename the folder to the name of the map",
                 "7: You can then edit the positions of these objects by editing the json file in a text editor"
             };
+
             for (int i = 0; i < info.Length; i++)
             {
                 AddInternal(
@@ -154,8 +156,9 @@ namespace CrankItUp.Game
         {
             if (e.Key == osuTK.Input.Key.Escape)
             {
-                PushMenu();
+                pushMenu();
             }
+
             return base.OnKeyDown(e);
         }
 
@@ -164,12 +167,12 @@ namespace CrankItUp.Game
             this.FadeInFromZero(500, Easing.OutQuint);
         }
 
-        void PushMenu()
+        private void pushMenu()
         {
             this.Exit();
         }
 
-        void PushSetupDifficulty(Storage storage)
+        private void pushSetupDifficulty(Storage storage)
         {
             JObject meta = new JObject
             {

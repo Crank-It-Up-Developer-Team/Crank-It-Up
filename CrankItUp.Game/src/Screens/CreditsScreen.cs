@@ -1,22 +1,23 @@
+using CrankItUp.Game.Elements;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
+using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
-using osu.Framework.Screens;
-using osuTK;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Events;
-using osu.Framework.Graphics.Containers;
+using osu.Framework.Screens;
+using osuTK;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Screens
 {
     public partial class CreditsScreen : Screen
     {
-        CIUButton backButton;
+        private CiuButton backButton;
 
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
         {
-            backButton = new CIUButton(textures)
+            backButton = new CiuButton(textures)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -24,7 +25,7 @@ namespace CrankItUp.Game
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
                 Position = new Vector2(0, 0),
-                Action = () => PushMenu(),
+                Action = pushMenu,
             };
             InternalChildren = new Drawable[]
             {
@@ -48,6 +49,7 @@ namespace CrankItUp.Game
                 "MrJamesGaming - Programming",
                 "Camellia - Allowing free use of the album 'Tera I/O'"
             };
+
             for (int i = 0; i < credits.Length; i++)
             {
                 AddInternal(
@@ -67,8 +69,9 @@ namespace CrankItUp.Game
         {
             if (e.Key == osuTK.Input.Key.Escape)
             {
-                PushMenu();
+                pushMenu();
             }
+
             return base.OnKeyDown(e);
         }
 
@@ -77,7 +80,7 @@ namespace CrankItUp.Game
             this.FadeInFromZero(500, Easing.OutQuint);
         }
 
-        void PushMenu()
+        private void pushMenu()
         {
             this.Exit();
         }

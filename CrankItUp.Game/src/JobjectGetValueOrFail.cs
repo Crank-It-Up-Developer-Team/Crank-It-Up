@@ -15,6 +15,7 @@ namespace CrankItUp.Game
             {
                 throw new ArgumentException("Value not found!");
             }
+
             return value;
         }
 
@@ -28,6 +29,7 @@ namespace CrankItUp.Game
             {
                 throw new ArgumentException("Value " + name + " not found!");
             }
+
             return value.Value<T>();
         }
     }

@@ -1,17 +1,17 @@
-using osu.Framework.Allocation;
-using osu.Framework.Graphics;
-using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Shapes;
-using osu.Framework.Graphics.Sprites;
-using osu.Framework.Graphics.Textures;
-using osu.Framework.Graphics.Cursor;
-using osuTK;
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
+using osu.Framework.Allocation;
+using osu.Framework.Graphics;
+using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Cursor;
+using osu.Framework.Graphics.Shapes;
+using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Textures;
 using osu.Framework.Platform;
+using osuTK;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Elements
 {
     public partial class Crank : CompositeDrawable
     {
@@ -23,15 +23,18 @@ namespace CrankItUp.Game
 
         private Container box;
         private CursorContainer mouse;
-        public static Line collisionLine;
-        String compositeString;
-        public StreamWriter writer;
-        double previousDirection = 0;
-        Vector2 previousNearEnd,
-            previousFarEnd;
-        float dilation;
-        double crankScaledHeight,
-            crankScaledLength;
+        public static Line CollisionLine;
+        private string compositeString;
+        public StreamWriter Writer;
+        private double previousDirection;
+
+        private Vector2 previousNearEnd,
+                        previousFarEnd;
+
+        private float dilation;
+
+        private double crankScaledHeight,
+                       crankScaledLength;
 
         [BackgroundDependencyLoader]
         private void load(TextureStore textures, Storage storage)
@@ -39,11 +42,11 @@ namespace CrankItUp.Game
             mouse = new CursorContainer();
             mouse.ToggleVisibility();
             compositeString = "";
-            dilation = (float)(NoteManager.radius / Constants.NOTE_DEFAULT_RADIUS);
+            dilation = (float)(NoteManager.Radius / Constants.NOTE_DEFAULT_RADIUS);
             crankScaledHeight = Constants.CRANK_DEFAULT_HEIGHT * dilation;
             crankScaledLength = Constants.CRANK_DEFAULT_LENGTH * dilation;
 
-            writer = new StreamWriter(storage.CreateFileSafely("./debug.txt"));
+            Writer = new StreamWriter(storage.CreateFileSafely("./debug.txt"));
             previousNearEnd = new Vector2(812, (float)crankScaledLength);
             previousFarEnd = new Vector2(813, -(float)crankScaledLength);
 
@@ -68,11 +71,6 @@ namespace CrankItUp.Game
                     },
                 }
             };
-        }
-
-        protected override void LoadComplete()
-        {
-            base.LoadComplete();
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -111,9 +109,9 @@ namespace CrankItUp.Game
             // compositeString += nearEnd.ToString() + "\n";
             // compositeString += farEnd.ToString() + "\n";
 
-            collisionLine = new Line(new Point(nearEnd), new Point(farEnd));
-            compositeString = collisionLine.toStringFull();
-            writer.WriteLine(compositeString);
+            CollisionLine = new Line(new Point(nearEnd), new Point(farEnd));
+            compositeString = CollisionLine.ToStringFull();
+            Writer.WriteLine(compositeString);
 
             previousDirection = direction;
             previousFarEnd = farEnd;
@@ -121,9 +119,9 @@ namespace CrankItUp.Game
             base.Update();
         }
 
-        public void updateRotation(Vector2 MousePos)
+        public void UpdateRotation(Vector2 mousePos)
         {
-            box.Rotation = (float)((180 / Math.PI) * Math.Atan2(MousePos.Y, MousePos.X));
+            box.Rotation = (float)((180 / Math.PI) * Math.Atan2(mousePos.Y, mousePos.X));
         }
     }
 }

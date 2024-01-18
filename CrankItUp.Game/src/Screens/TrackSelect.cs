@@ -1,26 +1,27 @@
+using CrankItUp.Game.Elements;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
-using osu.Framework.Graphics.Sprites;
-using osu.Framework.Screens;
-using osu.Framework.Graphics.Textures;
-using osuTK;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Events;
-using osu.Framework.Platform;
 using osu.Framework.Logging;
+using osu.Framework.Platform;
+using osu.Framework.Screens;
+using osuTK;
 
-namespace CrankItUp.Game
+namespace CrankItUp.Game.Screens
 {
     public partial class TrackSelect : Screen
     {
-        Container trackContainer;
-        CIUButton backButton;
-        TrackMetadata trackmeta;
+        private Container trackContainer;
+        private CiuButton backButton;
+        private TrackMetadata trackmeta;
 
         [BackgroundDependencyLoader]
         private void load(TextureStore textures, Storage storage)
         {
-            backButton = new CIUButton(textures)
+            backButton = new CiuButton(textures)
             {
                 Anchor = Anchor.BottomCentre,
                 Origin = Anchor.BottomCentre,
@@ -28,9 +29,9 @@ namespace CrankItUp.Game
                 Text = "Back to menu",
                 Size = new Vector2(200, 40),
                 Margin = new MarginPadding(10),
-                Action = () => pushMenu(),
+                Action = pushMenu,
             };
-            trackContainer = new Container()
+            trackContainer = new Container
             {
                 Anchor = Anchor.TopLeft,
                 Origin = Anchor.BottomRight,
@@ -39,12 +40,14 @@ namespace CrankItUp.Game
 
             Vector2 position = new Vector2(0, 0);
             var maps = storage.GetDirectories("maps");
+
             foreach (string mapPath in maps)
             {
                 var map = mapPath[5..];
                 Logger.Log("Found map: " + map);
 
                 var mapStorage = storage.GetStorageForDirectory(mapPath);
+
                 try
                 {
                     trackmeta = new TrackMetadata(mapStorage.GetStream("metadata.json"));
@@ -57,24 +60,26 @@ namespace CrankItUp.Game
                 }
 
                 trackContainer.Add(
-                    new CIUButton(textures)
+                    new CiuButton(textures)
                     {
-                        Text = trackmeta.name,
+                        Text = trackmeta.Name,
                         Size = new Vector2(200, 40),
                         Margin = new MarginPadding(10),
                         Position = position,
-                        Action = () => pushDifficultySelect(map, mapPath, storage),
+                        Action = () => PushDifficultySelect(map, mapPath, storage),
                     }
                 );
 
                 // change the position, relative to it's current position, preventing overlap
                 position.Y += 50;
+
                 if (position.Y == 600)
                 {
                     position.Y = 0;
                     position.X += 250;
                 }
             }
+
             InternalChildren = new Drawable[]
             {
                 new DrawSizePreservingFillContainer
@@ -98,7 +103,7 @@ namespace CrankItUp.Game
             this.Exit();
         }
 
-        public void pushDifficultySelect(string map, string mapPath, Storage storage)
+        public void PushDifficultySelect(string map, string mapPath, Storage storage)
         {
             // we get the metadata again here, as the metadata gathered in load() is overwriten each loop
             var mapStorage = storage.GetStorageForDirectory(mapPath);
@@ -112,6 +117,7 @@ namespace CrankItUp.Game
             {
                 pushMenu();
             }
+
             return base.OnKeyDown(e);
         }
 
