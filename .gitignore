@@ -5,3 +5,4 @@ CrankItUp.Resources/bin
 .vscode/*
 **/debug.txt
 CrankItUp.Desktop/AppImages
+.direnv
