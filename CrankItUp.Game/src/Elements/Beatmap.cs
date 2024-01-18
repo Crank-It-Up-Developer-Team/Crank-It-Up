@@ -62,7 +62,8 @@ namespace CrankItUp.Game
             JToken meta = beatmap.GetValueOrFail("meta");
             noteRadius = meta.GetValueOrFail<double>("radius");
             approachRate = meta.GetValueOrFail<double>("approachRate");
-            endTime = meta.GetValueOrFail<double>("endTime");
+            // optional value
+            endTime = meta.GetValue<double>("endTime");
             // for some reason, GetValue<double> returns 0 if the value is not found
             if (endTime == 0)
             {
